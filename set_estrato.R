@@ -1,6 +1,6 @@
 # Criando a tabela de referência com UF, estrato e descrição
 tabela_estratos_2008 <- data.frame(
-  COD_UF = c(
+  UF = c(
     rep(11, 22),  # Rondônia
     rep(12, 8),   # Acre
     rep(13, 26),  # Amazonas
@@ -103,6 +103,15 @@ tabela_estratos_2008 <- data.frame(
   stringsAsFactors = FALSE
 )
 
+
+#tabela_estratos_2008 <- tabela_estratos_2008 %>%
+#  mutate(nova_coluna = case_when(
+#    descricao_estrato == "PA-UCapital" ~ "media_totalrrm",  # Caso específico para PA-UCapital
+#    grepl("-UF$", descricao_estrato) ~ "media_estados",
+#    grepl("-UCapital$", descricao_estrato) ~ "media_capitais",
+#    grepl("-CapitalRRM$", descricao_estrato) ~ "media_totalrrm",
+#    TRUE ~ NA_character_  # Para os casos que não se encaixam
+#  ))
 
 # Criando a tabela de referência com UF, estrato e descrição para 2018
 tabela_estratos_2018 <- data.frame(
