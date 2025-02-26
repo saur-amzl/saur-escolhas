@@ -1,0 +1,1239 @@
+/* PROGRAMA DE LEITURA EM SAS DO ARQUIVO DE MICRODADOS DA PNAD CONT�NUA */
+
+/* Obs.1: As duas primeiras posi��es da UPA (Unidade Prim�ria de Amostragem) s�o o c�digo da UF (Unidade da Federa��o)
+
+   Obs.2: Ajuste o endere�o do arquivo \PNADC_xxxx.txt no comando INFILE */
+
+data pnadc_xxxxxx;
+infile "...\Dados\PNADC_xxxxxx.txt" lrecl=7400 Missover;
+input
+@0001 Ano   $4.   /* Ano de refer�ncia */
+@0005 Trimestre   $1.   /* Trimestre de refer�ncia */
+@0006 UF   $2.   /* Unidade da Federa��o */
+@0008 Capital   $2.   /* Munic�pio da Capital */
+@0010 RM_RIDE   $2.   /* Reg. Metr. e Reg. Adm. Int. Des. */
+@0012 UPA   $9.   /* Unidade Prim�ria de Amostragem */
+@0021 Estrato   $7.   /* Estrato */
+@0028 V1008   $2.   /* N�mero de sele��o do domic�lio */
+@0030 V1014   $2.   /* Painel */
+@0032 V1016   $1.   /* N�mero da entrevista no domic�lio */
+@0033 V1022   $1.   /* Tipo de situa��o da regi�o */
+@0034 V1023   $1.   /* Tipo de �rea */
+@0035 V1027   15.   /* Peso SEM calibra��o */
+@0050 V1028   15.   /* Peso COM calibra��o */
+@0065 V1029   9.   /* Proje��o da popula��o por n�veis geogr�ficos */
+@0074 V1033   9.   /* Proje��o da popula��o por sexo e idade */
+@0083 posest   $3.   /* Dom�nios de proje��o geogr�ficos */
+@0086 posest_sxi   $3.   /* Dom�nios de proje��o por sexo e idade */
+@0089 V2001   2.   /* N�mero de pessoas no domic�lio */
+@0091 V2003   $2.   /* N�mero de ordem */
+@0093 V2005   $2.   /* Condi��o no domic�lio */
+@0095 V2007   $1.   /* Sexo */
+@0096 V2008   $2.   /* Dia de nascimento */
+@0098 V20081   $2.   /* M�s de nascimento */
+@0100 V20082   $4.   /* Ano de nascimento */
+@0104 V2009   3.   /* Idade na data de refer�ncia */
+@0107 V2010   $1.   /* Cor ou ra�a */
+@0108 V3001   $1.   /* Sabe ler e escrever */
+@0109 V3002   $1.   /* Frequenta escola */
+@0110 V3002A   $1.   /* A escola que ... frequenta � de */
+@0111 V3003   $2.   /* Qual � o curso que frequenta */
+@0113 V3003A   $2.   /* Qual � o curso que frequenta */
+@0115 V3004   $1.   /* Dura��o deste curso que requenta */
+@0116 V3005   $1.   /* Curso que frequenta � seriado */
+@0117 V3005A   $1.   /* Curso que freq � organizado em: */
+@0118 V3006   $2.   /* Qual � o ano/s�rie que frequenta */
+@0120 V3006A   $1.   /* Qual � a etapa que frequenta */
+@0121 V3007   $1.   /* Concluiu outro curso de gradua��o */
+@0122 V3008   $1.   /* Anteriormente frequentou escola */
+@0123 V3009   $2.   /* Curso mais elevado que frequentou */
+@0125 V3009A   $2.   /* Curso mais elevado que frequentou */
+@0127 V3010   $1.   /* Dura��o do curso que frequentou */
+@0128 V3011   $1.   /* Curso quefrequentou era seriado */
+@0129 V3011A   $1.   /* Curso que freq � organizado em: */
+@0130 V3012   $1.   /* Aprovado na prim. s�rie do curso */
+@0131 V3013   $2.   /* �ltimo ano/s�rie que concluiu */
+@0133 V3013A   $1.   /* Qual � a etapa que frequentou */
+@0134 V3013B   $1.   /* Cursou os anos iniciais deste curso */
+@0135 V3014   $1.   /* Concluiu o curso que frequentou */
+@0136 V4001   $1.   /* Trabalhou 1 hr em ativ. remunerd. */
+@0137 V4002   $1.   /* Trabalhou 1 hr em produtos etc... */
+@0138 V4003   $1.   /* Fez algum bico pelo menos de 1 hr */
+@0139 V4004   $1.   /* Ajudou sem receber no domic. 1 hr */
+@0140 V4005   $1.   /* Afastado trabalho remunerado */
+@0141 V4006   $1.   /* Motivo de estar afastado */
+@0142 V4006A   $1.   /* Motivo de estar afastado */
+@0143 V4007   $1.   /* Durante afastameno recebia pagam. */
+@0144 V4008   $1.   /* Quanto tempo que estava afastado */
+@0145 V40081   $2.   /* Tempo de afastamenento at� 1 ano */
+@0147 V40082   $2.   /* Tempo de afastamen. de 1 a 2 anos */
+@0149 V40083   $2.   /* Tempo de afastamen. mais d 2 anos */
+@0151 V4009   $1.   /* Quantos trabalhos tinhana semana */
+@0152 V4010   $4.   /* Ocupa��o no trab. principal */
+@0156 V4012   $1.   /* Posi��o na ocupa��o */
+@0157 V40121   $1.   /* Tipo trabalhador n�o remunerado */
+@0158 V4013   $5.   /* Atividade no trab. principal */
+@0163 V40132   $1.   /* Se��o da atividade */
+@0164 V40132A   $1.   /* Se��o da atividade */
+@0165 V4014   $1.   /* Esse trabalho era na �rea */
+@0166 V4015   $1.   /* Teve ajuda de pelo menos um trabalhador n�o remunerado */
+@0167 V40151   $1.   /* Qnts trabalhadores n�o remunerados */
+@0168 V401511   $1.   /* 1 a 5 trabalhadores n�o remunerados */
+@0169 V401512   $2.   /* 6 a 10 trabalhadores n�o remunerados */
+@0171 V4016   $1.   /* Qnts empregados trabalhavam nesse neg�cio/empresa*/
+@0172 V40161   $1.   /* 1 a 5 empregados */
+@0173 V40162   $2.   /* 6 a 10 empregados */
+@0175 V40163   $2.   /* 11 a 50 empregados */
+@0177 V4017   $1.   /* Tinha pelo menos um s�cio que trab. nesse neg�cio/empresa*/
+@0178 V40171   $1.   /* Quantos s�cios */
+@0179 V401711   $1.   /* 1 a 5 s�cios */
+@0180 V4018   $1.   /* Qnts pessoas trabalhavam nesse neg�cio/empresa */
+@0181 V40181   $1.   /* 1 a 5pessoas */
+@0182 V40182   $2.   /* 6 a 10pessoas */
+@0184 V40183   $2.   /* 11 a 50pessoas */
+@0186 V4019   $1.   /* Neg�cio/empresa registrado no CNPJ*/
+@0187 V4020   $1.   /* Em que tipo de local funcionava esse neg�cio/empresa*/
+@0188 V4021   $1.   /* Exercia o trabalho em estabelecimento desse neg�cio/empresa*/ 
+@0189 V4022   $1.   /* Onde exercia normalmente esse trabalho*/
+@0190 V4024   $1.   /* Serv. dom�st. em mais de 1 domic. */
+@0191 V4025   $1.   /* Contratado como empreg. tempor�rio*/
+@0192 V4026   $1.   /* Era contratado somente por pessoa respons�vel pelo neg�cio */
+@0193 V4027   $1.   /* Era contratado somente por intermedi�rio */
+@0194 V4028   $1.   /* Servidor p�blico estatut�rio */
+@0195 V4029   $1.   /* Carteira de trabalho assinada */
+@0196 V4032   $1.   /* Contribuinte de instit. d previd. */
+@0197 V4033   $1.   /* Rendimento habitual var. auxil. */
+@0198 V40331   $1.   /* Rendimento habitual em dinheiro */
+@0199 V403311   $1.   /* Faixa do valor do rendimento hab. */
+@0200 V403312   8.   /* Valor do rend. hab. em dinheiro */
+@0208 V40332   $1.   /* Rendimento habitual em produtos */
+@0209 V403321   $1.   /* Faixa do valor do rendimento hab. */
+@0210 V403322   8.   /* Valor do rend. hab. em produtos */
+@0218 V40333   $1.   /* Rendimento habitual em benef�cios */
+@0219 V403331   $1.   /* Tipo rend. habitual em benef�cios */
+@0220 V4034   $1.   /* Rendimento efetivo var. auxil. */
+@0221 V40341   $1.   /* Rendimento efetivo em dinheiro */
+@0222 V403411   $1.   /* Faixa do valor do rendimento efe. */
+@0223 V403412   8.   /* Valor do rend. efe. em dinheiro */
+@0231 V40342   $1.   /* Rendimento efetivo em produtos */
+@0232 V403421   $1.   /* Faixa do valor do rendimento efe. */
+@0233 V403422   8.   /* Valor do rend. efe. em produtos */
+@0241 V4039   3.   /* Hrs habituais no trab. princ. */
+@0244 V4039C   3.   /* Hrs efetivas no trab. princ. */
+@0247 V4040   $1.   /* Tempo que estava nesse trabalho */
+@0248 V40401   2.   /* De 1 m�s a menos de 1 ano */
+@0250 V40402   2.   /* De 1 ano a menos de 2 anos */
+@0252 V40403   2.   /* De 2 anos ou mais tempo */
+@0254 V4041   $4.   /* Ocupa��o no trab. secund�rio */
+@0258 V4043   $1.   /* Posi��o na ocupa��o */
+@0259 V40431   $1.   /* Tipo trabalhador n�o remunerado */
+@0260 V4044   $5.   /* Atividade no trab. secund�rio */
+@0265 V4045   $1.   /* Esse trabalho era na �rea */
+@0266 V4046   $1.   /* Neg�cio/empresa registrado no CNPJ*/
+@0267 V4047   $1.   /* Servidor p�blico estatut�rio */
+@0268 V4048   $1.   /* Carteira de trabalho assinada */
+@0269 V4049   $1.   /* Contribuinte de instit. d previd. */
+@0270 V4050   $1.   /* Rendimento habitual var. auxil. */
+@0271 V40501   $1.   /* Rendimento habitual em dinheiro */
+@0272 V405011   $1.   /* Faixa do valor do rendimento hab. */
+@0273 V405012   8.   /* Valor do rend. hab. em dinheiro */
+@0281 V40502   $1.   /* Rendimento habitual em produtos */
+@0282 V405021   $1.   /* Faixa do valor do rendimento hab. */
+@0283 V405022   8.   /* Valor do rend. hab. em produtos */
+@0291 V40503   $1.   /* Rendimento habitual em benef�cios */
+@0292 V405031   $1.   /* Tipo rend. habitual em benef�cios */
+@0293 V4051   $1.   /* Rendimento efetivo var. auxil. */
+@0294 V40511   $1.   /* Rendimento efetivo em dinheiro */
+@0295 V405111   $1.   /* Faixa do valor do rendimento efe. */
+@0296 V405112   8.   /* Valor do rend. efe. em dinheiro */
+@0304 V40512   $1.   /* Rendimento efetivo em produtos */
+@0305 V405121   $1.   /* Faixa do valor do rendimento efe. */
+@0306 V405122   8.   /* Valor do rend. efe. em produtos */
+@0314 V4056   3.   /* Hrs habituais no trab. secun. */
+@0317 V4056C   3.   /* Hrs efetivas no trab. secun. */
+@0320 V4057   $1.   /* Contribuinte de instit. d previd. */
+@0321 V4058   $1.   /* Rendimento habitual var. auxil. */
+@0322 V40581   $1.   /* Rendimento habitual em dinheiro */
+@0323 V405811   $1.   /* Faixa do valor do rendimento hab. */
+@0324 V405812   8.   /* Valor do rend. hab. em dinheiro */
+@0332 V40582   $1.   /* Rendimento habitual em produtos */
+@0333 V405821   $1.   /* Faixa do valor do rendimento hab. */
+@0334 V405822   8.   /* Valor do rend. hab. em produtos */
+@0342 V40583   $1.   /* Rendimento habitual em benef�cios */
+@0343 V405831   $1.   /* Tipo rend. habitual em benef�cios */
+@0344 V40584   $1.   /* N�o remunerado */
+@0345 V4059   $1.   /* Rendimento efetivo var. auxil. */
+@0346 V40591   $1.   /* Rendimento efetivo em dinheiro */
+@0347 V405911   $1.   /* Faixa do valor do rendimento efe. */
+@0348 V405912   8.   /* Valor do rend. efe. em dinheiro */
+@0356 V40592   $1.   /* Rendimento efetivo em produtos */
+@0357 V405921   $1.   /* Faixa do valor do rendimento efe. */
+@0358 V405922   8.   /* Valor do rend. efe. em produtos */
+@0366 V4062   3.   /* Hrs habituais no(s) outro(s) trab.*/
+@0369 V4062C   3.   /* Hrs efetivas no(s) outro(s) trab .*/
+@0372 V4063   $1.   /* Gostaria trabalhar + hrs efetivas */
+@0373 V4063A   $1.   /* Gostaria trabalhar + hrs habituais*/
+@0374 V4064   $1.   /* Dispon. trabalhar + hrs efetivas */
+@0375 V4064A   $1.   /* Dispon. trabalhar + hrs habituais */
+@0376 V4071   $1.   /* Provid�ncia p/ conseg. trab.(30d) */
+@0377 V4072   $2.   /* Principal provid. p/conseg. trab. */
+@0379 V4072A   $1.   /* Principal provid. p/conseg. trab. */
+@0380 V4073   $1.   /* Gostaria de ter trabalhado */
+@0381 V4074   $1.   /* Motivo de n�o ter tomado provid. */
+@0382 V4074A   $2.   /* Motivo de n�o ter tomado provid. */
+@0384 V4075A   $1.   /* Tempo em que ir� come�ar o trab. */
+@0385 V4075A1   $2.   /* Meses em que ir� come�ar o trab. */
+@0387 V4076   $1.   /* Tempo tentando conseguir trabalho */
+@0388 V40761   2.   /* Tempo tentando trab. 1 mes-1 ano */
+@0390 V40762   2.   /* Tempo tentando trab. 1 ano-2 anos */
+@0392 V40763   2.   /* Tempo tentando trab. + de 2 anos */
+@0394 V4077   $1.   /* Poderia ter come�ado a trabalhar */
+@0395 V4078   $1.   /* Motivo p/� querer/come�ar a trab. */
+@0396 V4078A   $1.   /* Motivo p /� querer/come�ar a trab. */
+@0397 V4082   $1.   /* Trab por pelo menos 1 hora em 1 ano*/
+@0398 VI5001A   $1.   /* Recebeu BPC-LOAS */ 
+@0399 VI5001A2   8.   /* Rend recebido de BPC-LOAS */
+@0407 VI5002A   $1.   /* Recebeu bolsa fam�lia */ 
+@0408 VI5002A2   8.   /* Rend recebido de bolsa familia */
+@0416 VI5003A   $1.   /* Recebeu outro prog social */
+@0417 VI5003A2   8.   /* Rend recebido de outro prog social */
+@0425 VI5004A   $1.   /* Recebeu aposentadoria e pens�o */
+@0426 VI5004A2   8.   /* Rend recebido de aposentadoria e pens�o */
+@0434 VI5005A   $1.   /* Recebeu rendimentos de seguro-desemprego, seguro-defeso */
+@0435 VI5005A2   8.   /* Rend recebido de seguro-desemprego, seguro-defeso */
+@0443 VI5006A   $1.   /* Recebeu pens�o aliment�cia, doa��o, etc */
+@0444 VI5006A2   8.   /* Rend recebido por pens�o aliment�cia, doa��o, etc */
+@0452 VI5007A   $1.   /* Recebeu aluguel e arrendamento */
+@0453 VI5007A2   8.   /* Rend recebido aluguel e arrendamento */
+@0461 VI5008A   $1.   /* Recebeu outros rendimentos (bolsa de estudos, rendimento de poupan�a, aplic finan, etc.) */
+@0462 VI5008A2   8.   /* Rend recebido de outros rendimentos (bolsa de estudos, rendimento de poupan�a, aplic finan, etc.) */
+@0470 S01021   2.   /* N�mero de moradores que t�m telefone m�vel celular para uso pessoal */
+@0472 S01022   $1.   /* Este domic�lio tem telefone fixo convencional? */
+@0473 S01024A   $1.   /* Este domic�lio tem r�dio, ainda que integrado a outro equipamento (como r�dio-rel�gio, r�dio-gravador, telefone m�vel celular ou computador)? */
+@0474 S01025   $1.   /* Este domic�lio tem televis�o? */
+@0475 S01025A   $2.   /* N� de televis�es de tela fina neste domicilio*/
+@0477 S01025B   $2.   /* N� de televis�es de tubo neste domic�lio */
+@0479 S01026   $1.   /* Possui servi�o de televis�o por assinatura */
+@0480 S01026A   $1.   /* Principal motivo para o domic�lio n�o ter TV por assinatura */
+@0481 S01027   $1.   /* Tem televis�o com antena parab�lica */
+@0482 S01027A   $1.   /* H� televis�o que tem sinal digital de TV aberta */
+@0483 S01027B   $1.   /* H� televis�o que tem condi��o de receber sinal digital de televis�o aberta */
+@0484 S01027C   $1.   /* H� televis�o com sinal anal�gico de televis�o aberta */
+@0485 S01027D   $1.   /* Antena parab�lica est� sendo utilizada para acessar canais de televis�o */
+@0486 S01027E   $1.   /* Antena parab�lica acessa canais de televis�o fechada */
+@0487 S01027F   $1.   /* Este domic�lio possui televis�o com antena parab�lica ou mini parab�lica? */
+@0488 S01027G   $1.   /* Esta antena parab�lica grande est� sendo utilizada, de fato, para acessar canais de televis�o? */
+@0489 S01027H   $1.   /* Para acessar os canais desta antena mini parab�lica, � necess�rio pagar alguma mensalidade? */
+@0490 S01027I   $1.   /* Este domic�lio possui televis�o que, de fato, recebe sinal de televis�o aberta (digital ou anal�gica)? */
+@0491 S01028   $1.   /* Tem microcomputador (considere inclusive os port�teis) */
+@0492 S01028A   $1.   /* No domicilio tem tablet */
+@0493 S01029   $1.   /* Acessa � Internet por meio de microcomputador, tablet, celular, televis�o ou outro equipamento? */
+@0494 S01029A   $1.   /* Este domic�lio tem algum dispositivo inteligente que pode ser acessado pela Internet, como c�meras, caixa de som, l�mpadas, ar-condicionado, geladeira etc.? */
+@0495 S01029B   $1.   /* Este domic�lio tem acesso a servi�o pago de streaming de v�deo como Netflix, Amazon Prime Video, Disney+, Globoplay etc.? */
+@0496 S01030   $1.   /* Utiliza para acessar � Internet: */
+@0497 S010301   $1.   /* Utiliza microcomputador (de mesa ou port�til) para acessar � Internet */
+@0498 S010302   $1.   /* Utiliza tablet para acessar � Internet */
+@0499 S010303   $1.   /* Utiliza telefone m�vel celular para acessar � Internet */
+@0500 S010304   $1.   /* Utiliza televis�o para acessar � Internet */
+@0501 S010305   $1.   /* Utiliza outro equipamento eletr�nico para acessar � Internet */
+@0502 S01030A1   $1.   /* A conex�o utilizada p/ Internet � 3G ou 4G */
+@0503 S01030A2   $1.   /* A conex�o utilizada p/ Internet � discada */
+@0504 S01030A3   $1.   /* A conex�o utilizada p/ Internet � banda larga */
+@0505 S01030B   $1.   /* Principal motivo de n�o ter acesso � Internet */
+@0506 S01030C   $1.   /* H� servi�o de celular neste domicilio */
+@0507 S01030D   $1.   /* Qual o principal motivo de nenhum morador ter acesso � Internet no domic�lio? */
+@0508 S07001   $1.   /* Utilizou a Internet em algum local por meio de computador, tablet, celular, televis�o ou outro equipamento */
+@0509 S07001A   $1.   /* Normalmente, com que frequ�ncia utiliza a Internet? */
+@0510 S070021   $1.   /* Acessou a Internet em algum local por meio de computador */
+@0511 S070022   $1.   /* Acessou a Internet em algum local por meio de tablet */
+@0512 S070023   $1.   /* Acessou a Internet em algum local por meio de telefone m�vel celular */
+@0513 S070024   $1.   /* Acessou a Internet em algum local por meio da televis�o */
+@0514 S070025   $1.   /* Acessou a Internet em algum local por meio de outro equipamento eletr�nico */
+@0515 S070031   $1.   /* Utilizou sinal de rede celular 3G ou 4G para acessar a Internet */
+@0516 S070032   $1.   /* Utilizou sinal de linha telef�nica para acessar a Internet */
+@0517 S070033   $1.   /* Utilizou sinal de bana larga para acessar a Internet */
+@0518 S070041   $1.   /* Utilizou a Internet em algum local para enviar ou receber e-mails */
+@0519 S070042   $1.   /* Utilizou a Internet em algum local para enviar ou receber mensagens de texto, voz ou imagens */
+@0520 S070043   $1.   /* Utilizou a Internet em algum local para conversar por chamadas de voz ou v�deo */
+@0521 S070044   $1.   /* Utilizou a Internet em algum local para assistir a v�deos, inclusive programas, s�ries e filmes */
+@0522 S070045   $1.   /* Nos �ltimos 3 meses, utilizou a Internet para usar redes sociais (Facebook, Instagram, Twitter, Snapchat, Tiktok, Linkedin etc.)? */
+@0523 S070046   $1.   /* Nos �ltimos 3 meses, utilizou a Internet para ouvir m�sicas, r�dio ou podcast? */
+@0524 S070047   $1.   /* Nos �ltimos 3 meses, utilizou a Internet para ler jornais, not�cias, livros ou revistas pela Internet? */
+@0525 S070048   $1.   /* Nos �ltimos 3 meses, utilizou a Internet para jogar (pelo videogame, celular, computador etc.)? */
+@0526 S070049   $1.   /* Nos �ltimos 3 meses, utilizou a Internet para comprar ou encomendar bens ou servi�os? */
+@0527 S0700410   $1.   /* Nos �ltimos 3 meses, utilizou a Internet para vender ou anunciar bens ou servi�os? */
+@0528 S0700411   $1.   /* Nos �ltimos 3 meses, utilizou a Internet para usar algum servi�o p�blico como, por exemplo, emitir documentos, preencher e enviar formul�rios on-line, ou pagar taxas e impostos? */
+@0529 S0700412   $1.   /* Nos �ltimos 3 meses, utilizou a Internet para acessar banco(s) ou outras institui��es financeiras para pagamento, transfer�ncia, consulta de saldo etc.? */
+@0530 S07004A1   $1.   /* Nos �ltimos 3 meses, utilizou Internet gratuita (Wi-Fi) em escola/universidade p�blica ou biblioteca p�blica? */
+@0531 S07004A2   $1.   /* Nos �ltimos 3 meses, utilizou Internet gratuita (Wi-Fi) em posto de sa�de, hospital p�blico ou outra unidade de sa�de p�blica? */
+@0532 S07004A3   $1.   /* Nos �ltimos 3 meses, utilizou Internet gratuita (Wi-Fi) em pra�as ou parques p�blicos? */
+@0533 S07005   $1.   /* Motivo para n�o ter acessado a Internet em algum local */
+@0534 S07005A   $1.   /* Qual foi o principal motivo para n�o ter acessado a Internet nos �ltimos tr�s meses?  */
+@0535 S07005B1   $1.   /* Nos �ltimos 3 meses, enviou ou recebeu e-mails (correio eletr�nico)? */
+@0536 S07005B2   $1.   /* Nos �ltimos 3 meses, enviou ou recebeu mensagens de texto, voz ou imagens por aplicativos diferentes de e-mail, como WhatsApp, Telegram, Messenger etc.? */
+@0537 S07005B3   $1.   /* Nos �ltimos 3 meses, usou redes sociais, como Facebook, Instagram, Twitter, Snapchat etc.? */
+@0538 S07005B4   $1.   /* Nos �ltimos 3 meses, usou servi�os de v�deos ou streaming, como YouTube, Netflix, Globoplay etc.? */
+@0539 S07005B5   $1.   /* Nos �ltimos 3 meses, utilizou aplicativo de transporte, compras ou entregas, como Uber, 99, Rappi, Ifood etc.? */
+@0540 S07006   $1.   /* Tem celular pessoal */
+@0541 S07007   $1.   /* Esse celular pessoal tem acesso � Internet */
+@0542 S07008   $1.   /* Principal motivo para n�o ter celular pessoal */
+@0543 S07008A   $1.   /* Qual � o principal motivo para n�o ter telefone m�vel de uso pessoal? */
+@0544 S07009   $1.   /* Informante deste m�dulo */
+@0545 S090000   $1.   /* Tipo de entrevista do morador selecionado*/
+@0546 S090011   $1.   /* Nas redondezas do domic�lio, existe ilumina��o p�blica? */
+@0547 S0900111   $1.   /* Como voc� avalia? (Ilumina��o p�blica) */
+@0548 S090012   $1.   /* Nas redondezas ou arredores do seu domic�lio, a rua tem asfalto, cimento, concreto, paralelep�pedo e/ou pedra? */
+@0549 S0900121   $1.   /* Como voc� avalia? (Pavimenta��o) */
+@0550 S090013   $1.   /* Nas redondezas ou arredores do seu domic�lio, existe parque, pra�a ou campinho (quadra de esportes)? */
+@0551 S0900131   $1.   /* Como voc� avalia? (�reas de lazer) */
+@0552 S090014   $1.   /* Nas redondezas ou arredores do seu domic�lio, existe transporte coletivo como �nibus, van, trem, metr� etc.? */
+@0553 S0900141   $1.   /* Como voc� avalia? (Transporte coletivo) */
+@0554 S090015   $1.   /* Nas redondezas ou arredores do seu domic�lio, existe creche ou escola p�blica? */
+@0555 S0900151   $1.   /* Como voc� avalia? (Creche ou escola p�blica) */
+@0556 S090016   $1.   /* Nas redondezas ou arredores do seu domic�lio, existe posto de sa�de ou outro centro de atendimento de sa�de p�blico? */
+@0557 S0900161   $1.   /* Como voc� avalia? (Centro de sa�de p�blico) */
+@0558 S090017   $1.   /* Nas redondezas ou arredores do seu domic�lio, existe policiamento? */
+@0559 S0900171   $1.   /* Como voc� avalia? (Policiamento) */
+@0560 S090018   $1.   /* Nas redondezas ou arredores do seu domic�lio, existe coleta de lixo? */
+@0561 S0900181   $1.   /* Como voc� avalia? (Coleta de lixo) */
+@0562 S090021   $1.   /* Nas redondezas ou arredores do seu domic�lio, existe pr�dio, casa ou galp�o abandonado? */
+@0563 S090022   $1.   /* Nas redondezas ou arredores do seu domic�lio, existe carro abandonado, arrebentado ou desmontado? */
+@0564 S090023   $1.   /* Nas redondezas ou arredores do seu domic�lio, existe terreno baldio ou lote abandonado? */
+@0565 S090024   $1.   /* Nas redondezas ou arredores do seu domic�lio, existe morador de rua? */
+@0566 S090025   $1.   /* Nas redondezas ou arredores do seu domic�lio, existem pessoas consumindo drogas ilegais? */
+@0567 S090026   $1.   /* Nas redondezas ou arredores do seu domic�lio, existem pessoas se prostituindo na rua? */
+@0568 S090031   $1.   /* Nos �ltimos doze meses, nas redondezas ou arredores do seu domic�lio, teve troca de tiros ou brigas com armas de fogo? */
+@0569 S090032   $1.   /* Nos �ltimos doze meses, nas redondezas ou arredores do seu domic�lio, teve assassinato? */
+@0570 S090033   $1.   /* Nos �ltimos doze meses, nas redondezas ou arredores do seu domic�lio, teve assalto ou roubo com viol�ncia? */
+@0571 S090034   $1.   /* Nos �ltimos doze meses, nas redondezas ou arredores do seu domic�lio, teve venda de drogas ilegais? */
+@0572 S090035   $1.   /* Nos �ltimos doze meses, nas redondezas ou arredores do seu domic�lio, teve viol�ncia policial? */
+@0573 S090036   $1.   /* Nos �ltimos doze meses, nas redondezas ou arredores do seu domic�lio, teve extors�o ou cobran�a de taxas ilegais? */
+@0574 S090037   $1.   /* Nos �ltimos doze meses, nas redondezas ou arredores do seu domic�lio, teve alguma pessoa, que n�o era policial ou das for�as armadas, andando nas ruas com arma de fogo? */
+@0575 S09004   $1.   /* Na maioria das vezes, como voc� fica sabendo sobre crimes que acontecem na sua cidade? */
+@0576 S090051   $1.   /* O quanto voc� confia em familiares ou parentes? */
+@0577 S090052   $1.   /* O quanto voc� confia em amigos? */
+@0578 S090053   $1.   /* O quanto voc� confia em colegas (trabalho, escola ou outra atividade)? */
+@0579 S090054   $1.   /* O quanto voc� confia em vizinhos? */
+@0580 S090061   $1.   /* O quanto voc� confia na Guarda Municipal? */
+@0581 S090062   $1.   /* O quanto voc� confia na Pol�cia Civil? */
+@0582 S090063   $1.   /* O quanto voc� confia na Pol�cia Militar? */
+@0583 S090064   $1.   /* O quanto voc� confia no Corpo de Bombeiros? */
+@0584 S090065   $1.   /* O quanto voc� confia na Justi�a? */
+@0585 S090066   $1.   /* O quanto voc� confia no Ex�rcito, Marinha e Aeron�utica? */
+@0586 S090071   $1.   /* O quanto voc� se sente seguro(a) na sua casa? */
+@0587 S090072   $1.   /* O quanto voc� se sente seguro(a) no seu bairro? */
+@0588 S090073   $1.   /* O quanto voc� se sente seguro(a) na sua cidade? */
+@0589 S09008   $1.   /* O quanto voc� se sente seguro(a) andando sozinho(a) nas redondezas ou arredores do seu domic�lio? */
+@0590 S090091   $1.   /* O quanto voc� se sente seguro(a) andando sozinho(a) nas redondezas ou arredores do seu domic�lio, durante o dia? */
+@0591 S090092   $1.   /* O quanto voc� se sente seguro(a) andando sozinho(a) nas redondezas ou arredores do seu domic�lio, durante a noite? */
+@0592 S0901001   $1.   /* No seu dia a dia, qual a chance de voc� ter suas fotos, v�deos ou conversas divulgadas na internet contra a sua vontade? */
+@0593 S0901002   $1.   /* No seu dia a dia, qual a chance de voc� ser v�tima de viol�ncia policial? */
+@0594 S0901003   $1.   /* No seu dia a dia, qual a chance de voc� ser confundido(a) com bandido(a) pela pol�cia? */
+@0595 S0901004   $1.   /* No seu dia a dia, qual a chance de voc� ter seu carro, moto ou bicicleta assaltado ou roubado com viol�ncia? */
+@0596 S0901005   $1.   /* No seu dia a dia, qual a chance de voc� ser assaltado(a) no transporte coletivo como �nibus, van, trem, metr� etc.? */
+@0597 S0901006   $1.   /* No seu dia a dia, qual a chance de voc� ser assaltado(a) ou roubado(a) com viol�ncia na rua? */
+@0598 S0901007   $1.   /* No seu dia a dia, qual a chance de voc� ter seu domic�lio roubado ou furtado? */
+@0599 S0901008   $1.   /* No seu dia a dia, qual a chance de voc� ser v�tima de agress�o f�sica? */
+@0600 S0901009   $1.   /* No seu dia a dia, qual a chance de voc� ser v�tima de agress�o sexual? */
+@0601 S0901010   $1.   /* No seu dia a dia, qual a chance de voc� ser v�tima de sequestro? */
+@0602 S0901011   $1.   /* No seu dia a dia, qual a chance de voc� estar no meio de um tiroteio? */
+@0603 S0901012   $1.   /* No seu dia a dia, qual a chance de voc� ser v�tima de bala perdida? */
+@0604 S0901013   $1.   /* No seu dia a dia, qual a chance de voc� ser assassinado(a)? */
+@0605 S090111   $1.   /* Nos �ltimos doze meses, por motivo de seguran�a, voc� evitou ir a caixas eletr�nicos de rua � noite? */
+@0606 S090112   $1.   /* Nos �ltimos doze meses, por motivo de seguran�a, voc� evitou usar rel�gio de pulso, joias ou outro(s) objeto(s) de valor? */
+@0607 S090113   $1.   /* Nos �ltimos doze meses, por motivo de seguran�a, voc� evitou usar celular em locais p�blicos? */
+@0608 S090114   $1.   /* Nos �ltimos doze meses, por motivo de seguran�a, voc� evitou atividades de lazer que fazia? */
+@0609 S090115   $1.   /* Nos �ltimos doze meses, por motivo de seguran�a, voc� evitou lugares com poucas pessoas circulando? */
+@0610 S090116   $1.   /* Nos �ltimos doze meses, por motivo de seguran�a, voc� evitou chegar ou sair muito tarde de casa? */
+@0611 S090117   $1.   /* Nos �ltimos doze meses, por motivo de seguran�a, voc� evitou usar algum transporte coletivo? */
+@0612 S090118   $1.   /* Nos �ltimos doze meses, por motivo de seguran�a, voc� evitou conversar com pessoas desconhecidas em locais p�blicos? */
+@0613 S090119   $1.   /* Nos �ltimos doze meses, por motivo de seguran�a, voc� evitou usar redes sociais ou internet? */
+@0614 S100011   $1.   /* Para aumentar a seguran�a do seu domic�lio e/ou condom�nio, existe(m) funcion�rio(s) contratado(s) para vigil�ncia? */
+@0615 S1000111   $1.   /* Foi(ram) contratado(s) nos �ltimos 12 meses? */
+@0616 S100012   $1.   /* Para aumentar a seguran�a do seu domic�lio e/ou condom�nio, existem alarmes ou c�meras de v�deo? */
+@0617 S1000121   $1.   /* Foi(ram) instalado(s) nos �ltimos 12 meses? */
+@0618 S100013   $1.   /* Para aumentar a seguran�a do seu domic�lio e/ou condom�nio, existem muros ou grades altos, cacos de vidro ou arame farpado? */
+@0619 S1000131   $1.   /* Foi(ram) instalado(s) nos �ltimos 12 meses? */
+@0620 S100014   $1.   /* Para aumentar a seguran�a do seu domic�lio e/ou condom�nio, existe cerca el�trica? */
+@0621 S1000141   $1.   /* Foi instalada nos �ltimos 12 meses? */
+@0622 S100015   $1.   /* Para aumentar a seguran�a do seu domic�lio e/ou condom�nio, existe(m) trava, tranca, fechadura refor�ada ou grade (porta, janela ou port�o)? */
+@0623 S1000151   $1.   /* Foi(ram) instalado(s) nos �ltimos 12 meses? */
+@0624 S100016   $1.   /* Para aumentar a seguran�a do seu domic�lio e/ou condom�nio, existe cachorro ou outro animal para proteger o domic�lio? */
+@0625 S1000161   $1.   /* Foi(ram) adquirido(s) nos �ltimos 12 meses? */
+@0626 S100017   $1.   /* Para aumentar a seguran�a do seu domic�lio e/ou condom�nio, existe(m) arma(s) de fogo? */
+@0627 S1000171   $1.   /* Foi(ram) adquirida(s) nos �ltimos 12 meses? */
+@0628 S100018   $1.   /* Para aumentar a seguran�a do seu domic�lio e/ou condom�nio, existe outro dispositivo de seguran�a? */
+@0629 S1000181   $1.   /* Foi(ram) instalado(s) ou adquirido(s) nos �ltimos 12 meses? */
+@0630 S100021   $1.   /* Nos �ltimos 12 meses, algum morador deste domic�lio foi v�tima, SEM uso de viol�ncia ou amea�a, de furto de carro(s)? */
+@0631 S1000211   2.   /* Quantas vezes? */
+@0633 S100022   $1.   /* Nos �ltimos 12 meses, algum morador deste domic�lio foi v�tima, SEM uso de viol�ncia ou amea�a, de furto de moto(s)? */
+@0634 S1000221   2.   /* Quantas vezes? */
+@0636 S100023   $1.   /* Nos �ltimos 12 meses, algum morador deste domic�lio foi v�tima, SEM uso de viol�ncia ou amea�a, de furto de bicicleta(s)? */
+@0637 S1000231   2.   /* Quantas vezes? */
+@0639 S10003   $1.   /* Nos �ltimos 12 meses, algu�m furtou alguma coisa no seu domic�lio, SEM uso de viol�ncia ou ame�a (N�O considere carro, moto e bicicleta. Exemplos: eletrodom�sticos, roupas, joias, celular, dinheiro, documentos etc.)? */
+@0640 S100031   2.   /* Quantas vezes? */
+@0642 S10004   $1.   /* Nos �ltimos 12 meses, algum morador sofreu outro furto fora do domic�lio, SEM uso de viol�ncia ou ame�a (N�O considere moto e bicicleta. Exemplos: joias, celular, dinheiro, documentos etc.)? */
+@0643 S10005   $1.   /* Na �ltima vez em que o carro foi furtado, onde ele estava? */
+@0644 S10006   $1.   /* Nessa �ltima vez, algu�m procurou a pol�cia ou guarda municipal? */
+@0645 S100061   $1.   /* Pol�cia Militar? */
+@0646 S100062   $1.   /* Pol�cia Civil? */
+@0647 S100063   $1.   /* Guarda Municipal? */
+@0648 S100064   $1.   /* Outra Pol�cia? */
+@0649 S10007   $1.   /* Qual o principal motivo de n�o ter procurado? */
+@0650 S10008   $1.   /* Fez registro de corr�ncia na delegacia de pol�cia? */
+@0651 S10009   $1.   /* Qual o principal motivo de n�o ter feito o registro? */
+@0652 S10010   $1.   /* Na �ltima vez em que a moto foi furtada, onde ela estava? */
+@0653 S10011   $1.   /* Nessa �ltima vez, algu�m procurou a pol�cia ou guarda municipal? */
+@0654 S100111   $1.   /* Pol�cia Militar? */
+@0655 S100112   $1.   /* Pol�cia Civil? */
+@0656 S100113   $1.   /* Guarda Municipal? */
+@0657 S100114   $1.   /* Outra Pol�cia? */
+@0658 S10012   $1.   /* Qual o principal motivo de n�o ter procurado? */
+@0659 S10013   $1.   /* Fez registro de ocorr�ncia na delegacia de pol�cia?  */
+@0660 S10014   $1.   /* Qual o principal motivo de n�o ter feito o registro? */
+@0661 S10015   $1.   /* Na �ltima vez em que a bicicleta foi furtada, onde ela estava? */
+@0662 S10016   $1.   /* Nessa �ltima vez, algu�m procurou a pol�cia ou guarda municipal? */
+@0663 S100161   $1.   /* Pol�cia Militar? */
+@0664 S100162   $1.   /* Pol�cia Civil? */
+@0665 S100163   $1.   /* Guarda Municipal? */
+@0666 S100164   $1.   /* Outra Pol�cia? */
+@0667 S10017   $1.   /* Qual o principal motivo de n�o ter procurado? */
+@0668 S10018   $1.   /* Fez registro de corr�ncia na delegacia de pol�cia? */
+@0669 S10019   $1.   /* Qual o principal motivo de n�o ter feito o registro? */
+@0670 S100201   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s) Aparelho(s) eletrodom�stico(s)          ? */
+@0671 S100202   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s) Computador(es) e/ou tablet(s)          ? */
+@0672 S100203   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s) Roupa(s) e/ou cal�ado(s)          ? */
+@0673 S100204   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s) Joia(s), bijuteria(s), rel�gio(s)          ? */
+@0674 S100205   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s) Telefone(s) celular(es)          ? */
+@0675 S100206   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s) Dinheiro em esp�cie          ? */
+@0676 S100207   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s) Documento(s)          ? */
+@0677 S100208   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s) Cart�o de d�bito /cr�dito ou cheque              ? */
+@0678 S10021   $1.   /* Nessa �ltima vez, algu�m procurou a pol�cia ou guarda municipal? */
+@0679 S100211   $1.   /* Pol�cia Militar? */
+@0680 S100212   $1.   /* Pol�cia Civil? */
+@0681 S100213   $1.   /* Guarda Municipal? */
+@0682 S100214   $1.   /* Outra Pol�cia? */
+@0683 S10022   $1.   /* Qual o principal motivo de n�o ter procurado? */
+@0684 S10023   $1.   /* Fez registro de corr�ncia na delegacia de pol�cia? */
+@0685 S10024   $1.   /* Qual o principal motivo de n�o ter feito o registro? */
+@0686 S10025   $2.   /* Voc� disse que ocorreu furto de outros bens fora do domic�lio nos �ltimos 12 meses. Qual(is) morador(es) foi(ram) furtado(s)? */
+@0688 S1002501   $1.   /* Morador 1 */
+@0689 S1002502   $1.   /* Morador 2 */
+@0690 S1002503   $1.   /* Morador 3 */
+@0691 S1002504   $1.   /* Morador 4 */
+@0692 S1002505   $1.   /* Morador 5 */
+@0693 S1002506   $1.   /* Morador 6 */
+@0694 S1002507   $1.   /* Morador 7 */
+@0695 S1002508   $1.   /* Morador 8 */
+@0696 S1002509   $1.   /* Morador 9 */
+@0697 S1002510   $1.   /* Morador 10 */
+@0698 S1002511   $1.   /* Morador 11 */
+@0699 S1002512   $1.   /* Morador 12 */
+@0700 S1002513   $1.   /* Morador 13 */
+@0701 S1002514   $1.   /* Morador 14 */
+@0702 S1002515   $1.   /* Morador 15 */
+@0703 S1002516   $1.   /* Morador 16 */
+@0704 S1002517   $1.   /* Morador 17 */
+@0705 S1002518   $1.   /* Morador 18 */
+@0706 S1002519   $1.   /* Morador 19 */
+@0707 S1002520   $1.   /* Morador 20 */
+@0708 S1002521   $1.   /* Morador 21 */
+@0709 S1002522   $1.   /* Morador 22 */
+@0710 S1002523   $1.   /* Morador 23 */
+@0711 S1002524   $1.   /* Morador 24 */
+@0712 S1002525   $1.   /* Morador 25 */
+@0713 S1002526   $1.   /* Morador 26 */
+@0714 S1002527   $1.   /* Morador 27 */
+@0715 S1002528   $1.   /* Morador 28 */
+@0716 S1002529   $1.   /* Morador 29 */
+@0717 S1002530   $1.   /* Morador 30 */
+@0718 S10025011   2.   /* Quantas vezes? Morador 1 */
+@0720 S10025021   2.   /* Quantas vezes? Morador 2 */
+@0722 S10025031   2.   /* Quantas vezes? Morador 3 */
+@0724 S10025041   2.   /* Quantas vezes? Morador 4 */
+@0726 S10025051   2.   /* Quantas vezes? Morador 5 */
+@0728 S10025061   2.   /* Quantas vezes? Morador 6 */
+@0730 S10025071   2.   /* Quantas vezes? Morador 7 */
+@0732 S10025081   2.   /* Quantas vezes? Morador 8 */
+@0734 S10025091   2.   /* Quantas vezes? Morador 9 */
+@0736 S10025101   2.   /* Quantas vezes? Morador 10 */
+@0738 S10025111   2.   /* Quantas vezes? Morador 11 */
+@0740 S10025121   2.   /* Quantas vezes? Morador 12 */
+@0742 S10025131   2.   /* Quantas vezes? Morador 13 */
+@0744 S10025141   2.   /* Quantas vezes? Morador 14 */
+@0746 S10025151   2.   /* Quantas vezes? Morador 15 */
+@0748 S10025161   2.   /* Quantas vezes? Morador 16 */
+@0750 S10025171   2.   /* Quantas vezes? Morador 17 */
+@0752 S10025181   2.   /* Quantas vezes? Morador 18 */
+@0754 S10025191   2.   /* Quantas vezes? Morador 19 */
+@0756 S10025201   2.   /* Quantas vezes? Morador 20 */
+@0758 S10025211   2.   /* Quantas vezes? Morador 21 */
+@0760 S10025221   2.   /* Quantas vezes? Morador 22 */
+@0762 S10025231   2.   /* Quantas vezes? Morador 23 */
+@0764 S10025241   2.   /* Quantas vezes? Morador 24 */
+@0766 S10025251   2.   /* Quantas vezes? Morador 25 */
+@0768 S10025261   2.   /* Quantas vezes? Morador 26 */
+@0770 S10025271   2.   /* Quantas vezes? Morador 27 */
+@0772 S10025281   2.   /* Quantas vezes? Morador 28 */
+@0774 S10025291   2.   /* Quantas vezes? Morador 29 */
+@0776 S10025301   2.   /* Quantas vezes? Morador 30 */
+@0778 S100261   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s) Joia(s), bijuteria(s), rel�gio(s)? */
+@0779 S100262   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s) Telefone(s) celular(es)? */
+@0780 S100263   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s) Dinheiro em esp�cie? */
+@0781 S100264   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s) Documento(s)? */
+@0782 S100265   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s) Cart�o de d�bito /cr�dito ou cheque? */
+@0783 S10027   $1.   /* Nessa �ltima vez, algu�m procurou a pol�cia ou guarda municipal? */
+@0784 S10028   $1.   /* Fez registro de corr�ncia na delegacia de pol�cia? */
+@0785 S100291   $1.   /* Nos �ltimos 12 meses, algum morador deste domic�lio foi v�tima, COM uso de viol�ncia ou amea�a, de roubo de carro(s)? */
+@0786 S1002911   2.   /* Quantas vezes? */
+@0788 S100292   $1.   /* Nos �ltimos 12 meses, algum morador deste domic�lio foi v�tima, COM uso de viol�ncia ou amea�a, de roubo de moto(s)? */
+@0789 S1002921   2.   /* Quantas vezes? */
+@0791 S100293   $1.   /* Nos �ltimos 12 meses, algum morador deste domic�lio foi v�tima, COM uso de viol�ncia ou amea�a, de roubo de bicicleta(s)? */
+@0792 S1002931   2.   /* Quantas vezes? */
+@0794 S10030   $1.   /* Nos �ltimos 12 meses, algu�m roubou alguma coisa no seu domic�lio, COM uso de viol�ncia ou ame�a (N�O considere carro, moto e bicicleta)? */
+@0795 S100301   2.   /* Quantas vezes? */
+@0797 S10031   $1.   /* Nos �ltimos 12 meses, algum morador sofreu outro roubo fora do domic�lio, COM uso de viol�ncia ou amea�a (N�O considere carro, moto e bicicleta)?  */
+@0798 S10032   $2.   /* Voc� disse que ocorreu roubo de carro nos �ltimos 12 meses. Qual(is) morador(es) foi(ram) roubado(s)? */
+@0800 S1003201   $1.   /* Morador 1 */
+@0801 S1003202   $1.   /* Morador 2 */
+@0802 S1003203   $1.   /* Morador 3 */
+@0803 S1003204   $1.   /* Morador 4 */
+@0804 S1003205   $1.   /* Morador 5 */
+@0805 S1003206   $1.   /* Morador 6 */
+@0806 S1003207   $1.   /* Morador 7 */
+@0807 S1003208   $1.   /* Morador 8 */
+@0808 S1003209   $1.   /* Morador 9 */
+@0809 S1003210   $1.   /* Morador 10 */
+@0810 S1003211   $1.   /* Morador 11 */
+@0811 S1003212   $1.   /* Morador 12 */
+@0812 S1003213   $1.   /* Morador 13 */
+@0813 S1003214   $1.   /* Morador 14 */
+@0814 S1003215   $1.   /* Morador 15 */
+@0815 S1003216   $1.   /* Morador 16 */
+@0816 S1003217   $1.   /* Morador 17 */
+@0817 S1003218   $1.   /* Morador 18 */
+@0818 S1003219   $1.   /* Morador 19 */
+@0819 S1003220   $1.   /* Morador 20 */
+@0820 S1003221   $1.   /* Morador 21 */
+@0821 S1003222   $1.   /* Morador 22 */
+@0822 S1003223   $1.   /* Morador 23 */
+@0823 S1003224   $1.   /* Morador 24 */
+@0824 S1003225   $1.   /* Morador 25 */
+@0825 S1003226   $1.   /* Morador 26 */
+@0826 S1003227   $1.   /* Morador 27 */
+@0827 S1003228   $1.   /* Morador 28 */
+@0828 S1003229   $1.   /* Morador 29 */
+@0829 S1003230   $1.   /* Morador 30 */
+@0830 S10033   $1.   /* Na �ltima vez o(s) autor(es) desse roubo usou(ram) algum tipo de arma? */
+@0831 S100341   $1.   /* Foi utilizado pau, madeira ou pedra */
+@0832 S100342   $1.   /* Foi utilizado faca ou canivete */
+@0833 S100343   $1.   /* Foi utilizado rev�lver ou outra arma de fogo */
+@0834 S100344   $1.   /* Foi utilizada outra arma */
+@0835 S10035   $1.   /* Na �ltima vez em que o carro foi roubado, onde ele estava? */
+@0836 S10036   $1.   /* Nessa �ltima vez, algu�m procurou a pol�cia ou guarda municipal? */
+@0837 S100361   $1.   /* Pol�cia Militar? */
+@0838 S100362   $1.   /* Pol�cia Civil? */
+@0839 S100363   $1.   /* Guarda Municipal? */
+@0840 S100364   $1.   /* Outra Pol�cia? */
+@0841 S10037   $1.   /* Qual o principal motivo de n�o ter procurado? */
+@0842 S10038   $1.   /* Fez registro de corr�ncia na delegacia de pol�cia? */
+@0843 S10039   $1.   /* Qual o principal motivo de n�o ter feito o registro? */
+@0844 S10040   $2.   /* Voc� disse que ocorreu roubo de moto nos �ltimos 12 meses. Qual(is) morador(es) foi(ram) roubado(s)? */
+@0846 S1004001   $1.   /* Morador 1 */
+@0847 S1004002   $1.   /* Morador 2 */
+@0848 S1004003   $1.   /* Morador 3 */
+@0849 S1004004   $1.   /* Morador 4 */
+@0850 S1004005   $1.   /* Morador 5 */
+@0851 S1004006   $1.   /* Morador 6 */
+@0852 S1004007   $1.   /* Morador 7 */
+@0853 S1004008   $1.   /* Morador 8 */
+@0854 S1004009   $1.   /* Morador 9 */
+@0855 S1004010   $1.   /* Morador 10 */
+@0856 S1004011   $1.   /* Morador 11 */
+@0857 S1004012   $1.   /* Morador 12 */
+@0858 S1004013   $1.   /* Morador 13 */
+@0859 S1004014   $1.   /* Morador 14 */
+@0860 S1004015   $1.   /* Morador 15 */
+@0861 S1004016   $1.   /* Morador 16 */
+@0862 S1004017   $1.   /* Morador 17 */
+@0863 S1004018   $1.   /* Morador 18 */
+@0864 S1004019   $1.   /* Morador 19 */
+@0865 S1004020   $1.   /* Morador 20 */
+@0866 S1004021   $1.   /* Morador 21 */
+@0867 S1004022   $1.   /* Morador 22 */
+@0868 S1004023   $1.   /* Morador 23 */
+@0869 S1004024   $1.   /* Morador 24 */
+@0870 S1004025   $1.   /* Morador 25 */
+@0871 S1004026   $1.   /* Morador 26 */
+@0872 S1004027   $1.   /* Morador 27 */
+@0873 S1004028   $1.   /* Morador 28 */
+@0874 S1004029   $1.   /* Morador 29 */
+@0875 S1004030   $1.   /* Morador 30 */
+@0876 S10041   $1.   /* Na �ltima vez o(s) autor(es) desse roubo usou(ram) algum tipo de arma? */
+@0877 S100421   $1.   /* Foi utilizado pau, madeira ou pedra */
+@0878 S100422   $1.   /* Foi utilizado faca ou canivete */
+@0879 S100423   $1.   /* Foi utilizado rev�lver ou outra arma de fogo */
+@0880 S100424   $1.   /* Foi utilizada outra arma */
+@0881 S10043   $1.   /* Na �ltima vez em que a moto foi roubada, onde ela estava? */
+@0882 S10044   $1.   /* Nessa �ltima vez, algu�m procurou a pol�cia ou guarda municipal? */
+@0883 S100441   $1.   /* Pol�cia Militar? */
+@0884 S100442   $1.   /* Pol�cia Civil? */
+@0885 S100443   $1.   /* Guarda Municipal? */
+@0886 S100444   $1.   /* Outra Pol�cia? */
+@0887 S10045   $1.   /* Qual o principal motivo de n�o ter procurado? */
+@0888 S10046   $1.   /* Fez registro de corr�ncia na delegacia de pol�cia? */
+@0889 S10047   $1.   /* Qual o principal motivo de n�o ter feito o registro? */
+@0890 S10048   $2.   /* Voc� disse que ocorreu roubo de bicicleta nos �ltimos 12 meses. Qual(is) morador(es) foi(ram) roubado(s)? */
+@0892 S1004801   $1.   /* Morador 1 */
+@0893 S1004802   $1.   /* Morador 2 */
+@0894 S1004803   $1.   /* Morador 3 */
+@0895 S1004804   $1.   /* Morador 4 */
+@0896 S1004805   $1.   /* Morador 5 */
+@0897 S1004806   $1.   /* Morador 6 */
+@0898 S1004807   $1.   /* Morador 7 */
+@0899 S1004808   $1.   /* Morador 8 */
+@0900 S1004809   $1.   /* Morador 9 */
+@0901 S1004810   $1.   /* Morador 10 */
+@0902 S1004811   $1.   /* Morador 11 */
+@0903 S1004812   $1.   /* Morador 12 */
+@0904 S1004813   $1.   /* Morador 13 */
+@0905 S1004814   $1.   /* Morador 14 */
+@0906 S1004815   $1.   /* Morador 15 */
+@0907 S1004816   $1.   /* Morador 16 */
+@0908 S1004817   $1.   /* Morador 17 */
+@0909 S1004818   $1.   /* Morador 18 */
+@0910 S1004819   $1.   /* Morador 19 */
+@0911 S1004820   $1.   /* Morador 20 */
+@0912 S1004821   $1.   /* Morador 21 */
+@0913 S1004822   $1.   /* Morador 22 */
+@0914 S1004823   $1.   /* Morador 23 */
+@0915 S1004824   $1.   /* Morador 24 */
+@0916 S1004825   $1.   /* Morador 25 */
+@0917 S1004826   $1.   /* Morador 26 */
+@0918 S1004827   $1.   /* Morador 27 */
+@0919 S1004828   $1.   /* Morador 28 */
+@0920 S1004829   $1.   /* Morador 29 */
+@0921 S1004830   $1.   /* Morador 30 */
+@0922 S10049   $1.   /* Na �ltima vez o(s) autor(es) desse roubo usou(ram) algum tipo de arma? */
+@0923 S100501   $1.   /* Foi utilizado pau, madeira ou pedra */
+@0924 S100502   $1.   /* Foi utilizado faca ou canivete */
+@0925 S100503   $1.   /* Foi utilizado rev�lver ou outra arma de fogo */
+@0926 S100504   $1.   /* Foi utilizada outra arma */
+@0927 S10051   $1.   /* Na �ltima vez em que a bicicleta foi roubada, onde ela estava? */
+@0928 S10052   $1.   /* Nessa �ltima vez, algu�m procurou a pol�cia ou guarda municipal? */
+@0929 S100521   $1.   /* Pol�cia Militar? */
+@0930 S100522   $1.   /* Pol�cia Civil? */
+@0931 S100523   $1.   /* Guarda Municipal? */
+@0932 S100524   $1.   /* Outra Pol�cia? */
+@0933 S10053   $1.   /* Qual o principal motivo de n�o ter procurado? */
+@0934 S10054   $1.   /* Fez registro de corr�ncia na delegacia de pol�cia? */
+@0935 S10055   $1.   /* Qual o principal motivo de n�o ter feito o registro? */
+@0936 S10056   $1.   /* Na �ltima vez em que seu domic�lio foi roubado, o(s) autor(es) desse roubo usou(ram) algum tipo de arma? */
+@0937 S100571   $1.   /* Foi utilizado pau, madeira ou pedra? */
+@0938 S100572   $1.   /* Foi utilizado faca ou canivete? */
+@0939 S100573   $1.   /* Foi utilizado rev�lver ou outra arma de fogo? */
+@0940 S100574   $1.   /* Foi utilizada outra arma? */
+@0941 S100581   $2.   /* Na �ltima vez em que SEU DOMIC�LIO foi roubado, o que foi(ram) levado(s) Aparelho(s) eletrodom�stico(s)          ? */
+@0943 S100582   $2.   /* Na �ltima vez em que SEU DOMIC�LIO foi roubado, o que foi(ram) levado(s) Computador(es) e/ou tablet(s)          ? */
+@0945 S100583   $2.   /* Na �ltima vez em que SEU DOMIC�LIO foi roubado, o que foi(ram) levado(s) Roupa(s) e/ou cal�ado(s)          ? */
+@0947 S100584   $2.   /* Na �ltima vez em que SEU DOMIC�LIO foi roubado, o que foi(ram) levado(s) Joia(s), bijuteria(s), rel�gio(s)          ? */
+@0949 S100585   $2.   /* Na �ltima vez em que SEU DOMIC�LIO foi roubado, o que foi(ram) levado(s) Telefone(s) celular(es)          ? */
+@0951 S100586   $2.   /* Na �ltima vez em que SEU DOMIC�LIO foi roubado, o que foi(ram) levado(s) Dinheiro em esp�cie          ? */
+@0953 S100587   $2.   /* Na �ltima vez em que SEU DOMIC�LIO foi roubado, o que foi(ram) levado(s) Documento(s)          ? */
+@0955 S100588   $2.   /* Na �ltima vez em que SEU DOMIC�LIO foi roubado, o que foi(ram) levado(s) Cart�o de d�bito /cr�dito ou cheque              ? */
+@0957 S100589   $2.   /* Na �ltima vez em que SEU DOMIC�LIO foi roubado, o que foi(ram) levado(s) Outros objetos                          ? */
+@0959 S10059   $1.   /* Nessa �ltima vez, algu�m procurou a pol�cia ou guarda municipal? */
+@0960 S100591   $1.   /* Pol�cia Militar? */
+@0961 S100592   $1.   /* Pol�cia Civil? */
+@0962 S100593   $1.   /* Guarda Municipal? */
+@0963 S100594   $1.   /* Outra Pol�cia? */
+@0964 S10060   $1.   /* Qual o principal motivo de n�o ter procurado? */
+@0965 S10061   $1.   /* Fez registro de corr�ncia na delegacia de pol�cia? */
+@0966 S10062   $1.   /* Qual o principal motivo de n�o ter feito o registro? */
+@0967 S10063   $1.   /* Voc� disse que ocorreu roubo de outros bens fora do domic�lio nos �ltimos 12 meses. Qual(is) morador(es) foi(ram) roubado(s)? */
+@0968 S1006301   $1.   /* Morador 1 */
+@0969 S1006302   $1.   /* Morador 2 */
+@0970 S1006303   $1.   /* Morador 3 */
+@0971 S1006304   $1.   /* Morador 4 */
+@0972 S1006305   $1.   /* Morador 5 */
+@0973 S1006306   $1.   /* Morador 6 */
+@0974 S1006307   $1.   /* Morador 7 */
+@0975 S1006308   $1.   /* Morador 8 */
+@0976 S1006309   $1.   /* Morador 9 */
+@0977 S1006310   $1.   /* Morador 10 */
+@0978 S1006311   $1.   /* Morador 11 */
+@0979 S1006312   $1.   /* Morador 12 */
+@0980 S1006313   $1.   /* Morador 13 */
+@0981 S1006314   $1.   /* Morador 14 */
+@0982 S1006315   $1.   /* Morador 15 */
+@0983 S1006316   $1.   /* Morador 16 */
+@0984 S1006317   $1.   /* Morador 17 */
+@0985 S1006318   $1.   /* Morador 18 */
+@0986 S1006319   $1.   /* Morador 19 */
+@0987 S1006320   $1.   /* Morador 20 */
+@0988 S1006321   $1.   /* Morador 21 */
+@0989 S1006322   $1.   /* Morador 22 */
+@0990 S1006323   $1.   /* Morador 23 */
+@0991 S1006324   $1.   /* Morador 24 */
+@0992 S1006325   $1.   /* Morador 25 */
+@0993 S1006326   $1.   /* Morador 26 */
+@0994 S1006327   $1.   /* Morador 27 */
+@0995 S1006328   $1.   /* Morador 28 */
+@0996 S1006329   $1.   /* Morador 29 */
+@0997 S1006330   $1.   /* Morador 30 */
+@0998 S10063011   2.   /* Quantas vezes? Morador 1 */
+@1000 S10063021   2.   /* Quantas vezes? Morador 2 */
+@1002 S10063031   2.   /* Quantas vezes? Morador 3 */
+@1004 S10063041   2.   /* Quantas vezes? Morador 4 */
+@1006 S10063051   2.   /* Quantas vezes? Morador 5 */
+@1008 S10063061   2.   /* Quantas vezes? Morador 6 */
+@1010 S10063071   2.   /* Quantas vezes? Morador 7 */
+@1012 S10063081   2.   /* Quantas vezes? Morador 8 */
+@1014 S10063091   2.   /* Quantas vezes? Morador 9 */
+@1016 S10063101   2.   /* Quantas vezes? Morador 10 */
+@1018 S10063111   2.   /* Quantas vezes? Morador 11 */
+@1020 S10063121   2.   /* Quantas vezes? Morador 12 */
+@1022 S10063131   2.   /* Quantas vezes? Morador 13 */
+@1024 S10063141   2.   /* Quantas vezes? Morador 14 */
+@1026 S10063151   2.   /* Quantas vezes? Morador 15 */
+@1028 S10063161   2.   /* Quantas vezes? Morador 16 */
+@1030 S10063171   2.   /* Quantas vezes? Morador 17 */
+@1032 S10063181   2.   /* Quantas vezes? Morador 18 */
+@1034 S10063191   2.   /* Quantas vezes? Morador 19 */
+@1036 S10063201   2.   /* Quantas vezes? Morador 20 */
+@1038 S10063211   2.   /* Quantas vezes? Morador 21 */
+@1040 S10063221   2.   /* Quantas vezes? Morador 22 */
+@1042 S10063231   2.   /* Quantas vezes? Morador 23 */
+@1044 S10063241   2.   /* Quantas vezes? Morador 24 */
+@1046 S10063251   2.   /* Quantas vezes? Morador 25 */
+@1048 S10063261   2.   /* Quantas vezes? Morador 26 */
+@1050 S10063271   2.   /* Quantas vezes? Morador 27 */
+@1052 S10063281   2.   /* Quantas vezes? Morador 28 */
+@1054 S10063291   2.   /* Quantas vezes? Morador 29 */
+@1056 S10063301   2.   /* Quantas vezes? Morador 30 */
+@1058 S10064   $1.   /* Na �ltima vez que__foi roubado,  o(s) autor(es) desse roubo usou(ram) algum tipo de arma? */
+@1059 S100651   $1.   /* Foi utilizado pau, madeira ou pedra? */
+@1060 S100652   $1.   /* Foi utilizado faca ou canivete? */
+@1061 S100653   $1.   /* Foi utilizado rev�lver ou outra arma de fogo? */
+@1062 S100654   $1.   /* Foi utilizada outra arma? */
+@1063 S100661   $1.   /* Na �ltima vez em que__foi roubado, o que foi(ram) levado(s) Joia(s), bijuteria(s), rel�gio(s)? */
+@1064 S100662   $1.   /* Na �ltima vez em que__foi roubado, o que foi(ram) levado(s) Telefone(s) celular(es)? */
+@1065 S100663   $1.   /* Na �ltima vez em que__foi roubado, o que foi(ram) levado(s) Dinheiro em esp�cie? */
+@1066 S100664   $1.   /* Na �ltima vez em que__foi roubado, o que foi(ram) levado(s) Documento(s)? */
+@1067 S100665   $1.   /* Na �ltima vez em que__foi roubado, o que foi(ram) levado(s) Cart�o de d�bito /cr�dito ou cheque? */
+@1068 S100666   $1.   /* Na �ltima vez em que__foi roubado, o que foi(ram) levado(s) Outros objetos? */
+@1069 S10067   $1.   /* Nessa �ltima vez, algu�m procurou a pol�cia ou guarda municipal? */
+@1070 S10068   $1.   /* Fez registro de corr�ncia na delegacia de pol�cia? */
+@1071 S10069   $1.   /* Quem foi o informante da parte? */
+@1072 S14001   $1.   /* Normalmente, em qual local exerce o seu trabalho? */
+@1073 S14002   $1.   /* Nesse trabalho, no per�odo de a (per�odo de refer�ncia de 30 dias), trabalhou pelo menos um dia em sua casa? */
+@1074 S14003   $1.   /* No per�odo de a (per�odo de refer�ncia de 30 dias), com que frequ�ncia trabalhou em casa: */
+@1075 S14004   $1.   /* Quando trabalha em casa, utiliza um computador, tablet ou telefone (fixo ou celular) para realizar as tarefas desse trabalho? */
+@1076 S14005   $1.   /* Nesse trabalho,trabalhou em algum local que n�o tenha sido em sua casa, estabelecimento do pr�prio neg�cio ou de algum cliente ou o local onde normalmente trabalha? */
+@1077 S14006   $1.   /* Esse outro local foi o estabelecimento do neg�cio/empresa onde trabalha ou de algum cliente? */
+@1078 S14007   $1.   /* No per�odo de a (per�odo de refer�ncia de 30 dias), com que frequ�ncia trabalhou nesse(s) outro(s) local(is): */
+@1079 S14008   $1.   /* Quando trabalha nesses outros locais, utiliza um computador, tablet ou telefone para realizar as tarefas desse trabalho? */
+@1080 S14009   $1.   /* No seu trabalho, obteve clientes e prestou servi�os por meio de (exclusive venda de produtos) */
+@1081 S140091   $1.   /* Prestou servi�o por meio de: Aplicativo de t�xi (99t�xi, aplicativo da cooperativa ou prefeitura etc.)? */
+@1082 S140092   $1.   /* Prestou servi�o por meio de: Aplicativo de transporte particular de passageiros diferente de t�xi (Uber, 99, outro aplicativo regional/local etc.)?  */
+@1083 S140093   $1.   /* Prestou servi�o por meio de: Aplicativo de entrega de comida, produtos etc. (Ifood, Rappi, Loggi, outro aplicativo regional/local etc.)?  */
+@1084 S140094   $1.   /* Prestou servi�o por meio de: Aplicativo de presta��o de servi�os gerais ou profissionais (GetNinjas, Parafuzo, Freelancer, Workana, 99freela etc.)?  */
+@1085 S14010   $1.   /* No seu trabalho, obteve clientes e vendeu produtos regularmente por meio de: ou No seu trabalho principal, obteve clientes e vendeu produtos regularmente por meio de:  */
+@1086 S140102   $1.   /* Obteve clientes e vendeu produtos regularmente por meio de: Um aplicativo ou plataforma de com�rcio eletr�nico (Mercado Livre, Shopee, Amazon, Americanas, Magazine Luiza etc.)?  */
+@1087 S140111   $1.   /* Nesse trabalho, era o aplicativo que determinava: O valor a ser recebido por cada tarefa realizada ou trabalho entregue? */
+@1088 S140112   $1.   /* Nesse trabalho, era o aplicativo que determinava: Os clientes a serem atendidos?  */
+@1089 S140113   $1.   /* Nesse trabalho, era o aplicativo que determinava: O prazo para realiza��o da tarefa ou atividade?  */
+@1090 S140114   $1.   /* Nesse trabalho, era o aplicativo que determinava: A forma de recebimento do pagamento?  */
+@1091 S140121   $1.   /* Nesse trabalho, a jornada de trabalho era influenciada por quais motivos: Incentivos/b�nus, promo��es que mudam os pre�os? */
+@1092 S140122   $1.   /* Nesse trabalho, a jornada de trabalho era influenciada por quais motivos: Amea�as de puni��es, bloqueios realizados pelo aplicativo/plataforma? */
+@1093 S140123   $1.   /* Nesse trabalho, a jornada de trabalho era influenciada por quais motivos: Turnos, dias sugeridos pelo aplicativo/plataforma?  */
+@1094 S140124   $1.   /* Nesse trabalho, a jornada de trabalho era influenciada por quais motivos: Possibilidade de escolha dos dias e hor�rios de forma independente?  */
+@1095 S17001   $1.   /* Os moradores deste domic�lio tiveram preocupa��o de que os alimentos acabassem antes de poderem, comprar ou receber mais comida */
+@1096 S17002   $1.   /* Os alimentos acabaram antes que os moradores deste domic�lio tivessem dinheiro para comprar mais comida */
+@1097 S17003   $1.   /* Os moradores deste domic�lio ficaram sem dinheiro para ter uma alimenta��o saud�vel e variada */
+@1098 S17004   $1.   /* Os moradores deste domic�lio comeram apenas alguns poucos tipos de alimentos que ainda tinham por que o dinheiro acabou */
+@1099 S17005   $1.   /* Algum morador de 18 anos ou mais de idade, deixou de fazer alguma refei��o porque n�o havia dinheiro para comprar comida */
+@1100 S17006   $1.   /* Algum morador de 18 anos ou mais de idade, alguma vez comeu menos do que achou que devia porque n�o havia dinheiro para comprar comida */
+@1101 S17007   $1.   /* Algum morador de 18 anos ou mais de idade, alguma vez sentiu fome, mas n�o comeu porque n�o havia dinheiro para comprar comida */
+@1102 S17008   $1.   /* Algum morador de 18 anos ou mais de idade, alguma vez fez apenas uma refei��o ao dia ou ficou um dia inteiro sem comer porque n�o havia dinheiro para comprar comida */
+@1103 S17009   $1.   /* Algum morador com menos de 18 anos de idade, alguma vez deixou de ter uma alimenta��o saud�vel e variada porque n�o havia dinheiro para comprar comida */
+@1104 S17010   $1.   /* Algum morador com menos de 18 anos de idade, alguma vez, comeu menos de que devia porque n�o havia dinheiro para comprar comida */
+@1105 S17011   $1.   /* Alguma vez, foi diminu�da a quantidade de alimentos das refei��es de algum morador com menos de 18 anos de idade, por que n�o havia dinheiro para comprar comida */
+@1106 S17012   $1.   /* Alguma vez, algum morador com menos de 18 anos de idade, deixou de fazer alguma refei��o porque n�o havia dinheiro para comprar comida */
+@1107 S17013   $1.   /* Alguma vez, algum morador com menos de 18 anos de idade, sentiu fome, mas n�o comeu porque n�o havia dinheiro para comprar comida */
+@1108 S17014   $1.   /* Alguma vez, algum morador com menos de 18 anos de idade, fez apenas uma refei��o ao dia ou ficou sem comer por um dia inteiro porque n�o havia dinheiro para comprar comida */
+@1109 VD2002   $2.   /* Condi��o no domic�lio */
+@1111 VD2003   2.   /* N�mero de componentes do domic. */
+@1113 VD2004   $1.   /* Esp�cie da unidade dom�stica*/
+@1114 VD2006   $2.   /* Faixas et�rias utilizadas no processo de calibra��o */
+@1116 VD3004   $1.   /* N�vel de instru��o mais elevado alcan�ado (5 anos ou mais de idade) */
+@1117 VD3005   $2.   /* Anos de estudo (5 anos ou mais de idade) para fundamental de 9 anos */
+@1119 VD3006   $1.   /* Grupamento de anos de estudo (pessoas de 5 anos ou mais de idade) para fundamental de 9 anos */
+@1120 VD4001   $1.   /* Condi��o em rela��o for�a d trab. */
+@1121 VD4002   $1.   /* Condi��o de ocupa��o */
+@1122 VD4003   $1.   /* For�a de trabalho potencial */
+@1123 VD4004A   $1.   /* Subocupa��o por insufici�n. de hrs hab*/
+@1124 VD4005   $1.   /* Pessoas desalentadas */
+@1125 VD4007   $1.   /* Posi��o na ocupa��o trab. princ. */
+@1126 VD4008   $1.   /* Posi��o na ocupa��o trab. princ. */
+@1127 VD4009   $2.   /* Posi��o na ocupa��o trab. princ. */
+@1129 VD4010   $2.   /* Grupamen. d ativid. trab. princ. */
+@1131 VD4011   $2.   /* Grupamen. ocupacion. trab. Princ. */
+@1133 VD4012   $1.   /* Contrib. instit. previd. qq trab. */
+@1134 VD4013   $1.   /* Faixa hrs habituais em todos trab. */
+@1135 VD4014   $1.   /* Faixa hrs efetivas em todos trab. */
+@1136 VD4015   $1.   /* Tipo d remunera��o trab. princ. */
+@1137 VD4016   8.   /* Rendim. habitual trab. princ. */
+@1145 VD4017   8.   /* Rendim. efetivo trab. princ. */
+@1153 VD4018   $1.   /* Tipo d remunera��o em qq trabalho */
+@1154 VD4019   8.   /* Rendim. habitual qq trabalho */
+@1162 VD4020   8.   /* Rendim. efetivo qq trabalho */
+@1170 VDI4022   8.   /* Rendim. Efetivo tds fontes */
+@1178 VD4023   $1.   /* Pq � proc./� gost./� disp.p/trab. */
+@1179 VD4030   $1.   /* Pq � proc./� gost./� disp.p/trab. */
+@1180 VD4031   3.   /* Hrs habituais em todos trab. */
+@1183 VD4032   3.   /* Hrs efetivas no trab. princ. */
+@1186 VD4033   3.   /* Hrs efetivas no trab. secun. */
+@1189 VD4034   3.   /* Hrs efetivas no(s) outro(s) trab .*/
+@1192 VD4035   3.   /* Hrs efetivas em todos trab. */
+@1195 VD4036   $1.   /* Faixa hrs habituais trab. princ. */
+@1196 VD4037   $1.   /* Faixa hrs efetivas trab. princ. */
+@1197 VDI4046   8.   /* Rendim. habitual tds fontes */
+@1205 VDI4047   8.   /* Rend efetivo de progr sociais, seguro-desemprego, etc */
+@1213 VDI4048   8.   /* Rend efetivo recebido de outras fontes */
+@1221 VDI4052   8.   /* Rendim. habitual tds fontes  com ticket*/
+@1229 VDI5001   8.   /* Rend efetivo domiciliar */
+@1237 VDI5002   8.   /* Rend efetivo domiciliar per capita */
+@1245 VDI5003   $1.   /* Faixa de rend efetivo domiciliar per capita */
+@1246 VDI5004   8.   /* Rend efetivo domiciliar */
+@1254 VDI5005   8.   /* Rend efetivo domiciliar per capita */
+@1262 VDI5006   $1.   /* Faixa de rend efetivo domiciliar per capita */
+@1263 VDI5007   8.   /* Rend habitual domiciliar */
+@1271 VDI5008   8.   /* Rend habitual domiciliar per capita */
+@1279 VDI5009   $1.   /* Faixa de rend habital domiciliar per capita */
+@1280 VDI5010   8.   /* Rend habitual domiciliar */
+@1288 VDI5011   8.   /* Rend habitual domiciliar per capita */
+@1296 VDI5012   $1.   /* Faixa de rend habitual domiciliar per capita */
+@1297 SD10001   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s)? Botij�o de g�s e/ou outros combust�veis */
+@1298 SD10002   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s)? Itens de ve�culo */
+@1299 SD10003   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s)? Animais */
+@1300 SD10004   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s)? Comidas */
+@1301 SD10005   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s)? Armas e muni��es */
+@1302 SD10006   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s)? M�veis */
+@1303 SD10007   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s)? Ferramentas */
+@1304 SD10008   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s)? Itens de el�trica */
+@1305 SD10009   $1.   /* Na �ltima vez em que SEU DOMIC�LIO foi furtado, o que foi(ram) levado(s)? Outros */
+@1306 SD10010   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s)? Animais */
+@1307 SD10011   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s)? Botij�o de g�s e/ou outros combust�veis */
+@1308 SD10012   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s)? Comidas */
+@1309 SD10013   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s)? Ferramentas */
+@1310 SD10014   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s)? Itens de ve�culo */
+@1311 SD10015   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s)? Vestu�rio, bolsas e mochilas */
+@1312 SD10016   $1.   /* Na �ltima vez em que__foi furtado, o que foi(ram) levado(s)? Outros */
+@1313 SD17001   $1.   /* Situa��o de seguran�a alimentar existente no domic�lio */
+@1314 V1028001   15.   /* Peso REPLICADO 1 */
+@1329 V1028002   15.   /* Peso REPLICADO 2 */
+@1344 V1028003   15.   /* Peso REPLICADO 3 */
+@1359 V1028004   15.   /* Peso REPLICADO 4 */
+@1374 V1028005   15.   /* Peso REPLICADO 5 */
+@1389 V1028006   15.   /* Peso REPLICADO 6 */
+@1404 V1028007   15.   /* Peso REPLICADO 7 */
+@1419 V1028008   15.   /* Peso REPLICADO 8 */
+@1434 V1028009   15.   /* Peso REPLICADO 9 */
+@1449 V1028010   15.   /* Peso REPLICADO 10 */
+@1464 V1028011   15.   /* Peso REPLICADO 11 */
+@1479 V1028012   15.   /* Peso REPLICADO 12 */
+@1494 V1028013   15.   /* Peso REPLICADO 13 */
+@1509 V1028014   15.   /* Peso REPLICADO 14 */
+@1524 V1028015   15.   /* Peso REPLICADO 15 */
+@1539 V1028016   15.   /* Peso REPLICADO 16 */
+@1554 V1028017   15.   /* Peso REPLICADO 17 */
+@1569 V1028018   15.   /* Peso REPLICADO 18 */
+@1584 V1028019   15.   /* Peso REPLICADO 19 */
+@1599 V1028020   15.   /* Peso REPLICADO 20 */
+@1614 V1028021   15.   /* Peso REPLICADO 21 */
+@1629 V1028022   15.   /* Peso REPLICADO 22 */
+@1644 V1028023   15.   /* Peso REPLICADO 23 */
+@1659 V1028024   15.   /* Peso REPLICADO 24 */
+@1674 V1028025   15.   /* Peso REPLICADO 25 */
+@1689 V1028026   15.   /* Peso REPLICADO 26 */
+@1704 V1028027   15.   /* Peso REPLICADO 27 */
+@1719 V1028028   15.   /* Peso REPLICADO 28 */
+@1734 V1028029   15.   /* Peso REPLICADO 29 */
+@1749 V1028030   15.   /* Peso REPLICADO 30 */
+@1764 V1028031   15.   /* Peso REPLICADO 31 */
+@1779 V1028032   15.   /* Peso REPLICADO 32 */
+@1794 V1028033   15.   /* Peso REPLICADO 33 */
+@1809 V1028034   15.   /* Peso REPLICADO 34 */
+@1824 V1028035   15.   /* Peso REPLICADO 35 */
+@1839 V1028036   15.   /* Peso REPLICADO 36 */
+@1854 V1028037   15.   /* Peso REPLICADO 37 */
+@1869 V1028038   15.   /* Peso REPLICADO 38 */
+@1884 V1028039   15.   /* Peso REPLICADO 39 */
+@1899 V1028040   15.   /* Peso REPLICADO 40 */
+@1914 V1028041   15.   /* Peso REPLICADO 41 */
+@1929 V1028042   15.   /* Peso REPLICADO 42 */
+@1944 V1028043   15.   /* Peso REPLICADO 43 */
+@1959 V1028044   15.   /* Peso REPLICADO 44 */
+@1974 V1028045   15.   /* Peso REPLICADO 45 */
+@1989 V1028046   15.   /* Peso REPLICADO 46 */
+@2004 V1028047   15.   /* Peso REPLICADO 47 */
+@2019 V1028048   15.   /* Peso REPLICADO 48 */
+@2034 V1028049   15.   /* Peso REPLICADO 49 */
+@2049 V1028050   15.   /* Peso REPLICADO 50 */
+@2064 V1028051   15.   /* Peso REPLICADO 51 */
+@2079 V1028052   15.   /* Peso REPLICADO 52 */
+@2094 V1028053   15.   /* Peso REPLICADO 53 */
+@2109 V1028054   15.   /* Peso REPLICADO 54 */
+@2124 V1028055   15.   /* Peso REPLICADO 55 */
+@2139 V1028056   15.   /* Peso REPLICADO 56 */
+@2154 V1028057   15.   /* Peso REPLICADO 57 */
+@2169 V1028058   15.   /* Peso REPLICADO 58 */
+@2184 V1028059   15.   /* Peso REPLICADO 59 */
+@2199 V1028060   15.   /* Peso REPLICADO 60 */
+@2214 V1028061   15.   /* Peso REPLICADO 61 */
+@2229 V1028062   15.   /* Peso REPLICADO 62 */
+@2244 V1028063   15.   /* Peso REPLICADO 63 */
+@2259 V1028064   15.   /* Peso REPLICADO 64 */
+@2274 V1028065   15.   /* Peso REPLICADO 65 */
+@2289 V1028066   15.   /* Peso REPLICADO 66 */
+@2304 V1028067   15.   /* Peso REPLICADO 67 */
+@2319 V1028068   15.   /* Peso REPLICADO 68 */
+@2334 V1028069   15.   /* Peso REPLICADO 69 */
+@2349 V1028070   15.   /* Peso REPLICADO 70 */
+@2364 V1028071   15.   /* Peso REPLICADO 71 */
+@2379 V1028072   15.   /* Peso REPLICADO 72 */
+@2394 V1028073   15.   /* Peso REPLICADO 73 */
+@2409 V1028074   15.   /* Peso REPLICADO 74 */
+@2424 V1028075   15.   /* Peso REPLICADO 75 */
+@2439 V1028076   15.   /* Peso REPLICADO 76 */
+@2454 V1028077   15.   /* Peso REPLICADO 77 */
+@2469 V1028078   15.   /* Peso REPLICADO 78 */
+@2484 V1028079   15.   /* Peso REPLICADO 79 */
+@2499 V1028080   15.   /* Peso REPLICADO 80 */
+@2514 V1028081   15.   /* Peso REPLICADO 81 */
+@2529 V1028082   15.   /* Peso REPLICADO 82 */
+@2544 V1028083   15.   /* Peso REPLICADO 83 */
+@2559 V1028084   15.   /* Peso REPLICADO 84 */
+@2574 V1028085   15.   /* Peso REPLICADO 85 */
+@2589 V1028086   15.   /* Peso REPLICADO 86 */
+@2604 V1028087   15.   /* Peso REPLICADO 87 */
+@2619 V1028088   15.   /* Peso REPLICADO 88 */
+@2634 V1028089   15.   /* Peso REPLICADO 89 */
+@2649 V1028090   15.   /* Peso REPLICADO 90 */
+@2664 V1028091   15.   /* Peso REPLICADO 91 */
+@2679 V1028092   15.   /* Peso REPLICADO 92 */
+@2694 V1028093   15.   /* Peso REPLICADO 93 */
+@2709 V1028094   15.   /* Peso REPLICADO 94 */
+@2724 V1028095   15.   /* Peso REPLICADO 95 */
+@2739 V1028096   15.   /* Peso REPLICADO 96 */
+@2754 V1028097   15.   /* Peso REPLICADO 97 */
+@2769 V1028098   15.   /* Peso REPLICADO 98 */
+@2784 V1028099   15.   /* Peso REPLICADO 99 */
+@2799 V1028100   15.   /* Peso REPLICADO 100 */
+@2814 V1028101   15.   /* Peso REPLICADO 101 */
+@2829 V1028102   15.   /* Peso REPLICADO 102 */
+@2844 V1028103   15.   /* Peso REPLICADO 103 */
+@2859 V1028104   15.   /* Peso REPLICADO 104 */
+@2874 V1028105   15.   /* Peso REPLICADO 105 */
+@2889 V1028106   15.   /* Peso REPLICADO 106 */
+@2904 V1028107   15.   /* Peso REPLICADO 107 */
+@2919 V1028108   15.   /* Peso REPLICADO 108 */
+@2934 V1028109   15.   /* Peso REPLICADO 109 */
+@2949 V1028110   15.   /* Peso REPLICADO 110 */
+@2964 V1028111   15.   /* Peso REPLICADO 111 */
+@2979 V1028112   15.   /* Peso REPLICADO 112 */
+@2994 V1028113   15.   /* Peso REPLICADO 113 */
+@3009 V1028114   15.   /* Peso REPLICADO 114 */
+@3024 V1028115   15.   /* Peso REPLICADO 115 */
+@3039 V1028116   15.   /* Peso REPLICADO 116 */
+@3054 V1028117   15.   /* Peso REPLICADO 117 */
+@3069 V1028118   15.   /* Peso REPLICADO 118 */
+@3084 V1028119   15.   /* Peso REPLICADO 119 */
+@3099 V1028120   15.   /* Peso REPLICADO 120 */
+@3114 V1028121   15.   /* Peso REPLICADO 121 */
+@3129 V1028122   15.   /* Peso REPLICADO 122 */
+@3144 V1028123   15.   /* Peso REPLICADO 123 */
+@3159 V1028124   15.   /* Peso REPLICADO 124 */
+@3174 V1028125   15.   /* Peso REPLICADO 125 */
+@3189 V1028126   15.   /* Peso REPLICADO 126 */
+@3204 V1028127   15.   /* Peso REPLICADO 127 */
+@3219 V1028128   15.   /* Peso REPLICADO 128 */
+@3234 V1028129   15.   /* Peso REPLICADO 129 */
+@3249 V1028130   15.   /* Peso REPLICADO 130 */
+@3264 V1028131   15.   /* Peso REPLICADO 131 */
+@3279 V1028132   15.   /* Peso REPLICADO 132 */
+@3294 V1028133   15.   /* Peso REPLICADO 133 */
+@3309 V1028134   15.   /* Peso REPLICADO 134 */
+@3324 V1028135   15.   /* Peso REPLICADO 135 */
+@3339 V1028136   15.   /* Peso REPLICADO 136 */
+@3354 V1028137   15.   /* Peso REPLICADO 137 */
+@3369 V1028138   15.   /* Peso REPLICADO 138 */
+@3384 V1028139   15.   /* Peso REPLICADO 139 */
+@3399 V1028140   15.   /* Peso REPLICADO 140 */
+@3414 V1028141   15.   /* Peso REPLICADO 141 */
+@3429 V1028142   15.   /* Peso REPLICADO 142 */
+@3444 V1028143   15.   /* Peso REPLICADO 143 */
+@3459 V1028144   15.   /* Peso REPLICADO 144 */
+@3474 V1028145   15.   /* Peso REPLICADO 145 */
+@3489 V1028146   15.   /* Peso REPLICADO 146 */
+@3504 V1028147   15.   /* Peso REPLICADO 147 */
+@3519 V1028148   15.   /* Peso REPLICADO 148 */
+@3534 V1028149   15.   /* Peso REPLICADO 149 */
+@3549 V1028150   15.   /* Peso REPLICADO 150 */
+@3564 V1028151   15.   /* Peso REPLICADO 151 */
+@3579 V1028152   15.   /* Peso REPLICADO 152 */
+@3594 V1028153   15.   /* Peso REPLICADO 153 */
+@3609 V1028154   15.   /* Peso REPLICADO 154 */
+@3624 V1028155   15.   /* Peso REPLICADO 155 */
+@3639 V1028156   15.   /* Peso REPLICADO 156 */
+@3654 V1028157   15.   /* Peso REPLICADO 157 */
+@3669 V1028158   15.   /* Peso REPLICADO 158 */
+@3684 V1028159   15.   /* Peso REPLICADO 159 */
+@3699 V1028160   15.   /* Peso REPLICADO 160 */
+@3714 V1028161   15.   /* Peso REPLICADO 161 */
+@3729 V1028162   15.   /* Peso REPLICADO 162 */
+@3744 V1028163   15.   /* Peso REPLICADO 163 */
+@3759 V1028164   15.   /* Peso REPLICADO 164 */
+@3774 V1028165   15.   /* Peso REPLICADO 165 */
+@3789 V1028166   15.   /* Peso REPLICADO 166 */
+@3804 V1028167   15.   /* Peso REPLICADO 167 */
+@3819 V1028168   15.   /* Peso REPLICADO 168 */
+@3834 V1028169   15.   /* Peso REPLICADO 169 */
+@3849 V1028170   15.   /* Peso REPLICADO 170 */
+@3864 V1028171   15.   /* Peso REPLICADO 171 */
+@3879 V1028172   15.   /* Peso REPLICADO 172 */
+@3894 V1028173   15.   /* Peso REPLICADO 173 */
+@3909 V1028174   15.   /* Peso REPLICADO 174 */
+@3924 V1028175   15.   /* Peso REPLICADO 175 */
+@3939 V1028176   15.   /* Peso REPLICADO 176 */
+@3954 V1028177   15.   /* Peso REPLICADO 177 */
+@3969 V1028178   15.   /* Peso REPLICADO 178 */
+@3984 V1028179   15.   /* Peso REPLICADO 179 */
+@3999 V1028180   15.   /* Peso REPLICADO 180 */
+@4014 V1028181   15.   /* Peso REPLICADO 181 */
+@4029 V1028182   15.   /* Peso REPLICADO 182 */
+@4044 V1028183   15.   /* Peso REPLICADO 183 */
+@4059 V1028184   15.   /* Peso REPLICADO 184 */
+@4074 V1028185   15.   /* Peso REPLICADO 185 */
+@4089 V1028186   15.   /* Peso REPLICADO 186 */
+@4104 V1028187   15.   /* Peso REPLICADO 187 */
+@4119 V1028188   15.   /* Peso REPLICADO 188 */
+@4134 V1028189   15.   /* Peso REPLICADO 189 */
+@4149 V1028190   15.   /* Peso REPLICADO 190 */
+@4164 V1028191   15.   /* Peso REPLICADO 191 */
+@4179 V1028192   15.   /* Peso REPLICADO 192 */
+@4194 V1028193   15.   /* Peso REPLICADO 193 */
+@4209 V1028194   15.   /* Peso REPLICADO 194 */
+@4224 V1028195   15.   /* Peso REPLICADO 195 */
+@4239 V1028196   15.   /* Peso REPLICADO 196 */
+@4254 V1028197   15.   /* Peso REPLICADO 197 */
+@4269 V1028198   15.   /* Peso REPLICADO 198 */
+@4284 V1028199   15.   /* Peso REPLICADO 199 */
+@4299 V1028200   15.   /* Peso REPLICADO 200 */
+@4314 V1037   9.   /* Proje��o da popula��o por n�veis geogr�ficos - MORADOR SELECIONADO */
+@4323 V1038   9.   /* Proje��o da popula��o por sexo e idade - MORADOR SELECIONADO */
+@4332 V1035   15.   /* Peso SEM calibra��o - MORADOR SELECIONADO */
+@4347 V1036   15.   /* Peso COM calibra��o - MORADOR SELECIONADO */
+@4362 V1036001   15.   /* Peso REPLICADO - MORADOR SELECIONADO 1 */
+@4377 V1036002   15.   /* Peso REPLICADO - MORADOR SELECIONADO 2 */
+@4392 V1036003   15.   /* Peso REPLICADO - MORADOR SELECIONADO 3 */
+@4407 V1036004   15.   /* Peso REPLICADO - MORADOR SELECIONADO 4 */
+@4422 V1036005   15.   /* Peso REPLICADO - MORADOR SELECIONADO 5 */
+@4437 V1036006   15.   /* Peso REPLICADO - MORADOR SELECIONADO 6 */
+@4452 V1036007   15.   /* Peso REPLICADO - MORADOR SELECIONADO 7 */
+@4467 V1036008   15.   /* Peso REPLICADO - MORADOR SELECIONADO 8 */
+@4482 V1036009   15.   /* Peso REPLICADO - MORADOR SELECIONADO 9 */
+@4497 V1036010   15.   /* Peso REPLICADO - MORADOR SELECIONADO 10 */
+@4512 V1036011   15.   /* Peso REPLICADO - MORADOR SELECIONADO 11 */
+@4527 V1036012   15.   /* Peso REPLICADO - MORADOR SELECIONADO 12 */
+@4542 V1036013   15.   /* Peso REPLICADO - MORADOR SELECIONADO 13 */
+@4557 V1036014   15.   /* Peso REPLICADO - MORADOR SELECIONADO 14 */
+@4572 V1036015   15.   /* Peso REPLICADO - MORADOR SELECIONADO 15 */
+@4587 V1036016   15.   /* Peso REPLICADO - MORADOR SELECIONADO 16 */
+@4602 V1036017   15.   /* Peso REPLICADO - MORADOR SELECIONADO 17 */
+@4617 V1036018   15.   /* Peso REPLICADO - MORADOR SELECIONADO 18 */
+@4632 V1036019   15.   /* Peso REPLICADO - MORADOR SELECIONADO 19 */
+@4647 V1036020   15.   /* Peso REPLICADO - MORADOR SELECIONADO 20 */
+@4662 V1036021   15.   /* Peso REPLICADO - MORADOR SELECIONADO 21 */
+@4677 V1036022   15.   /* Peso REPLICADO - MORADOR SELECIONADO 22 */
+@4692 V1036023   15.   /* Peso REPLICADO - MORADOR SELECIONADO 23 */
+@4707 V1036024   15.   /* Peso REPLICADO - MORADOR SELECIONADO 24 */
+@4722 V1036025   15.   /* Peso REPLICADO - MORADOR SELECIONADO 25 */
+@4737 V1036026   15.   /* Peso REPLICADO - MORADOR SELECIONADO 26 */
+@4752 V1036027   15.   /* Peso REPLICADO - MORADOR SELECIONADO 27 */
+@4767 V1036028   15.   /* Peso REPLICADO - MORADOR SELECIONADO 28 */
+@4782 V1036029   15.   /* Peso REPLICADO - MORADOR SELECIONADO 29 */
+@4797 V1036030   15.   /* Peso REPLICADO - MORADOR SELECIONADO 30 */
+@4812 V1036031   15.   /* Peso REPLICADO - MORADOR SELECIONADO 31 */
+@4827 V1036032   15.   /* Peso REPLICADO - MORADOR SELECIONADO 32 */
+@4842 V1036033   15.   /* Peso REPLICADO - MORADOR SELECIONADO 33 */
+@4857 V1036034   15.   /* Peso REPLICADO - MORADOR SELECIONADO 34 */
+@4872 V1036035   15.   /* Peso REPLICADO - MORADOR SELECIONADO 35 */
+@4887 V1036036   15.   /* Peso REPLICADO - MORADOR SELECIONADO 36 */
+@4902 V1036037   15.   /* Peso REPLICADO - MORADOR SELECIONADO 37 */
+@4917 V1036038   15.   /* Peso REPLICADO - MORADOR SELECIONADO 38 */
+@4932 V1036039   15.   /* Peso REPLICADO - MORADOR SELECIONADO 39 */
+@4947 V1036040   15.   /* Peso REPLICADO - MORADOR SELECIONADO 40 */
+@4962 V1036041   15.   /* Peso REPLICADO - MORADOR SELECIONADO 41 */
+@4977 V1036042   15.   /* Peso REPLICADO - MORADOR SELECIONADO 42 */
+@4992 V1036043   15.   /* Peso REPLICADO - MORADOR SELECIONADO 43 */
+@5007 V1036044   15.   /* Peso REPLICADO - MORADOR SELECIONADO 44 */
+@5022 V1036045   15.   /* Peso REPLICADO - MORADOR SELECIONADO 45 */
+@5037 V1036046   15.   /* Peso REPLICADO - MORADOR SELECIONADO 46 */
+@5052 V1036047   15.   /* Peso REPLICADO - MORADOR SELECIONADO 47 */
+@5067 V1036048   15.   /* Peso REPLICADO - MORADOR SELECIONADO 48 */
+@5082 V1036049   15.   /* Peso REPLICADO - MORADOR SELECIONADO 49 */
+@5097 V1036050   15.   /* Peso REPLICADO - MORADOR SELECIONADO 50 */
+@5112 V1036051   15.   /* Peso REPLICADO - MORADOR SELECIONADO 51 */
+@5127 V1036052   15.   /* Peso REPLICADO - MORADOR SELECIONADO 52 */
+@5142 V1036053   15.   /* Peso REPLICADO - MORADOR SELECIONADO 53 */
+@5157 V1036054   15.   /* Peso REPLICADO - MORADOR SELECIONADO 54 */
+@5172 V1036055   15.   /* Peso REPLICADO - MORADOR SELECIONADO 55 */
+@5187 V1036056   15.   /* Peso REPLICADO - MORADOR SELECIONADO 56 */
+@5202 V1036057   15.   /* Peso REPLICADO - MORADOR SELECIONADO 57 */
+@5217 V1036058   15.   /* Peso REPLICADO - MORADOR SELECIONADO 58 */
+@5232 V1036059   15.   /* Peso REPLICADO - MORADOR SELECIONADO 59 */
+@5247 V1036060   15.   /* Peso REPLICADO - MORADOR SELECIONADO 60 */
+@5262 V1036061   15.   /* Peso REPLICADO - MORADOR SELECIONADO 61 */
+@5277 V1036062   15.   /* Peso REPLICADO - MORADOR SELECIONADO 62 */
+@5292 V1036063   15.   /* Peso REPLICADO - MORADOR SELECIONADO 63 */
+@5307 V1036064   15.   /* Peso REPLICADO - MORADOR SELECIONADO 64 */
+@5322 V1036065   15.   /* Peso REPLICADO - MORADOR SELECIONADO 65 */
+@5337 V1036066   15.   /* Peso REPLICADO - MORADOR SELECIONADO 66 */
+@5352 V1036067   15.   /* Peso REPLICADO - MORADOR SELECIONADO 67 */
+@5367 V1036068   15.   /* Peso REPLICADO - MORADOR SELECIONADO 68 */
+@5382 V1036069   15.   /* Peso REPLICADO - MORADOR SELECIONADO 69 */
+@5397 V1036070   15.   /* Peso REPLICADO - MORADOR SELECIONADO 70 */
+@5412 V1036071   15.   /* Peso REPLICADO - MORADOR SELECIONADO 71 */
+@5427 V1036072   15.   /* Peso REPLICADO - MORADOR SELECIONADO 72 */
+@5442 V1036073   15.   /* Peso REPLICADO - MORADOR SELECIONADO 73 */
+@5457 V1036074   15.   /* Peso REPLICADO - MORADOR SELECIONADO 74 */
+@5472 V1036075   15.   /* Peso REPLICADO - MORADOR SELECIONADO 75 */
+@5487 V1036076   15.   /* Peso REPLICADO - MORADOR SELECIONADO 76 */
+@5502 V1036077   15.   /* Peso REPLICADO - MORADOR SELECIONADO 77 */
+@5517 V1036078   15.   /* Peso REPLICADO - MORADOR SELECIONADO 78 */
+@5532 V1036079   15.   /* Peso REPLICADO - MORADOR SELECIONADO 79 */
+@5547 V1036080   15.   /* Peso REPLICADO - MORADOR SELECIONADO 80 */
+@5562 V1036081   15.   /* Peso REPLICADO - MORADOR SELECIONADO 81 */
+@5577 V1036082   15.   /* Peso REPLICADO - MORADOR SELECIONADO 82 */
+@5592 V1036083   15.   /* Peso REPLICADO - MORADOR SELECIONADO 83 */
+@5607 V1036084   15.   /* Peso REPLICADO - MORADOR SELECIONADO 84 */
+@5622 V1036085   15.   /* Peso REPLICADO - MORADOR SELECIONADO 85 */
+@5637 V1036086   15.   /* Peso REPLICADO - MORADOR SELECIONADO 86 */
+@5652 V1036087   15.   /* Peso REPLICADO - MORADOR SELECIONADO 87 */
+@5667 V1036088   15.   /* Peso REPLICADO - MORADOR SELECIONADO 88 */
+@5682 V1036089   15.   /* Peso REPLICADO - MORADOR SELECIONADO 89 */
+@5697 V1036090   15.   /* Peso REPLICADO - MORADOR SELECIONADO 90 */
+@5712 V1036091   15.   /* Peso REPLICADO - MORADOR SELECIONADO 91 */
+@5727 V1036092   15.   /* Peso REPLICADO - MORADOR SELECIONADO 92 */
+@5742 V1036093   15.   /* Peso REPLICADO - MORADOR SELECIONADO 93 */
+@5757 V1036094   15.   /* Peso REPLICADO - MORADOR SELECIONADO 94 */
+@5772 V1036095   15.   /* Peso REPLICADO - MORADOR SELECIONADO 95 */
+@5787 V1036096   15.   /* Peso REPLICADO - MORADOR SELECIONADO 96 */
+@5802 V1036097   15.   /* Peso REPLICADO - MORADOR SELECIONADO 97 */
+@5817 V1036098   15.   /* Peso REPLICADO - MORADOR SELECIONADO 98 */
+@5832 V1036099   15.   /* Peso REPLICADO - MORADOR SELECIONADO 99 */
+@5847 V1036100   15.   /* Peso REPLICADO - MORADOR SELECIONADO 100 */
+@5862 V1036101   15.   /* Peso REPLICADO - MORADOR SELECIONADO 101 */
+@5877 V1036102   15.   /* Peso REPLICADO - MORADOR SELECIONADO 102 */
+@5892 V1036103   15.   /* Peso REPLICADO - MORADOR SELECIONADO 103 */
+@5907 V1036104   15.   /* Peso REPLICADO - MORADOR SELECIONADO 104 */
+@5922 V1036105   15.   /* Peso REPLICADO - MORADOR SELECIONADO 105 */
+@5937 V1036106   15.   /* Peso REPLICADO - MORADOR SELECIONADO 106 */
+@5952 V1036107   15.   /* Peso REPLICADO - MORADOR SELECIONADO 107 */
+@5967 V1036108   15.   /* Peso REPLICADO - MORADOR SELECIONADO 108 */
+@5982 V1036109   15.   /* Peso REPLICADO - MORADOR SELECIONADO 109 */
+@5997 V1036110   15.   /* Peso REPLICADO - MORADOR SELECIONADO 110 */
+@6012 V1036111   15.   /* Peso REPLICADO - MORADOR SELECIONADO 111 */
+@6027 V1036112   15.   /* Peso REPLICADO - MORADOR SELECIONADO 112 */
+@6042 V1036113   15.   /* Peso REPLICADO - MORADOR SELECIONADO 113 */
+@6057 V1036114   15.   /* Peso REPLICADO - MORADOR SELECIONADO 114 */
+@6072 V1036115   15.   /* Peso REPLICADO - MORADOR SELECIONADO 115 */
+@6087 V1036116   15.   /* Peso REPLICADO - MORADOR SELECIONADO 116 */
+@6102 V1036117   15.   /* Peso REPLICADO - MORADOR SELECIONADO 117 */
+@6117 V1036118   15.   /* Peso REPLICADO - MORADOR SELECIONADO 118 */
+@6132 V1036119   15.   /* Peso REPLICADO - MORADOR SELECIONADO 119 */
+@6147 V1036120   15.   /* Peso REPLICADO - MORADOR SELECIONADO 120 */
+@6162 V1036121   15.   /* Peso REPLICADO - MORADOR SELECIONADO 121 */
+@6177 V1036122   15.   /* Peso REPLICADO - MORADOR SELECIONADO 122 */
+@6192 V1036123   15.   /* Peso REPLICADO - MORADOR SELECIONADO 123 */
+@6207 V1036124   15.   /* Peso REPLICADO - MORADOR SELECIONADO 124 */
+@6222 V1036125   15.   /* Peso REPLICADO - MORADOR SELECIONADO 125 */
+@6237 V1036126   15.   /* Peso REPLICADO - MORADOR SELECIONADO 126 */
+@6252 V1036127   15.   /* Peso REPLICADO - MORADOR SELECIONADO 127 */
+@6267 V1036128   15.   /* Peso REPLICADO - MORADOR SELECIONADO 128 */
+@6282 V1036129   15.   /* Peso REPLICADO - MORADOR SELECIONADO 129 */
+@6297 V1036130   15.   /* Peso REPLICADO - MORADOR SELECIONADO 130 */
+@6312 V1036131   15.   /* Peso REPLICADO - MORADOR SELECIONADO 131 */
+@6327 V1036132   15.   /* Peso REPLICADO - MORADOR SELECIONADO 132 */
+@6342 V1036133   15.   /* Peso REPLICADO - MORADOR SELECIONADO 133 */
+@6357 V1036134   15.   /* Peso REPLICADO - MORADOR SELECIONADO 134 */
+@6372 V1036135   15.   /* Peso REPLICADO - MORADOR SELECIONADO 135 */
+@6387 V1036136   15.   /* Peso REPLICADO - MORADOR SELECIONADO 136 */
+@6402 V1036137   15.   /* Peso REPLICADO - MORADOR SELECIONADO 137 */
+@6417 V1036138   15.   /* Peso REPLICADO - MORADOR SELECIONADO 138 */
+@6432 V1036139   15.   /* Peso REPLICADO - MORADOR SELECIONADO 139 */
+@6447 V1036140   15.   /* Peso REPLICADO - MORADOR SELECIONADO 140 */
+@6462 V1036141   15.   /* Peso REPLICADO - MORADOR SELECIONADO 141 */
+@6477 V1036142   15.   /* Peso REPLICADO - MORADOR SELECIONADO 142 */
+@6492 V1036143   15.   /* Peso REPLICADO - MORADOR SELECIONADO 143 */
+@6507 V1036144   15.   /* Peso REPLICADO - MORADOR SELECIONADO 144 */
+@6522 V1036145   15.   /* Peso REPLICADO - MORADOR SELECIONADO 145 */
+@6537 V1036146   15.   /* Peso REPLICADO - MORADOR SELECIONADO 146 */
+@6552 V1036147   15.   /* Peso REPLICADO - MORADOR SELECIONADO 147 */
+@6567 V1036148   15.   /* Peso REPLICADO - MORADOR SELECIONADO 148 */
+@6582 V1036149   15.   /* Peso REPLICADO - MORADOR SELECIONADO 149 */
+@6597 V1036150   15.   /* Peso REPLICADO - MORADOR SELECIONADO 150 */
+@6612 V1036151   15.   /* Peso REPLICADO - MORADOR SELECIONADO 151 */
+@6627 V1036152   15.   /* Peso REPLICADO - MORADOR SELECIONADO 152 */
+@6642 V1036153   15.   /* Peso REPLICADO - MORADOR SELECIONADO 153 */
+@6657 V1036154   15.   /* Peso REPLICADO - MORADOR SELECIONADO 154 */
+@6672 V1036155   15.   /* Peso REPLICADO - MORADOR SELECIONADO 155 */
+@6687 V1036156   15.   /* Peso REPLICADO - MORADOR SELECIONADO 156 */
+@6702 V1036157   15.   /* Peso REPLICADO - MORADOR SELECIONADO 157 */
+@6717 V1036158   15.   /* Peso REPLICADO - MORADOR SELECIONADO 158 */
+@6732 V1036159   15.   /* Peso REPLICADO - MORADOR SELECIONADO 159 */
+@6747 V1036160   15.   /* Peso REPLICADO - MORADOR SELECIONADO 160 */
+@6762 V1036161   15.   /* Peso REPLICADO - MORADOR SELECIONADO 161 */
+@6777 V1036162   15.   /* Peso REPLICADO - MORADOR SELECIONADO 162 */
+@6792 V1036163   15.   /* Peso REPLICADO - MORADOR SELECIONADO 163 */
+@6807 V1036164   15.   /* Peso REPLICADO - MORADOR SELECIONADO 164 */
+@6822 V1036165   15.   /* Peso REPLICADO - MORADOR SELECIONADO 165 */
+@6837 V1036166   15.   /* Peso REPLICADO - MORADOR SELECIONADO 166 */
+@6852 V1036167   15.   /* Peso REPLICADO - MORADOR SELECIONADO 167 */
+@6867 V1036168   15.   /* Peso REPLICADO - MORADOR SELECIONADO 168 */
+@6882 V1036169   15.   /* Peso REPLICADO - MORADOR SELECIONADO 169 */
+@6897 V1036170   15.   /* Peso REPLICADO - MORADOR SELECIONADO 170 */
+@6912 V1036171   15.   /* Peso REPLICADO - MORADOR SELECIONADO 171 */
+@6927 V1036172   15.   /* Peso REPLICADO - MORADOR SELECIONADO 172 */
+@6942 V1036173   15.   /* Peso REPLICADO - MORADOR SELECIONADO 173 */
+@6957 V1036174   15.   /* Peso REPLICADO - MORADOR SELECIONADO 174 */
+@6972 V1036175   15.   /* Peso REPLICADO - MORADOR SELECIONADO 175 */
+@6987 V1036176   15.   /* Peso REPLICADO - MORADOR SELECIONADO 176 */
+@7002 V1036177   15.   /* Peso REPLICADO - MORADOR SELECIONADO 177 */
+@7017 V1036178   15.   /* Peso REPLICADO - MORADOR SELECIONADO 178 */
+@7032 V1036179   15.   /* Peso REPLICADO - MORADOR SELECIONADO 179 */
+@7047 V1036180   15.   /* Peso REPLICADO - MORADOR SELECIONADO 180 */
+@7062 V1036181   15.   /* Peso REPLICADO - MORADOR SELECIONADO 181 */
+@7077 V1036182   15.   /* Peso REPLICADO - MORADOR SELECIONADO 182 */
+@7092 V1036183   15.   /* Peso REPLICADO - MORADOR SELECIONADO 183 */
+@7107 V1036184   15.   /* Peso REPLICADO - MORADOR SELECIONADO 184 */
+@7122 V1036185   15.   /* Peso REPLICADO - MORADOR SELECIONADO 185 */
+@7137 V1036186   15.   /* Peso REPLICADO - MORADOR SELECIONADO 186 */
+@7152 V1036187   15.   /* Peso REPLICADO - MORADOR SELECIONADO 187 */
+@7167 V1036188   15.   /* Peso REPLICADO - MORADOR SELECIONADO 188 */
+@7182 V1036189   15.   /* Peso REPLICADO - MORADOR SELECIONADO 189 */
+@7197 V1036190   15.   /* Peso REPLICADO - MORADOR SELECIONADO 190 */
+@7212 V1036191   15.   /* Peso REPLICADO - MORADOR SELECIONADO 191 */
+@7227 V1036192   15.   /* Peso REPLICADO - MORADOR SELECIONADO 192 */
+@7242 V1036193   15.   /* Peso REPLICADO - MORADOR SELECIONADO 193 */
+@7257 V1036194   15.   /* Peso REPLICADO - MORADOR SELECIONADO 194 */
+@7272 V1036195   15.   /* Peso REPLICADO - MORADOR SELECIONADO 195 */
+@7287 V1036196   15.   /* Peso REPLICADO - MORADOR SELECIONADO 196 */
+@7302 V1036197   15.   /* Peso REPLICADO - MORADOR SELECIONADO 197 */
+@7317 V1036198   15.   /* Peso REPLICADO - MORADOR SELECIONADO 198 */
+@7332 V1036199   15.   /* Peso REPLICADO - MORADOR SELECIONADO 199 */
+@7347 V1036200   15.   /* Peso REPLICADO - MORADOR SELECIONADO 200 */
+;
+run;
