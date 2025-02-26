@@ -24,23 +24,12 @@ pathdir <- paste(path, "data/", sep = "/")
 source("consumo-de-alimentos/set_estrato.R")
 
 # Etapa 1: Leitura dos dados ----------------------------------------------
-#2007-2008
-base_aquisicao_alimentar_2008 <- read.csv(paste0(pathdir,"tabela_base_alimentacao_pof0708.csv"),sep = ";")
-base_uc_2008 <- read.csv(paste0(pathdir,"tabela_base_uc_pof0708.csv"),sep = ";")
-
 #2017-2018
 base_aquisicao_alimentar_2018 <- read.csv(paste0(pathdir,"tabela_base_alimentacao_pof1718.csv"),sep = ";")
 base_uc_2018 <- read.csv(paste0(pathdir,"tabela_base_uc_pof1718.csv"),sep = ";")
 
 
 # Selecionando apenas estratos de interesse: AMZLEGAL
-#2007-2008
-base_aquisicao_alimentar_2008_amzl <- base_aquisicao_alimentar_2008 %>%
-  right_join(tabela_estratos_2008, by = c("COD_UF", "ESTRATO_POF"))
-
-base_uc_2008_amzl <- base_uc_2008 %>%
-  right_join(tabela_estratos_2008, by = c("COD_UF", "ESTRATO_POF"))
-
 #2017-2018
 base_aquisicao_alimentar_2018_amzl <- base_aquisicao_alimentar_2018 %>%
   right_join(tabela_estratos_2018, by = c("UF", "ESTRATO_POF"))
@@ -48,80 +37,33 @@ base_aquisicao_alimentar_2018_amzl <- base_aquisicao_alimentar_2018 %>%
 base_uc_2018_amzl <- base_uc_2018 %>%
   right_join(tabela_estratos_2018, by = c("UF", "ESTRATO_POF"))
 
-rm(base_aquisicao_alimentar_2018,base_uc_2018,base_uc_2008,base_aquisicao_alimentar_2008)
+rm(base_aquisicao_alimentar_2018,base_uc_2018)
 
-
-#Tradutor - Aquisicao de alimentos
-#tradutor_aquisicao_alimentar_2018 <-
-#  readxl::read_excel(paste0(pathdir,"2017_2018/Tradutores_20230713/Tradutor_Aquisi‡ֶo_Alimentar.xls"))
-
-mapeamento_nova_alimentacao_2008 <-
-  readxl::read_excel(paste0(pathdir,"mapeamento_alimentacaopof0708_nova_br.xlsx"),sheet = 'Sheet1', range= "A1:M3211")
-colnames(mapeamento_nova_alimentacao_2008)
-
+#Mapeamento GUIA(NOVA)
 mapeamento_nova_alimentacao_2018 <-
   readxl::read_excel(paste0(pathdir,"mapeamento_alimentacaopof1718_nova_br.xlsx"),sheet = 'Sheet1', range= "A1:Q8801")
 colnames(mapeamento_nova_alimentacao_2018)
 
-tradutor_locais_2018 <- read.csv(paste0(pathdir,"tradutor_locais_aqui_pof1718.csv"),sep = ";")
-colnames(tradutor_locais_2018)
-
-tradutor_locais_2018v2 <-
-  readxl::read_excel(paste0(pathdir,"mapeamento_local_pof.xlsx"),sheet = 'Sheet1', range= "A1:F795")
-
-
-#-- 2008
-tb_aux_2008 <- base_aquisicao_alimentar_2008_amzl %>%
-  left_join(mapeamento_nova_alimentacao_2008, by=("V9001"="V9001"))
-
-tb_aux_2008 <- tb_aux_2008[!is.na(tb_aux_2008$valor_mensal), ] # [2]
-
-tb_aux_2008 <-  tb_aux_2008 %>%
-  left_join(tradutor_locais_2018, by=c("V9004"="codigo_local"))
-
-tb_aux_2008 <- tb_aux_2008[!is.na(tb_aux_2008$valor_mensal), ] # [2]
+tradutor_locais_2018_amzl <-
+  readxl::read_excel(paste0(pathdir,"mapeamento_local_pof1718_amzl.xlsx"),sheet = 'Sheet1', range= "A1:E318")
 
 #-- 2018
 tb_aux_2018 <- base_aquisicao_alimentar_2018_amzl %>%
   left_join(mapeamento_nova_alimentacao_2018, by=c("V9001"="codigo_2018"))
 
-tb_aux_2018 <- tb_aux_2018[!is.na(tb_aux_2018$valor_mensal), ] # [2]
-
 tb_aux_2018 <-  tb_aux_2018 %>%
-  left_join(tradutor_locais_2018v2, by=c("V9004"="codigo_local"))
+  left_join(tradutor_locais_2018_amzl, by=c("V9004"="codigo_local"))
 
 tb_aux_2018 <- tb_aux_2018[!is.na(tb_aux_2018$valor_mensal), ] # [2]
+
+#Onde nao tem descricao do local é pq não foi informado
+tb_aux_2018 %>% filter(is.na(nome_local))
 
 # Tabela que inclui variável de contagem 
-#2008
-tabela_aquisicao_2008 <- tb_aux_2008 %>%
-  mutate(count = 1) %>%  # Criando variável de contagem
-  group_by(descricao_estrato,COD_UF, ESTRATO_POF, TIPO_SITUACAO_REG, COD_UPA, NUM_DOM, NUM_UC,classe_prod,nome_local) %>%
-  summarize(count = sum(count, na.rm = TRUE),
-            valor_mensal = sum(valor_mensal, na.rm = TRUE)) %>%
-  ungroup() %>%
-  mutate(key_morador = paste0(descricao_estrato,COD_UF, ESTRATO_POF, TIPO_SITUACAO_REG, COD_UPA, NUM_DOM, NUM_UC)) 
-
-base_uc_2008_amzl <- base_uc_2008_amzl %>%
-  mutate(across(c(COD_UF, ESTRATO_POF, TIPO_SITUACAO_REG, COD_UPA, NUM_DOM, NUM_UC), as.character)) %>%
-  mutate(key_morador = paste0(descricao_estrato,COD_UF, ESTRATO_POF, TIPO_SITUACAO_REG, COD_UPA, NUM_DOM, NUM_UC))
-
-tabela_final_2008 <- inner_join(tabela_aquisicao_2008, base_uc_2008_amzl, by = "key_morador")
-
-total_alimentos_nova_2008 <- tabela_final_2008 %>%
-  mutate(itens = count * PESO_FINAL) %>%
-  group_by(descricao_estrato.x,classe_prod) %>%
-  summarise(total_2008 = sum(itens, na.rm = TRUE))
-
-total_alimentos_nova_2008_local <- tabela_final_2008 %>%
-  mutate(itens = count * PESO_FINAL) %>%
-  group_by(descricao_estrato.x,classe_prod,nome_local) %>%
-  summarise(total_2008 = sum(itens, na.rm = TRUE))
-
 #2018
 tabela_aquisicao_2018 <- tb_aux_2018 %>%
   mutate(count = 1) %>%  # Criando variável de contagem
-  group_by(descricao_estrato, UF, ESTRATO_POF, TIPO_SITUACAO_REG, COD_UPA, NUM_DOM, NUM_UC,classe_prod,nome_local) %>%
+  group_by(descricao_estrato, UF, ESTRATO_POF, TIPO_SITUACAO_REG, COD_UPA, NUM_DOM, NUM_UC,classe_prod,nome_local,cod_local) %>%
   summarize(count = sum(count, na.rm = TRUE),
             valor_mensal = sum(valor_mensal, na.rm = TRUE)) %>%
   ungroup() %>%
@@ -142,23 +84,72 @@ colnames(total_alimentos_nova_2018)
 
 total_alimentos_nova_2018_local <- tabela_final_2018 %>%
   mutate(itens = count * PESO_FINAL) %>%
-  group_by(descricao_estrato.x,classe_prod,nome_local) %>%
+  group_by(descricao_estrato.x,classe_prod,nome_local,cod_local) %>%
   summarise(total_2018 = sum(itens, na.rm = TRUE))
-colnames(total_alimentos_nova_2018)
+colnames(total_alimentos_nova_2018_local)
 
-## Unindo as tabelas 
-total_alimentos_nova_combinada <- full_join(
-  total_alimentos_nova_2008 %>% select(descricao_estrato.x, classe_prod, total_2008),
-  total_alimentos_nova_2018 %>% select(descricao_estrato.x, classe_prod, total_2018),
-  by = c("descricao_estrato.x","classe_prod")
-)
 
-total_alimentos_nova_local_combinada <- full_join(
-  total_alimentos_nova_2008_local %>% select(descricao_estrato.x, classe_prod,nome_local, total_2008),
-  total_alimentos_nova_2018_local %>% select(descricao_estrato.x, classe_prod,nome_local, total_2018),
-  by = c("descricao_estrato.x","classe_prod","nome_local")
-)
+tabela6 <- total_alimentos_nova_2018_local %>%
+  mutate(classe_prod = recode(classe_prod,
+                              "In natura ou minimamente processado" = "natura",
+                              "Ultraprocessado" = "ultraprocessado",
+                              "Processado" = "processado",
+                              "preparacao_culinaria" = "prep_culinaria",
+                              "oleos_gorduras_sal_acucar" = "ingredientes_culinarios",
+                              "Bebida Alcoolica" = "bebida_alcoolica",
+                              "sem_classificacao" = "sem_classe"))  %>%
+    pivot_wider(
+      names_from = classe_prod, # Nome das colunas a partir de classe_prod
+      values_from = total_2018, # Valores preenchidos por total_2018
+      values_fill = list(total_2018 = 0) # Preencher valores ausentes com 0
+  ) %>%
+  # Calcular a soma total por linha (opcional)
+  rowwise() %>%
+  mutate(total = sum(c_across(where(is.numeric)))) %>%
+  ungroup()  %>%  
+  # Calcular os percentuais para cada classe_prod
+  mutate(across(
+    .cols = bebida_alcoolica:sem_classe, # Colunas de produtos
+    .fns = ~ (.x / total) * 100, # Fórmula para calcular percentual
+    .names = "perc_{.col}" # Nome da nova coluna de percentual
+  )) %>%
+  # Ordenar a tabela pelo cod_local
+  arrange(descricao_estrato.x, cod_local)
 
-write.table(total_alimentos_nova_combinada, paste(pathdir,"tabela_total_alimentos_nova_2008_2018_amzlegal.csv", sep = ""),row.names = F, sep = ";")
+
+tabela7 <- total_alimentos_nova_2018_local %>%
+  mutate(classe_prod = recode(classe_prod,
+                              "In natura ou minimamente processado" = "natura",
+                              "Ultraprocessado" = "ultraprocessado",
+                              "Processado" = "processado",
+                              "preparacao_culinaria" = "prep_culinaria",
+                              "oleos_gorduras_sal_acucar" = "ingredientes_culinarios",
+                              "Bebida Alcoolica" = "bebida_alcoolica",
+                              "sem_classificacao" = "sem_classe"))  %>%
+  pivot_wider(
+    names_from = classe_prod, # Nome das colunas a partir de classe_prod
+    values_from = total_2018, # Valores preenchidos por total_2018
+    values_fill = list(total_2018 = 0) # Preencher valores ausentes com 0
+  ) %>%
+  # Calcular o total para cada nome_local
+  group_by(descricao_estrato.x, nome_local, cod_local) %>%
+  mutate(total_local = sum(c_across(where(is.numeric)))) %>%
+  ungroup() %>%
+  # Calcular o total de cada produto dentro de cada descricao_estrato.x
+  group_by(descricao_estrato.x) %>%
+  mutate(across(
+    bebida_alcoolica:sem_classe, # Colunas de produtos
+    .fns = ~ .x / sum(.x, na.rm = TRUE), # Percentual em relação ao total por descricao_estrato
+    .names = "perc_{.col}" # Nome das novas colunas de percentual
+  )) %>%
+  ungroup() %>%
+  # Ordenar pelo cod_local (opcional)
+  arrange(descricao_estrato.x, cod_local)
+
+
+
+  
+write.table(tabela6, paste(pathdir,"tabela_total_alimentos_nova_local_2018_amzlegal.csv", sep = ""),row.names = F, sep = ";")
+write.table(tabela7, paste(pathdir,"tabela_total_alimentos_nova_local_percprod_2018_amzlegal.csv", sep = ""),row.names = F, sep = ";")
 
 write.table(total_alimentos_nova_local_combinada, paste(pathdir,"tabela_total_alimentos_nova_local_2008_2018_amzlegal.csv", sep = ""),row.names = F, sep = ";")

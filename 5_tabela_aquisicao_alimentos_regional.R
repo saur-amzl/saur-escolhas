@@ -29,12 +29,12 @@ base_pessoas_2018 <- read.csv(paste0(pathdir,"tabela_base_pessoas_pof1718.csv"),
 
 #Tradutor - Aquisicao de alimentos
 tradutor_alimentacao_2008 <-
-  readxl::read_excel(paste0(pathdir,"mapeamento_prod_aquisicao_classes_v12fev25.xlsx"),sheet = '2008', range = "A1:AC5136")
+  readxl::read_excel(paste0(pathdir,"mapeamento_prod_aquisicao_classes_v16fev25.xlsx"),sheet = '2008', range = "A1:AC5136")
 tradutor_alimentacao_2008 <-tradutor_alimentacao_2008[c(4:6,19:22,27:29)]
 colnames(tradutor_alimentacao_2008) <- c("codigo_2008_trad","produto_2008_trad","codigo_trad","is_regional","regiao","grupo_regional","item_regional","class_final","class_analisegeral_final","class_analisegeral_final_bebidas")
 
 tradutor_alimentacao_2018 <-
-  readxl::read_excel(paste0(pathdir,"mapeamento_prod_aquisicao_classes_v12fev25.xlsx"),sheet = '2018', range = "A1:AF4911")
+  readxl::read_excel(paste0(pathdir,"mapeamento_prod_aquisicao_classes_v16fev25.xlsx"),sheet = '2018', range = "A1:AF4911")
 tradutor_alimentacao_2018 <-tradutor_alimentacao_2018[c(2:4,22:25,30:32)]
 colnames(tradutor_alimentacao_2018) <- c("codigo_2018_trad","produto_2018_trad","codigo_trad","is_regional","regiao","grupo_regional","item_regional","class_final","class_analisegeral_final","class_analisegeral_final_bebidas")
 
@@ -127,6 +127,8 @@ tab_mediarm <- full_join(
 
 tab_combinada <- rbind(tab_estado, tab_capital, tab_rm, tab_mediaestado, tab_mediacapital, tab_mediarm)
 
+write.table(tab_combinada, paste(pathdir,"tabela_aquisicao_2008_2018_regional_16fev2025.csv", sep = ""),row.names = F, sep = ";")
+
 
 library(openxlsx)
 
@@ -173,5 +175,5 @@ for(i in niveis) {
 }
 
 # Salve o arquivo Excel
-saveWorkbook(wb, file = "tab_aquisicao_qtidade_niveis.xlsx", overwrite = TRUE)
+saveWorkbook(wb, file = "tab_aquisicao_qtidade_niveis_16fev2025.xlsx", overwrite = TRUE)
 

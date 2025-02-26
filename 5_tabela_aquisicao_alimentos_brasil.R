@@ -34,17 +34,16 @@ base_pessoas_2018 <- read.csv(paste0(pathdir,"tabela_base_pessoas_pof1718.csv"),
 
 
 #Tradutor - Aquisicao de alimentos
+#Tradutor - Aquisicao de alimentos
 tradutor_alimentacao_2008 <-
-  readxl::read_excel(paste0(pathdir,"mapeamento_prod_aquisicao_classes_v09fev25.xlsx"),sheet = '2008', range = "A1:AC5136")
+  readxl::read_excel(paste0(pathdir,"mapeamento_prod_aquisicao_classes_v16fev25.xlsx"),sheet = '2008', range = "A1:AC5136")
 tradutor_alimentacao_2008 <-tradutor_alimentacao_2008[c(4:6,19:22,27:29)]
 colnames(tradutor_alimentacao_2008) <- c("codigo_2008_trad","produto_2008_trad","codigo_trad","is_regional","regiao","grupo_regional","item_regional","class_final","class_analisegeral_final","class_analisegeral_final_bebidas")
 
-
 tradutor_alimentacao_2018 <-
-  readxl::read_excel(paste0(pathdir,"mapeamento_prod_aquisicao_classes_v09fev25.xlsx"),sheet = '2018', range = "A1:AF4911")
+  readxl::read_excel(paste0(pathdir,"mapeamento_prod_aquisicao_classes_v16fev25.xlsx"),sheet = '2018', range = "A1:AF4911")
 tradutor_alimentacao_2018 <-tradutor_alimentacao_2018[c(2:4,22:25,30:32)]
 colnames(tradutor_alimentacao_2018) <- c("codigo_2018_trad","produto_2018_trad","codigo_trad","is_regional","regiao","grupo_regional","item_regional","class_final","class_analisegeral_final","class_analisegeral_final_bebidas")
-
 
 
 #-- 2008
@@ -74,7 +73,7 @@ soma_nivel_3 <- tb_aux_2008 %>%
   group_by(item_regional) %>%
   summarise(qtidade_total = sum(qtidade_anual, na.rm = TRUE)) %>%
   rename(descricao = item_regional) %>%
-  mutate(indicador_nivel = 'alimentos_regional')
+  mutate(indicador_nivel = 'alimentos_regionais')
 
 soma_nivel_4 <- tb_aux_2008 %>%
   group_by(class_analisegeral_final_bebidas) %>%
@@ -129,7 +128,7 @@ soma_nivel_3 <- tb_aux_2018 %>%
   group_by(item_regional) %>%
   summarise(qtidade_total = sum(qtidade_anual, na.rm = TRUE)) %>%
   rename(descricao = item_regional) %>%
-  mutate(indicador_nivel = 'alimentos_regional')
+  mutate(indicador_nivel = 'alimentos_regionais')
 
 soma_nivel_4 <- tb_aux_2018 %>%
   group_by(class_analisegeral_final_bebidas) %>%
@@ -166,6 +165,6 @@ tab_aquisicao_combinada <- full_join(
 )
 colnames(tab_aquisicao_combinada)
 
-write.table(tab_aquisicao_combinada, paste(pathdir,"tabela_aquisicao_2008_2018_brasil_11fev2025.csv", sep = ""),row.names = F, sep = ";")
+write.table(tab_aquisicao_combinada, paste(pathdir,"tabela_aquisicao_2008_2018_brasil_16fev2025.csv", sep = ""),row.names = F, sep = ";")
 
 

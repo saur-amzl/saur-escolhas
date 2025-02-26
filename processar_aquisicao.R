@@ -36,7 +36,7 @@ processar_aquisicao <- function(tb_aux, tabela_estratos, base_pessoas, padrao_fi
   # Aplicando a função para cada nível
   soma_nivel_1 <- calcular_soma_nivel(tab_aquisicao_aux, "class_final", "classes_nova",agregar_por_estrato)
   soma_nivel_2 <- calcular_soma_nivel(tab_aquisicao_aux, "class_analisegeral_final", "alimentos_decreto",agregar_por_estrato)
-  soma_nivel_3 <- calcular_soma_nivel(tab_aquisicao_aux, "item_regional", "alimentos_regional",agregar_por_estrato)
+  soma_nivel_3 <- calcular_soma_nivel(tab_aquisicao_aux, "item_regional", "alimentos_regionais",agregar_por_estrato)
   soma_nivel_4 <- calcular_soma_nivel(tab_aquisicao_aux, "class_analisegeral_final_bebidas", "alimentos_decreto_bebidas",agregar_por_estrato)
   
   # Unindo todas as tabelas

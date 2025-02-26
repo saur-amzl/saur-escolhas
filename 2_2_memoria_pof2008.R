@@ -53,7 +53,7 @@ despesa_individual <- readRDS(paste0(pathdir,"2007-2008/Dados_20231009/DESPESA_I
 #     regionais do produto. Todos os resultados da pesquisa s?o trabalhados com os c?digos considerando os 5 primeiros n?meros.
 
 # [2] Sele??o dos itens do REGISTRO - DESPESA INDIVIDUAL (POF 4) que entram na tabela de alimenta??o 
-#     (todos do quadro 24 e c?digos 41001,48018,49075,49089).   
+#     (todos do quadro 24 e c?digos 41006,48033,49026).   
 
 # [3] Anualiza??o e expans?o dos valores utilizados para a obten??o dos resultados (vari?vel V8000_defla). 
 #     a) Para anualizar, utilizamos o quesito "fator_anualizacao". No caso espec?fico dos quadros 48 e 49,
@@ -67,7 +67,7 @@ desp_individual <-
   subset( transform( despesa_individual,
                      codigo = trunc(V9001/100) # [1]
   ),
-  codigo==41001|codigo==48018|codigo==49075|codigo==49089
+  NUM_QUADRO==24|codigo==41006|codigo==48033|codigo==49026
   ) # [2]
 
 desp_individual <-
