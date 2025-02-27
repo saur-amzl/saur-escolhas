@@ -1,8 +1,6 @@
 # ------------------------------------------------------------------------------
-# Script para definir 
-
-
-# -
+# 
+# ------------------------------------------------------------------------------
 # Limpa área de trabalho
 rm(list=ls())
 
@@ -21,18 +19,14 @@ path <- getwd()
 #Indica o caminho dos dados
 pathdir <- paste(path, "data/", sep = "/")
 inputdir <- paste(path, "data/inputs/", sep = "/")
+outdir <- paste(path, "data/outputs/", sep = "/")
 
-
+# Etapa 1: Leitura dos dados ----------------------------------------------------
 dicio_dom <-
   readxl::read_excel(paste0(inputdir,"dicio_pnad_dom_2013.xlsx"),sheet = 'diciopnad2013', range = "A1:E100")
-colnames(dicio_dom)
 
 # Criar coluna de fim de posição
-dicio_dom <- dicio_dom %>%
-  mutate(end = posicao_inicial + tamanho - 1)
-
-colnames(dicio_dom)
-## Converte o microdado para um arquivo csv
+dicio_dom <- dicio_dom %>% mutate(end = posicao_inicial + tamanho - 1)
 
 # Criar especificação para leitura dos microdados
 col_specs <- fwf_positions(start = dicio_dom$posicao_inicial, 
@@ -43,11 +37,9 @@ pnad_2013 <- read_fwf(paste0(pathdir,"PNAD/2013/Dados/DOM2013.txt"),
                       col_positions = col_specs, 
                       col_types = cols(.default = "c"))
 
+#Etapa 3: Processamento -------------------------------------------------------
 
-confere <- pnad_2013 %>% 
-  select(UF, V4107) %>% 
-  distinct()
-
+# Altera classe das colunas
 pnad_2013 <- pnad_2013 %>%
   mutate(
     V0105 = as.numeric(V0105),   # Total de moradores
@@ -74,10 +66,50 @@ pnad_2013 <- pnad_2013 %>%
   ))
 
 
+# Gerando o dado para o Brasil
+pnad_2013_brasil <- pnad_2013 %>%
+  mutate(Regiao = "Brasil") %>%
+  group_by(Regiao, seguranca_alimentar,situacao_domicilio) %>% 
+  summarise(num_pessoas = sum(V0105*V4611, na.rm=TRUE),
+            num_domicilios = sum(V4611, na.rm = TRUE)) 
 
-sumarizacao_segalimentar <- pnad_2013 %>%
-  group_by(seguranca_alimentar,situacao_domicilio) %>% summarise(num_pessoas = sum(V0105*V4611, na.rm=TRUE),
-                                                                 num_domicilios = sum(V4611, na.rm = TRUE))
+
+# Gerando o dado para os estados
+pnad_2013_estados <- pnad_2013 %>%
+  group_by(UF,seguranca_alimentar,situacao_domicilio) %>% 
+  summarise(num_pessoas = sum(V0105*V4611, na.rm=TRUE),
+            num_domicilios = sum(V4611, na.rm = TRUE)) %>% 
+  rename(Regiao = UF)
+
+# Juntando os dois dataframes
+pnad_2013_completo <- bind_rows(pnad_2013_brasil, pnad_2013_estados)
+
+# Substituindo os códigos pelos nomes dos estados usando case_when
+pnad_2013_completo <- pnad_2013_completo %>%
+  mutate(Regiao = case_when(
+    Regiao == "11" ~ "Rondônia", Regiao == "12" ~ "Acre",
+    Regiao == "13" ~ "Amazonas", Regiao == "14" ~ "Roraima",
+    Regiao == "15" ~ "Pará", Regiao == "16" ~ "Amapá",
+    Regiao == "17" ~ "Tocantins", Regiao == "21" ~ "Maranhão",
+    Regiao == "22" ~ "Piauí", Regiao == "23" ~ "Ceará",
+    Regiao == "24" ~ "Rio Grande do Norte", Regiao == "25" ~ "Paraíba",
+    Regiao == "26" ~ "Pernambuco", Regiao == "27" ~ "Alagoas",
+    Regiao == "28" ~ "Sergipe", Regiao == "29" ~ "Bahia",
+    Regiao == "31" ~ "Minas Gerais", Regiao == "32" ~ "Espírito Santo",
+    Regiao == "33" ~ "Rio de Janeiro", Regiao == "35" ~ "São Paulo",
+    Regiao == "41" ~ "Paraná", Regiao == "42" ~ "Santa Catarina",
+    Regiao == "43" ~ "Rio Grande do Sul", Regiao == "50" ~ "Mato Grosso do Sul",
+    Regiao == "51" ~ "Mato Grosso", Regiao == "52" ~ "Goiás",
+    Regiao == "53" ~ "Distrito Federal", Regiao == "Brasil" ~ "Brasil",
+    TRUE ~ Regiao  # Mantém os valores que não forem correspondidos
+  ))
+
+# Visualizando os dados
+head(pnad_2013_completo)
+
+
+write.table(pnad_2013_completo, paste(outdir,"tabela_seguranca_alimentar_pnad_2013_26marco2025.csv", sep = ""),row.names = F, sep = ";")
+
 
 
 # Calculando totais para as porcentagens
