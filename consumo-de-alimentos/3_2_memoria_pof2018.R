@@ -15,7 +15,7 @@ path <- getwd()
 
 #Indica o caminho dos dados
 pathdir <- paste(path, "data/", sep = "/")
-outdir <-  paste(path, "data/outputs", sep = "/")
+outdir <-  paste(path, "data/outputs/", sep = "/")
 
 # Tabela de Alimentação ---------------------------------------------------
 #  Leitura do REGISTRO - CADERNETA COLETIVA (Questionario POF 3)
