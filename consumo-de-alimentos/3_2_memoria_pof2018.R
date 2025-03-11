@@ -15,7 +15,7 @@ path <- getwd()
 
 #Indica o caminho dos dados
 pathdir <- paste(path, "data/", sep = "/")
-
+outdir <-  paste(path, "data/outputs", sep = "/")
 
 # Tabela de Alimentação ---------------------------------------------------
 #  Leitura do REGISTRO - CADERNETA COLETIVA (Questionario POF 3)
@@ -142,11 +142,11 @@ morador_pessoas <-
 
 
 # Salva o dado 
-write.table(junta_ali, paste(pathdir,"tabela_base_alimentacao_pof1718.csv", sep = ""),
+write.table(junta_ali, paste(outdir,"tabela_base_alimentacao_pof1718_10marco2025.csv", sep = ""),
             row.names = F, sep = ";")
 
-write.table(morador_uc, paste(pathdir,"tabela_base_uc_pof1718.csv", sep = ""),
+write.table(morador_uc, paste(outdir,"tabela_base_uc_pof1718_10marco2025.csv", sep = ""),
             row.names = F, sep = ";")
 
-write.table(morador_pessoas, paste(pathdir,"tabela_base_pessoas_pof1718.csv", sep = ""),
+write.table(morador_pessoas, paste(outdir,"tabela_base_pessoas_pof1718_10marco2025.csv", sep = ""),
             row.names = F, sep = ";")
