@@ -20,17 +20,19 @@ path <- getwd()
 
 #Indica o caminho dos dados
 pathdir <- paste(path, "data/", sep = "/")
+outdir <-  paste(path, "data/outputs/", sep = "/")
+
 
 source("consumo-de-alimentos/set_estrato.R")
 
 # Etapa 1: Leitura dos dados ----------------------------------------------
 #2007-2008
-base_aquisicao_alimentar_2008 <- read.csv(paste0(pathdir,"tabela_base_alimentacao_pof0708.csv"),sep = ";")
-base_pessoas_2008 <- read.csv(paste0(pathdir,"tabela_base_pessoas_pof0708.csv"),sep = ";")
+base_aquisicao_alimentar_2008 <- read.csv(paste0(outdir,"tabela_base_alimentacao_pof0809_10marco2025.csv"),sep = ";")
+base_pessoas_2008 <- read.csv(paste0(outdir,"tabela_base_pessoas_pof0809_10marco2025.csv"),sep = ";")
 
 #2017-2018
-base_aquisicao_alimentar_2018 <- read.csv(paste0(pathdir,"tabela_base_alimentacao_pof1718.csv"),sep = ";")
-base_pessoas_2018 <- read.csv(paste0(pathdir,"tabela_base_pessoas_pof1718.csv"),sep = ";")
+base_aquisicao_alimentar_2018 <- read.csv(paste0(outdir,"tabela_base_alimentacao_pof1718_10marco2025.csv"),sep = ";")
+base_pessoas_2018 <- read.csv(paste0(outdir,"tabela_base_pessoas_pof1718_10marco2025.csv"),sep = ";")
 
 
 # Selecionando apenas estratos de interesse: AMZLEGAL
