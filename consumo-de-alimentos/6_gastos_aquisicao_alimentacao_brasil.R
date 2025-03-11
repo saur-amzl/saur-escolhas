@@ -1,12 +1,4 @@
 
-
-## Script original disponibilizado juntamente com os microdados da POF 2007-2008
-## Scripts 'Tabela de Alimentacao.R
-
-## As tabelas geradas neste script pretendem investigar 
-##Alteração no consumo de alimentos e Alteração no consumo de alimentos (FVL)	
-# Atrabés da tabela de Aquisição alimentar domiciliar per capita anual (Quilogramas) para os anos de 2008 e 2018
-
 # Limpa área de trabalho
 rm(list=ls())
 
@@ -20,26 +12,31 @@ path <- getwd()
 
 #Indica o caminho dos dados
 pathdir <- paste(path, "data/", sep = "/")
+outdir <-  paste(path, "data/outputs/", sep = "/")
+dicdir <-  paste(path, "data/dic_map/", sep = "/")
 
 source("consumo-de-alimentos/set_estrato.R")
 
+#A data de referência fi xada para a compilação, análise e apresentação dos resultados da POF 2017-2018 foi 15 de janeiro de 2018.
+#A data de referência fi xada para a compilação, análise e apresentação dos resultados da POF 2008-2009 foi 15 de janeiro de 2009.
+# Valor será corrigido de acordo com o dado do INPC : 1.69892970
 # Etapa 1: Leitura dos dados ----------------------------------------------
-#2007-2008
-base_aquisicao_alimentar_2008 <- read.csv(paste0(pathdir,"tabela_base_alimentacao_pof0708.csv"),sep = ";")
-base_uc_2008 <- read.csv(paste0(pathdir,"tabela_base_uc_pof0708.csv"),sep = ";")
+#2008-2009
+base_aquisicao_alimentar_2008 <- read.csv(paste0(outdir,"tabela_base_alimentacao_pof0809_10marco2025.csv"),sep = ";")
+base_uc_2008 <- read.csv(paste0(outdir,"tabela_base_uc_pof0809_10marco2025.csv"),sep = ";")
 
 #2017-2018
-base_aquisicao_alimentar_2018 <- read.csv(paste0(pathdir,"tabela_base_alimentacao_pof1718.csv"),sep = ";")
-base_uc_2018 <- read.csv(paste0(pathdir,"tabela_base_uc_pof1718.csv"),sep = ";")
+base_aquisicao_alimentar_2018 <- read.csv(paste0(outdir,"tabela_base_alimentacao_pof1718_10marco2025.csv"),sep = ";")
+base_uc_2018 <- read.csv(paste0(outdir,"tabela_base_uc_pof1718_10marco2025.csv"),sep = ";")
 
 #Tradutor - Aquisicao de alimentos
 tradutor_alimentacao_2008 <-
-  readxl::read_excel(paste0(pathdir,"mapeamento_prod_aquisicao_classes_v16fev25.xlsx"),sheet = '2008', range = "A1:AC5136")
+  readxl::read_excel(paste0(dicdir,"mapeamento_produtos_aquisicao_v16fevereiro25.xlsx"),sheet = '2008', range = "A1:AC5136")
 tradutor_alimentacao_2008 <-tradutor_alimentacao_2008[c(4:6,19:22,27:29)]
 colnames(tradutor_alimentacao_2008) <- c("codigo_2008_trad","produto_2008_trad","codigo_trad","is_regional","regiao","grupo_regional","item_regional","class_final","class_analisegeral_final","class_analisegeral_final_bebidas")
 
 tradutor_alimentacao_2018 <-
-  readxl::read_excel(paste0(pathdir,"mapeamento_prod_aquisicao_classes_v16fev25.xlsx"),sheet = '2018', range = "A1:AF4911")
+  readxl::read_excel(paste0(dicdir,"mapeamento_produtos_aquisicao_v16fevereiro25.xlsx"),sheet = '2018', range = "A1:AF4911")
 tradutor_alimentacao_2018 <-tradutor_alimentacao_2018[c(2:4,22:25,30:32)]
 colnames(tradutor_alimentacao_2018) <- c("codigo_2018_trad","produto_2018_trad","codigo_trad","is_regional","regiao","grupo_regional","item_regional","class_final","class_analisegeral_final","class_analisegeral_final_bebidas")
 
@@ -93,7 +90,7 @@ str(tab_aquisicao_2008)
 
 tab_aquisicao_2008 <- tab_aquisicao_2008 %>%
   mutate(
-    gasto_mensal_familiar_2008 = round(valor_total / soma_uc_2008, 2)
+    gasto_mensal_familiar_2008 = round(valor_total / soma_uc_2008, 2) * 1.69892970 # corrigido pelo INPC
   )
 
 
@@ -160,5 +157,5 @@ tab_aquisicao_combinada <- full_join(
 )
 colnames(tab_aquisicao_combinada)
 
-write.table(tab_aquisicao_combinada, paste(pathdir,"tabela_gastos_aquisicao_2008_2018_brasil_27fev2025.csv", sep = ""),row.names = F, sep = ";")
+write.table(tab_aquisicao_combinada, paste(outdir,"tab_aquisicao_gasto_mensal_familiar_classes_2008_2018_brasil_10marco2025.csv", sep = ""),row.names = F, sep = ";")
 
