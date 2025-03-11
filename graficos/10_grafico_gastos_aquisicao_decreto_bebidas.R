@@ -11,12 +11,12 @@ path <- getwd()
 
 #Indica o caminho dos dados
 pathdir <- paste(path, "data/", sep = "/")
-outdir <-  paste(path, "data/outputs", sep = "/")
+outdir <-  paste(path, "data/outputs/", sep = "/")
+graphdir <-  paste(path, "data/graph/", sep = "/")
 
 
-tabela_aquisicao_br <- read.csv(paste(outdir,"/tabela_gastos_aquisicao_2008_2018_brasil_27fev2025.csv", sep = ""),sep = ";")
-tabela_aquisicao_regional <- read.csv(paste(outdir,"/tabela_aquisicao_gastos_2008_2018_regional_1marco2025.csv", sep = ""),sep = ";")
-
+tabela_aquisicao_br <- read.csv(paste(outdir,"tab_aquisicao_gasto_mensal_familiar_classes_2008_2018_brasil_10marco2025.csv", sep = ""),sep = ";")
+tabela_aquisicao_regional <- read.csv(paste(outdir,"tab_aquisicao_gasto_mensal_familiar_classes_2008_2018_regional_10marco2025.csv", sep = ""),sep = ";")
 
 # Brasil - com outros ----------------------------------------------------------
 subset <- tabela_aquisicao_br %>%
@@ -83,7 +83,7 @@ p1 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste0(outdir,"/grafico_comparacao_aquisicao_gastos_br.png", sep = ""), 
+ggsave(paste0(graphdir,"/grafico_comparacao_aquisicao_gastos_br_10marco2025.png", sep = ""), 
        plot = p1, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
@@ -154,7 +154,7 @@ p2 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste(outdir,"/grafico_comparacao_aquisicao_gastos_br_semoutros.png", sep = ""), 
+ggsave(paste(graphdir,"/grafico_comparacao_aquisicao_gastos_br_semoutros_10marco2025.png", sep = ""), 
        plot = p2, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
@@ -233,7 +233,7 @@ p3 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste(outdir,"/grafico_comparacao_aquisicao_gastos_media_estados.png", sep = ""), 
+ggsave(paste(graphdir,"/grafico_comparacao_aquisicao_gastos_media_estados_10marco2025.png", sep = ""), 
        plot = p3, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
@@ -307,7 +307,7 @@ p4 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste(outdir,"/grafico_comparacao_aquisicao_gastos_media_estados_semoutros.png", sep = ""), 
+ggsave(paste(graphdir,"/grafico_comparacao_aquisicao_gastos_media_estados_semoutros_10marco2025.png", sep = ""), 
        plot = p4, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
@@ -382,7 +382,7 @@ p5 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste(outdir,"/grafico_comparacao_aquisicao_gastos_media_capitais.png", sep = ""), 
+ggsave(paste(graphdir,"/grafico_comparacao_aquisicao_gastos_media_capitais_10marco2025.png", sep = ""), 
        plot = p5, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
@@ -454,7 +454,7 @@ p6 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste(outdir,"/grafico_comparacao_aquisicao_gastos_media_capitais_semoutros.png", sep = ""), 
+ggsave(paste(graphdir,"/grafico_comparacao_aquisicao_gastos_media_capitais_semoutros_10marco2025.png", sep = ""), 
        plot = p6, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
