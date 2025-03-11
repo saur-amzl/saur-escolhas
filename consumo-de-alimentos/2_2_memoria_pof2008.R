@@ -1,5 +1,5 @@
 
-## Script original disponibilizado juntamente com os microdados da POF 2007-2008
+## Script original disponibilizado juntamente com os microdados da POF 2008-2009
 ## Scripts 'Tabela de Alimentacao.R
 
 # Limpa área de trabalho
@@ -15,11 +15,11 @@ path <- getwd()
 
 #Indica o caminho dos dados
 pathdir <- paste(path, "data/", sep = "/")
-
+outdir <-  paste(path, "data/outputs/", sep = "/")
 
 # Tabela de Alimentação ---------------------------------------------------
 #  Leitura do REGISTRO - CADERNETA COLETIVA (Questionario POF 3)
-caderneta_coletiva <- readRDS(paste0(pathdir,"2007-2008/Dados_20231009/CADERNETA_COLETIVA.rds"))
+caderneta_coletiva <- readRDS(paste0(pathdir,"2008-2009/Dados_20231009/CADERNETA_COLETIVA.rds"))
 
 # [1] Transformacao do codigo do item (variavel V9001) em 5 numeros, para ficar no mesmo padrao dos codigos que constam nos arquivos de
 #     tradutores das tabelas. Esses c?digos s?o simplificados em 5 n?meros, pois os 2 ?ltimos n?meros caracterizam sin?nimos ou termos 
@@ -46,7 +46,7 @@ cad_coletiva <-
 rm(caderneta_coletiva)
 
 # Leitura do REGISTRO - DESPESA INDIVIDUAL (Question?rio POF 4)
-despesa_individual <- readRDS(paste0(pathdir,"2007-2008/Dados_20231009/DESPESA_INDIVIDUAL.rds"))
+despesa_individual <- readRDS(paste0(pathdir,"2008-2009/Dados_20231009/DESPESA_INDIVIDUAL.rds"))
 
 # [1] Transforma??o do c?digo do item (vari?vel V9001) em 5 n?meros, para ficar no mesmo padr?o dos c?digos que constam nos arquivos de
 #     tradutores das tabelas. Esses c?digos s?o simplificados em 5 n?meros, pois os 2 ?ltimos n?meros caracterizam sin?nimos ou termos 
@@ -118,7 +118,7 @@ junta_ali <-
 morador_uc <- 
   unique( 
     readRDS( 
-      paste0(pathdir,"2007-2008/Dados_20231009/MORADOR.rds")
+      paste0(pathdir,"2008-2009/Dados_20231009/MORADOR.rds")
     ) [ ,
         c("COD_UF","ESTRATO_POF","TIPO_SITUACAO_REG","COD_UPA","NUM_DOM","NUM_UC",
             "PESO_FINAL"
@@ -129,7 +129,7 @@ morador_uc <-
 morador_pessoas <- 
   unique( 
     readRDS( 
-      paste0(pathdir,"2007-2008/Dados_20231009/MORADOR.rds")
+      paste0(pathdir,"2008-2009/Dados_20231009/MORADOR.rds")
     ) [ ,
         c("COD_UF","ESTRATO_POF","TIPO_SITUACAO_REG","COD_UPA","NUM_DOM","NUM_UC","COD_INFORMANTE",
           "PESO_FINAL"
@@ -139,11 +139,11 @@ morador_pessoas <-
 
 
 # Salva o dado 
-write.table(junta_ali, paste(pathdir,"tabela_base_alimentacao_pof0708.csv", sep = ""),
+write.table(junta_ali, paste(outdir,"tabela_base_alimentacao_pof0809_10marco2025.csv", sep = ""),
             row.names = F, sep = ";")
 
-write.table(morador_uc, paste(pathdir,"tabela_base_uc_pof0708.csv", sep = ""),
+write.table(morador_uc, paste(outdir,"tabela_base_uc_pof0809_10marco2025.csv", sep = ""),
             row.names = F, sep = ";")
 
-write.table(morador_pessoas, paste(pathdir,"tabela_base_pessoas_pof0708.csv", sep = ""),
+write.table(morador_pessoas, paste(outdir,"tabela_base_pessoas_pof0809_10marco2025.csv", sep = ""),
             row.names = F, sep = ";")
