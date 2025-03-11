@@ -11,10 +11,13 @@ path <- getwd()
 
 #Indica o caminho dos dados
 pathdir <- paste(path, "data/", sep = "/")
+outdir <-  paste(path, "data/outputs/", sep = "/")
+graphdir <-  paste(path, "data/graph/", sep = "/")
 
 
-tabela_aquisicao_br <- read.csv(paste(pathdir,"tabela_aquisicao_2008_2018_brasil_16fev2025.csv", sep = ""),sep = ";")
-tabela_aquisicao_regional <- read.csv(paste(pathdir,"tabela_aquisicao_2008_2018_regional_16fev2025.csv", sep = ""),sep = ";")
+
+tabela_aquisicao_br <- read.csv(paste(outdir,"tab_aquisicao_qtidade_percapita_classes_2008_2018_brasil_10marco2025.csv", sep = ""),sep = ";")
+tabela_aquisicao_regional <- read.csv(paste(outdir,"tab_aquisicao_qtidade_percapita_classes_2008_2018_regional_10marco2025.csv", sep = ""),sep = ";")
 
 
 # Brasil - com outros ----------------------------------------------------------
@@ -22,13 +25,13 @@ subset <- tabela_aquisicao_br %>%
   filter(indicador_nivel == "alimentos_decreto_bebidas") %>%
   filter(!(descricao %in% c("Café e Chá", "Castanhas e nozes"))) %>%
   mutate(perc = qtd_anual_percapita_2018 / qtd_anual_percapita_2008 - 1) %>%
-  rename(`2007/2008` = qtd_anual_percapita_2008,
+  rename(`2008/2009` = qtd_anual_percapita_2008,
          `2017/2018` = qtd_anual_percapita_2018) %>%
-  select(descricao, `2007/2008`, `2017/2018`, perc)
+  select(descricao, `2008/2009`, `2017/2018`, perc)
 
 # Transformando os dados para formato long
 subset_long <- subset %>%
-  pivot_longer(cols = c(`2007/2008`, `2017/2018`), 
+  pivot_longer(cols = c(`2008/2009`, `2017/2018`), 
                names_to = "POF", values_to = "Valor")
 
 
@@ -62,14 +65,14 @@ new_names <- c("Leguminosa" = "Leguminosas",
 p1 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y = Valor, fill = POF)) +
   geom_bar(position = position_dodge(width = 0.9), stat = "identity") +
   geom_text(data = subset_long %>% 
-              filter(POF == "2007/2008"),
+              filter(POF == "2008/2009"),
             aes(x = factor(descricao, levels = my_order_descr), 
                 y = Valor + 1.5, 
                 label = scales::percent(perc, accuracy = 0.1)),
             color = "black", size = 3.5,
             position = position_dodge(width = 0.9)) +
   scale_x_discrete(labels = new_names) + # Alterando os nomes
-  scale_fill_manual(values = c("2007/2008" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
+  scale_fill_manual(values = c("2008/2009" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
   labs(x = "", y = "Aquisição per capita anual (kg)",
        fill = "POF") +
   theme_bw() +
@@ -82,7 +85,7 @@ p1 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste(pathdir,"grafico_comparacao_aquisicao_br.png", sep = ""), 
+ggsave(paste(graphdir,"grafico_comparacao_aquisicao_br_10marco2025.png", sep = ""), 
        plot = p1, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
@@ -95,13 +98,13 @@ subset <- tabela_aquisicao_br %>%
   filter(indicador_nivel == "alimentos_decreto_bebidas") %>%
   filter(!(descricao %in% c("Café e Chá", "Castanhas e nozes","Outros"))) %>%
   mutate(perc = qtd_anual_percapita_2018 / qtd_anual_percapita_2008 - 1) %>%
-  rename(`2007/2008` = qtd_anual_percapita_2008,
+  rename(`2008/2009` = qtd_anual_percapita_2008,
          `2017/2018` = qtd_anual_percapita_2018) %>%
-  select(descricao, `2007/2008`, `2017/2018`, perc)
+  select(descricao, `2008/2009`, `2017/2018`, perc)
 
 # Transformando os dados para formato long
 subset_long <- subset %>%
-  pivot_longer(cols = c(`2007/2008`, `2017/2018`), 
+  pivot_longer(cols = c(`2008/2009`, `2017/2018`), 
                names_to = "POF", values_to = "Valor")
 
 
@@ -133,14 +136,14 @@ new_names <- c("Leguminosa" = "Leguminosas",
 p2 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y = Valor, fill = POF)) +
   geom_bar(position = position_dodge(width = 0.9), stat = "identity") +
   geom_text(data = subset_long %>% 
-              filter(POF == "2007/2008"),
+              filter(POF == "2008/2009"),
             aes(x = factor(descricao, levels = my_order_descr), 
                 y = Valor + 1.5, 
                 label = scales::percent(perc, accuracy = 0.1)),
             color = "black", size = 3.5,
             position = position_dodge(width = 0.9)) +
   scale_x_discrete(labels = new_names) + # Alterando os nomes
-  scale_fill_manual(values = c("2007/2008" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
+  scale_fill_manual(values = c("2008/2009" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
   labs(x = "", y = "Aquisição per capita anual (kg)",
        fill = "POF") +
   theme_bw() +
@@ -153,7 +156,7 @@ p2 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste(pathdir,"grafico_comparacao_aquisicao_br_semoutros.png", sep = ""), 
+ggsave(paste(graphdir,"grafico_comparacao_aquisicao_br_semoutros_10marco2025.png", sep = ""), 
        plot = p2, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
@@ -172,13 +175,13 @@ subset <- tabela_aquisicao_regional %>%
   filter(indicador_nivel == "alimentos_decreto_bebidas") %>%
   filter(!(descricao %in% c("Café e Chá", "Castanhas e nozes"))) %>%
   mutate(perc = qtd_anual_percapita_2018 / qtd_anual_percapita_2008 - 1) %>%
-  rename(`2007/2008` = qtd_anual_percapita_2008,
+  rename(`2008/2009` = qtd_anual_percapita_2008,
          `2017/2018` = qtd_anual_percapita_2018) %>%
-  select(descricao, `2007/2008`, `2017/2018`, perc)
+  select(descricao, `2008/2009`, `2017/2018`, perc)
 
 # Transformando os dados para formato long
 subset_long <- subset %>%
-  pivot_longer(cols = c(`2007/2008`, `2017/2018`), 
+  pivot_longer(cols = c(`2008/2009`, `2017/2018`), 
                names_to = "POF", values_to = "Valor")
 
 
@@ -212,14 +215,14 @@ new_names <- c("Leguminosa" = "Leguminosas",
 p3 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y = Valor, fill = POF)) +
   geom_bar(position = position_dodge(width = 0.9), stat = "identity") +
   geom_text(data = subset_long %>% 
-              filter(POF == "2007/2008"),
+              filter(POF == "2008/2009"),
             aes(x = factor(descricao, levels = my_order_descr), 
                 y = Valor + 1.5, 
                 label = scales::percent(perc, accuracy = 0.1)),
             color = "black", size = 3.5,
             position = position_dodge(width = 0.9)) +
   scale_x_discrete(labels = new_names) + # Alterando os nomes
-  scale_fill_manual(values = c("2007/2008" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
+  scale_fill_manual(values = c("2008/2009" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
   labs(x = "", y = "Aquisição per capita anual (kg)",
        fill = "POF") +
   theme_bw() +
@@ -232,7 +235,7 @@ p3 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste(pathdir,"grafico_comparacao_aquisicao_media_estados.png", sep = ""), 
+ggsave(paste(graphdir,"grafico_comparacao_aquisicao_media_estados_10marco2025.png", sep = ""), 
        plot = p3, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
@@ -248,13 +251,13 @@ subset <- tabela_aquisicao_regional %>%
   filter(indicador_nivel == "alimentos_decreto_bebidas") %>%
   filter(!(descricao %in% c("Café e Chá", "Castanhas e nozes","Outros"))) %>%
   mutate(perc = qtd_anual_percapita_2018 / qtd_anual_percapita_2008 - 1) %>%
-  rename(`2007/2008` = qtd_anual_percapita_2008,
+  rename(`2008/2009` = qtd_anual_percapita_2008,
          `2017/2018` = qtd_anual_percapita_2018) %>%
-  select(descricao, `2007/2008`, `2017/2018`, perc)
+  select(descricao, `2008/2009`, `2017/2018`, perc)
 
 # Transformando os dados para formato long
 subset_long <- subset %>%
-  pivot_longer(cols = c(`2007/2008`, `2017/2018`), 
+  pivot_longer(cols = c(`2008/2009`, `2017/2018`), 
                names_to = "POF", values_to = "Valor")
 
 
@@ -286,14 +289,14 @@ new_names <- c("Leguminosa" = "Leguminosas",
 p4 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y = Valor, fill = POF)) +
   geom_bar(position = position_dodge(width = 0.9), stat = "identity") +
   geom_text(data = subset_long %>% 
-              filter(POF == "2007/2008"),
+              filter(POF == "2008/2009"),
             aes(x = factor(descricao, levels = my_order_descr), 
                 y = Valor + 1.5, 
                 label = scales::percent(perc, accuracy = 0.1)),
             color = "black", size = 3.5,
             position = position_dodge(width = 0.9)) +
   scale_x_discrete(labels = new_names) + # Alterando os nomes
-  scale_fill_manual(values = c("2007/2008" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
+  scale_fill_manual(values = c("2008/2009" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
   labs(x = "", y = "Aquisição per capita anual (kg)",
        fill = "POF") +
   theme_bw() +
@@ -306,7 +309,7 @@ p4 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste(pathdir,"grafico_comparacao_aquisicao_media_estados_semoutros.png", sep = ""), 
+ggsave(paste(graphdir,"grafico_comparacao_aquisicao_media_estados_semoutros_10marco2025.png", sep = ""), 
        plot = p4, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
@@ -321,13 +324,13 @@ subset <- tabela_aquisicao_regional %>%
   filter(indicador_nivel == "alimentos_decreto_bebidas") %>%
   filter(!(descricao %in% c("Café e Chá", "Castanhas e nozes"))) %>%
   mutate(perc = qtd_anual_percapita_2018 / qtd_anual_percapita_2008 - 1) %>%
-  rename(`2007/2008` = qtd_anual_percapita_2008,
+  rename(`2008/2009` = qtd_anual_percapita_2008,
          `2017/2018` = qtd_anual_percapita_2018) %>%
-  select(descricao, `2007/2008`, `2017/2018`, perc)
+  select(descricao, `2008/2009`, `2017/2018`, perc)
 
 # Transformando os dados para formato long
 subset_long <- subset %>%
-  pivot_longer(cols = c(`2007/2008`, `2017/2018`), 
+  pivot_longer(cols = c(`2008/2009`, `2017/2018`), 
                names_to = "POF", values_to = "Valor")
 
 
@@ -361,14 +364,14 @@ new_names <- c("Leguminosa" = "Leguminosas",
 p5 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y = Valor, fill = POF)) +
   geom_bar(position = position_dodge(width = 0.9), stat = "identity") +
   geom_text(data = subset_long %>% 
-              filter(POF == "2007/2008"),
+              filter(POF == "2008/2009"),
             aes(x = factor(descricao, levels = my_order_descr), 
                 y = Valor + 1.5, 
                 label = scales::percent(perc, accuracy = 0.1)),
             color = "black", size = 3.5,
             position = position_dodge(width = 0.9)) +
   scale_x_discrete(labels = new_names) + # Alterando os nomes
-  scale_fill_manual(values = c("2007/2008" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
+  scale_fill_manual(values = c("2008/2009" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
   labs(x = "", y = "Aquisição per capita anual (kg)",
        fill = "POF") +
   theme_bw() +
@@ -381,7 +384,7 @@ p5 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste(pathdir,"grafico_comparacao_aquisicao_media_capitais.png", sep = ""), 
+ggsave(paste(graphdir,"grafico_comparacao_aquisicao_media_capitais_10marco2025.png", sep = ""), 
        plot = p5, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
@@ -395,13 +398,13 @@ subset <- tabela_aquisicao_regional %>%
   filter(indicador_nivel == "alimentos_decreto_bebidas") %>%
   filter(!(descricao %in% c("Café e Chá", "Castanhas e nozes","Outros"))) %>%
   mutate(perc = qtd_anual_percapita_2018 / qtd_anual_percapita_2008 - 1) %>%
-  rename(`2007/2008` = qtd_anual_percapita_2008,
+  rename(`2008/2009` = qtd_anual_percapita_2008,
          `2017/2018` = qtd_anual_percapita_2018) %>%
-  select(descricao, `2007/2008`, `2017/2018`, perc)
+  select(descricao, `2008/2009`, `2017/2018`, perc)
 
 # Transformando os dados para formato long
 subset_long <- subset %>%
-  pivot_longer(cols = c(`2007/2008`, `2017/2018`), 
+  pivot_longer(cols = c(`2008/2009`, `2017/2018`), 
                names_to = "POF", values_to = "Valor")
 
 
@@ -433,14 +436,14 @@ new_names <- c("Leguminosa" = "Leguminosas",
 p6 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y = Valor, fill = POF)) +
   geom_bar(position = position_dodge(width = 0.9), stat = "identity") +
   geom_text(data = subset_long %>% 
-              filter(POF == "2007/2008"),
+              filter(POF == "2008/2009"),
             aes(x = factor(descricao, levels = my_order_descr), 
                 y = Valor + 1.5, 
                 label = scales::percent(perc, accuracy = 0.1)),
             color = "black", size = 3.5,
             position = position_dodge(width = 0.9)) +
   scale_x_discrete(labels = new_names) + # Alterando os nomes
-  scale_fill_manual(values = c("2007/2008" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
+  scale_fill_manual(values = c("2008/2009" = "#D1A1D6", "2017/2018" = "#8A4E98")) +  # Cores roxo clarinho e roxo escuro
   labs(x = "", y = "Aquisição per capita anual (kg)",
        fill = "POF") +
   theme_bw() +
@@ -453,7 +456,7 @@ p6 <- ggplot(subset_long, aes(x = factor(descricao, levels = my_order_descr), y 
 
 
 # Salvar o gráfico como .png
-ggsave(paste(pathdir,"grafico_comparacao_aquisicao_media_capitais_semoutros.png", sep = ""), 
+ggsave(paste(graphdir,"grafico_comparacao_aquisicao_media_capitais_semoutros_10marco2025.png", sep = ""), 
        plot = p6, 
        width = 10,  # Largura em polegadas
        height = 7,  # Altura em polegadas
