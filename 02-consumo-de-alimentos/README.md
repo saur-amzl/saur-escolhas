@@ -14,11 +14,11 @@ Antes de executar os scripts desta pasta, certifique-se de que os scripts da pas
 
 Os scripts estão organizados por tema e escopo geográfico:
 
-- `4_qtidade_aquisicao_alimentos_brasil.R` — Quantidade adquirida de alimentos (Brasil)  
-- `4_qtidade_aquisicao_alimentos_regional.R` — Quantidade adquirida de alimentos (por região)  
-- `5_gastos_aquisicao_alimentacao_brasil.R` — Gastos com aquisição alimentar (Brasil)  
-- `5_gastos_aquisicao_alimentacao_regional.R` — Gastos com aquisição alimentar (por região)  
-- `6_locais_aquisicao.R` — Tipos e distribuição dos locais de aquisição de alimentos  
+- `1_qtidade_aquisicao_alimentos_brasil.R` — Quantidade adquirida de alimentos (Brasil)  
+- `2_qtidade_aquisicao_alimentos_regional.R` — Quantidade adquirida de alimentos (por região)  
+- `3_gastos_aquisicao_alimentacao_brasil.R` — Gastos com aquisição alimentar (Brasil)  
+- `4_gastos_aquisicao_alimentacao_regional.R` — Gastos com aquisição alimentar (por região)  
+- `5_locais_aquisicao.R` — Tipos e distribuição dos locais de aquisição de alimentos  
 - `processar_aquisicao.R` — Script com a função para realizar o processamento da base de aquisição alimentar
 
 ---
