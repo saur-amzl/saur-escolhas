@@ -13,18 +13,17 @@ p_load(dplyr, data.table, ggplot2, sf, googledrive, tidyr,RColorBrewer,readxl,op
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
+intdir <-  paste(path, "data/intermediate/", sep = "/")
 outdir <-  paste(path, "data/outputs/", sep = "/")
-inputdir <-  paste(path, "data/inputs", sep = "/")
 dicdir <-  paste(path, "data/dic_map/", sep = "/")
 
 
-source("consumo-de-alimentos/set_estrato.R")
+source("set_estrato.R")
 
 # Etapa 1: Leitura dos dados ----------------------------------------------
 #2017-2018
-base_aquisicao_alimentar_2018 <- read.csv(paste0(outdir,"tabela_base_alimentacao_pof1718_10marco2025.csv"),sep = ";")
-base_uc_2018 <- read.csv(paste0(outdir,"tabela_base_uc_pof1718_10marco2025.csv"),sep = ";")
+base_aquisicao_alimentar_2018 <- read.csv(paste0(intdir,"tabela_base_alimentacao_pof1718_10marco2025.csv"),sep = ";")
+base_uc_2018 <- read.csv(paste0(intdir,"tabela_base_uc_pof1718_10marco2025.csv"),sep = ";")
 
 #Tradutor - Aquisicao de alimentos
 tradutor_alimentacao_2018 <-
