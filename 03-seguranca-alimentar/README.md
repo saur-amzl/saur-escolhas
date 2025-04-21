@@ -25,10 +25,10 @@ Os microdados da PNAD e da PNAD Contínua devem ser baixados manualmente a parti
 
 Após o download, organize os arquivos extraídos nas seguintes pastas:
 
-`data/raw/PNAD/2004`
-`data/raw/PNAD/2009`
-`data/raw/PNAD/2013`
-`data/raw/PNADC/2023`
+- `data/raw/PNAD/2004`
+- `data/raw/PNAD/2009`
+- `data/raw/PNAD/2013`
+- `data/raw/PNADC/2023`
 
 Essa estrutura é essencial para que os scripts de leitura e transformação funcionem corretamente.
 
