@@ -4,11 +4,18 @@ Este repositório contém scripts para o **ETL (Extract, Transform, Load — Ext
 
 ---
 
-## 📦 Etapa Inicial
+### 📥 Download dos dados
 
-- Download dos microdados da [POF 2008/2009](https://drive.google.com/drive/folders/1QLS0sRwo51Iybk0B-qtZXfrSL89xI89x?usp=drive_link) e [POF 2017/2018](https://drive.google.com/drive/folders/1sLQTUNtKr0KxnXpfhNFW8YzWXWUC9YiH?usp=drive_link) na pasta `data/raw`.
+Para executar os scripts deste repositório, é necessário realizar o download manual dos microdados da POF diretamente dos links abaixo:
 
----
+- [POF 2008/2009](https://drive.google.com/drive/folders/1QLS0sRwo51Iybk0B-qtZXfrSL89xI89x?usp=drive_link)  
+- [POF 2017/2018](https://drive.google.com/drive/folders/1sLQTUNtKr0KxnXpfhNFW8YzWXWUC9YiH?usp=drive_link)
+
+Após o download, coloque os arquivos extraídos na pasta:
+
+'data/raw/'
+
+Essa estrutura é esperada para que os scripts de leitura e transformação funcionem corretamente.
 
 ## 🗂️ Nome dos Arquivos de Script
 
@@ -19,11 +26,10 @@ Os scripts estão organizados por ano e tipo de operação:
 - `2_1_leitura_pof2018.R` – Leitura dos microdados da POF 2017/2018  
 - `2_2_memoria_pof2018.R` – Cálculo e tratamento baseado nos dados de 2017/2018  
 
-Esses scripts foram adaptados a partir dos arquivos disponibilizados pelo IBGE nos diretórios de programas e memória de cálculo:
+Esses scripts foram desenvolvidos com base nos códigos fornecidos pelo IBGE junto aos microdados, localizados nas seguintes pastas dentro do diretório `data/raw`:
 
-- [`Leitura dos Microdados - R.R`](../data/raw/2017-2018/Programas_de_Leitura_20230713/R/Leitura%20dos%20Microdados%20-%20R.R)  
-- [`Tabela de Alimentação.R`](../data/raw/2017-2018/Memoria_de_Calculo_20230929/R/Tabela%20de%20Alimentacao.R)
-
+- `2017-2018/Programas_de_Leitura_20230713/R/Leitura dos Microdados - R.R`: script original para leitura dos arquivos da POF  
+- `2017-2018/Memoria_de_Calculo_20230929/R/Tabela de Alimentacao.R`: script com os procedimentos de cálculo para tabulações específicas
 ---
 
 ## 👩‍💻 Autoria
