@@ -19,7 +19,7 @@ pathdir <- paste(path, "data/raw/", sep = "/")
 # nível na pasta Leitura dos dados da POF
 # REGISTRO - DOMICILIO
 DOMICILIO <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","DOMICILIO.txt")
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","DOMICILIO.txt")
            , widths = c(2,4,1,9,2,1,1,1,1,2,1,1,1,1,1,1,1,1,1,2,
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,14,14,1
            )
@@ -38,12 +38,12 @@ DOMICILIO <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(DOMICILIO,paste0(pathdir,"2017_2018/Dados_20230713/","DOMICILIO.rds"))
+saveRDS(DOMICILIO,paste0(pathdir,"2017-2018/Dados_20230713/","DOMICILIO.rds"))
 rm(DOMICILIO)
 
 # REGISTRO - MORADOR
 MORADOR <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","MORADOR.txt")
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","MORADOR.txt")
            , widths = c(2,4,1,9,2,1,2,2,1,2,2,4,3,1,1,
                         1,1,1,2,1,2,1,1,1,1,1,1,1,1,1,
                         1,1,1,1,1,2,1,1,2,1,1,2,1,1,1,
@@ -67,12 +67,12 @@ MORADOR <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(MORADOR,paste0(pathdir,"2017_2018/Dados_20230713/","MORADOR.rds"))
+saveRDS(MORADOR,paste0(pathdir,"2017-2018/Dados_20230713/","MORADOR.rds"))
 rm(MORADOR)
 
 # REGISTRO - MORADOR / QUALIDADE DE VIDA */
 MORADOR_QUALI_VIDA <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","MORADOR_QUALI_VIDA.txt")
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","MORADOR_QUALI_VIDA.txt")
            , widths = c(2,4,1,9,2,1,2,20,20,1,1,1,1,1,
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -94,12 +94,12 @@ MORADOR_QUALI_VIDA <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(MORADOR_QUALI_VIDA,paste0(pathdir,"2017_2018/Dados_20230713/","MORADOR_QUALI_VIDA.rds"))
+saveRDS(MORADOR_QUALI_VIDA,paste0(pathdir,"2017-2018/Dados_20230713/","MORADOR_QUALI_VIDA.rds"))
 rm(MORADOR_QUALI_VIDA)
 
 # REGISTRO - ALUGUEL ESTIMADO
 ALUGUEL_ESTIMADO <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","ALUGUEL_ESTIMADO.txt")
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","ALUGUEL_ESTIMADO.txt")
            , widths = c(2,4,1,9,2,1,2,7,2,10,2,2,12,10,1,2,14,14,10)
            , na.strings=c(" ")
            , col.names = c("UF", "ESTRATO_POF", "TIPO_SITUACAO_REG",
@@ -112,12 +112,12 @@ ALUGUEL_ESTIMADO <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(ALUGUEL_ESTIMADO,paste0(pathdir,"2017_2018/Dados_20230713/","ALUGUEL_ESTIMADO.rds"))
+saveRDS(ALUGUEL_ESTIMADO,paste0(pathdir,"2017-2018/Dados_20230713/","ALUGUEL_ESTIMADO.rds"))
 rm(ALUGUEL_ESTIMADO)
 
 # REGISTRO - DESPESA COLETIVA
 DESPESA_COLETIVA <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","DESPESA_COLETIVA.txt")
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","DESPESA_COLETIVA.txt")
            , widths = c(2,4,1,9,2,1,2,2,7,2,4,10,2,2,1
                         ,10,1,12,10,10,1,1,2,14,14,10,5)
            , na.strings=c(" ")
@@ -133,12 +133,12 @@ DESPESA_COLETIVA <-
   )
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(DESPESA_COLETIVA,paste0(pathdir,"2017_2018/Dados_20230713/","DESPESA_COLETIVA.rds"))
+saveRDS(DESPESA_COLETIVA,paste0(pathdir,"2017-2018/Dados_20230713/","DESPESA_COLETIVA.rds"))
 rm(DESPESA_COLETIVA)
 
 # REGISTRO - SERVI«OS N√O MONET¡RIOS/POF 2
 SERVICO_NAO_MONETARIO_POF2 <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","SERVICO_NAO_MONETARIO_POF2.txt")
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","SERVICO_NAO_MONETARIO_POF2.txt")
            , widths = c(2,4,1,9,2,1,2,2,7,2,10,2,2,10,
                         1,12,10,10,1,2,14,14,10,5)
            , na.strings=c(" ")
@@ -153,12 +153,12 @@ SERVICO_NAO_MONETARIO_POF2 <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(SERVICO_NAO_MONETARIO_POF2,paste0(pathdir,"2017_2018/Dados_20230713/","SERVICO_NAO_MONETARIO_POF2.rds"))
+saveRDS(SERVICO_NAO_MONETARIO_POF2,paste0(pathdir,"2017-2018/Dados_20230713/","SERVICO_NAO_MONETARIO_POF2.rds"))
 rm(SERVICO_NAO_MONETARIO_POF2)
 
 # REGISTRO - INVENT¡RIO DE BENS DUR¡VEIS
 INVENTARIO <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","INVENTARIO.txt") 
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","INVENTARIO.txt") 
            , widths = c(2,4,1,9,2,1,2,2,7,2,
                         2,4,1,14,14,10
            )
@@ -171,12 +171,12 @@ INVENTARIO <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(INVENTARIO,paste0(pathdir,"2017_2018/Dados_20230713/","INVENTARIO.rds"))
+saveRDS(INVENTARIO,paste0(pathdir,"2017-2018/Dados_20230713/","INVENTARIO.rds"))
 rm(INVENTARIO)
 
 # REGISTRO - CADERNETA COLETIVA
 CADERNETA_COLETIVA <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","CADERNETA_COLETIVA.txt")
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","CADERNETA_COLETIVA.txt")
            , widths = c(2,4,1,9,2,1,2,3,7,2,10,12,10,1,2,14,14,10,
                         9,4,5,9,5
            )
@@ -192,12 +192,12 @@ CADERNETA_COLETIVA <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(CADERNETA_COLETIVA,paste0(pathdir,"2017_2018/Dados_20230713/","CADERNETA_COLETIVA.rds"))
+saveRDS(CADERNETA_COLETIVA,paste0(pathdir,"2017-2018/Dados_20230713/","CADERNETA_COLETIVA.rds"))
 rm(CADERNETA_COLETIVA)
 
 # REGISTRO - DESPESA INDIVIDUAL
 DESPESA_INDIVIDUAL <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","DESPESA_INDIVIDUAL.txt") 
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","DESPESA_INDIVIDUAL.txt") 
            , widths = c(2,4,1,9,2,1,2,2,2,7,2,10,2
                         ,2,1,1,1,12,10,1,2,14,14,10,5)
            , na.strings=c(" ")
@@ -212,12 +212,12 @@ DESPESA_INDIVIDUAL <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(DESPESA_INDIVIDUAL,paste0(pathdir,"2017_2018/Dados_20230713/","DESPESA_INDIVIDUAL.rds"))
+saveRDS(DESPESA_INDIVIDUAL,paste0(pathdir,"2017-2018/Dados_20230713/","DESPESA_INDIVIDUAL.rds"))
 rm(DESPESA_INDIVIDUAL)
 
 # REGISTRO - SERVI«OS N√O MONET¡RIOS/POF 4
 SERVICO_NAO_MONETARIO_POF4 <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","SERVICO_NAO_MONETARIO_POF4.txt")
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","SERVICO_NAO_MONETARIO_POF4.txt")
            , widths = c(2,4,1,9,2,1,2,2,2,7,2,10,2,2,
                         1,1,12,10,1,2,14,14,10,5)
            , na.strings=c(" ")
@@ -232,12 +232,12 @@ SERVICO_NAO_MONETARIO_POF4 <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(SERVICO_NAO_MONETARIO_POF4,paste0(pathdir,"2017_2018/Dados_20230713/","SERVICO_NAO_MONETARIO_POF4.rds"))
+saveRDS(SERVICO_NAO_MONETARIO_POF4,paste0(pathdir,"2017-2018/Dados_20230713/","SERVICO_NAO_MONETARIO_POF4.rds"))
 rm(SERVICO_NAO_MONETARIO_POF4)
 
 # REGISTRO - RESTRI«√O DE PRODUTOS OU SERVI«OS DE SA⁄DE
 RESTRICAO_PRODUTOS_SERVICOS_SAUDE <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","RESTRICAO_PRODUTOS_SERVICOS_SAUDE.txt")
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","RESTRICAO_PRODUTOS_SERVICOS_SAUDE.txt")
            , widths = c(2,4,1,9,2,1,2,2,
                         2,7,1,14,14,10)
            , na.strings=c(" ")
@@ -249,12 +249,12 @@ RESTRICAO_PRODUTOS_SERVICOS_SAUDE <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(RESTRICAO_PRODUTOS_SERVICOS_SAUDE,paste0(pathdir,"2017_2018/Dados_20230713/","RESTRICAO_PRODUTOS_SERVICOS_SAUDE.rds"))
+saveRDS(RESTRICAO_PRODUTOS_SERVICOS_SAUDE,paste0(pathdir,"2017-2018/Dados_20230713/","RESTRICAO_PRODUTOS_SERVICOS_SAUDE.rds"))
 rm(RESTRICAO_PRODUTOS_SERVICOS_SAUDE)
 
 # REGISTRO - RENDIMENTO DO TRABALHO
 RENDIMENTO_TRABALHO <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","RENDIMENTO_TRABALHO.txt") 
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","RENDIMENTO_TRABALHO.txt") 
            , widths = c(2,4,1,9,2,1,2,2,1,1,7,1,1,1,1,1,1,7,7,
                         7,7,2,2,3,1,12,10,10,10,10,1,1,14,14,
                         10,4,5)
@@ -274,12 +274,12 @@ RENDIMENTO_TRABALHO <-
   )
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(RENDIMENTO_TRABALHO,paste0(pathdir,"2017_2018/Dados_20230713/","RENDIMENTO_TRABALHO.rds"))
+saveRDS(RENDIMENTO_TRABALHO,paste0(pathdir,"2017-2018/Dados_20230713/","RENDIMENTO_TRABALHO.rds"))
 rm(RENDIMENTO_TRABALHO)
 
 # REGISTRO - OUTROS RENDIMENTOS
 OUTROS_RENDIMENTOS <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","OUTROS_RENDIMENTOS.txt") 
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","OUTROS_RENDIMENTOS.txt") 
            , widths = c(2,4,1,9,2,1,2,2,2,7,10,10,2
                         ,2,12,10,10,1,1,14,14,10
            )
@@ -295,12 +295,12 @@ OUTROS_RENDIMENTOS <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(OUTROS_RENDIMENTOS,paste0(pathdir,"2017_2018/Dados_20230713/","OUTROS_RENDIMENTOS.rds"))
+saveRDS(OUTROS_RENDIMENTOS,paste0(pathdir,"2017-2018/Dados_20230713/","OUTROS_RENDIMENTOS.rds"))
 rm(OUTROS_RENDIMENTOS)
 
 # REGISTRO - CONDI«’ES DE VIDA
 CONDICOES_VIDA <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","CONDICOES_VIDA.txt") 
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","CONDICOES_VIDA.txt") 
            , widths = c(2,4,1,9,2,1,2,1,6,5,1,1,1,1,1,
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -324,12 +324,12 @@ CONDICOES_VIDA <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(CONDICOES_VIDA,paste0(pathdir,"2017_2018/Dados_20230713/","CONDICOES_VIDA.rds"))
+saveRDS(CONDICOES_VIDA,paste0(pathdir,"2017-2018/Dados_20230713/","CONDICOES_VIDA.rds"))
 rm(CONDICOES_VIDA)
 
 # REGISTRO - CARACTERÕSTICAS DA DIETA
 CARACTERISTICAS_DIETA <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","CARACTERISTICAS_DIETA.txt") 
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","CARACTERISTICAS_DIETA.txt") 
            , widths = c(2,4,1,9,2,1,2,1,1,1,1,
                         1,1,1,1,1,1,1,1,1,1,1,
                         1,1,1,1,3,3,14,15,10
@@ -348,12 +348,12 @@ CARACTERISTICAS_DIETA <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(CARACTERISTICAS_DIETA,paste0(pathdir,"2017_2018/Dados_20230713/","CARACTERISTICAS_DIETA.rds"))
+saveRDS(CARACTERISTICAS_DIETA,paste0(pathdir,"2017-2018/Dados_20230713/","CARACTERISTICAS_DIETA.rds"))
 rm(CARACTERISTICAS_DIETA)
 
 # REGISTRO - CONSUMO ALIMENTAR
 CONSUMO_ALIMENTAR <- 
-  read.fwf(paste0(pathdir,"2017_2018/Dados_20230713/","CONSUMO_ALIMENTAR.txt") 
+  read.fwf(paste0(pathdir,"2017-2018/Dados_20230713/","CONSUMO_ALIMENTAR.txt") 
            , widths = c(2,4,1,9,2,1,2,2,2,4,2,7,3,
                         2,1,1,1,1,1,1,1,1,1,1,1,1,
                         1,1,2,2,7,9,6,14,14,14,14,
@@ -387,5 +387,5 @@ CONSUMO_ALIMENTAR <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(CONSUMO_ALIMENTAR,paste0(pathdir,"2017_2018/Dados_20230713/","CONSUMO_ALIMENTAR.rds"))
+saveRDS(CONSUMO_ALIMENTAR,paste0(pathdir,"2017-2018/Dados_20230713/","CONSUMO_ALIMENTAR.rds"))
 rm(CONSUMO_ALIMENTAR)
