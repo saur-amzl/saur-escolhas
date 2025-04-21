@@ -64,3 +64,71 @@ processar_aquisicao <- function(tb_aux, tabela_estratos, base_pessoas, padrao_fi
   
   return(tab_aquisicao)
 }
+
+
+
+
+processar_aquisicao_gastos <- function(tb_aux, tabela_estratos, base_uc, padrao_filtro,agregar_por_estrato) {
+  
+  # Filtra os estratos conforme o padrão informado
+  estratos_filtrados <- unique(tabela_estratos$descricao_estrato[grep(padrao_filtro, tabela_estratos$descricao_estrato)])
+  
+  # Filtra os dados corretamente
+  tab_aquisicao_aux <- tb_aux %>%
+    right_join(tabela_estratos %>% filter(descricao_estrato %in% estratos_filtrados), by = c("UF", "ESTRATO_POF"))
+  
+  tab_uc_aux <- base_uc %>%
+    right_join(tabela_estratos %>% filter(descricao_estrato %in% estratos_filtrados), by = c("UF", "ESTRATO_POF"))
+  
+  # Função auxiliar para calcular soma dos níveis
+  calcular_soma_nivel <- function(df, coluna, indicador,agregar_por_estrato) {
+    
+    if (agregar_por_estrato){
+      df %>%
+        group_by(descricao_estrato, !!sym(coluna)) %>%
+        summarise(valor_total = sum(valor_mensal, na.rm = TRUE), .groups = "drop") %>%
+        rename(descricao = !!sym(coluna)) %>%
+        mutate(descricao = as.character(descricao),
+               indicador_nivel = indicador)
+    } else{   
+      df %>%
+        group_by(!!sym(coluna)) %>%
+        summarise(valor_total = sum(valor_mensal, na.rm = TRUE), .groups = "drop") %>%
+        rename(descricao = !!sym(coluna)) %>%
+        mutate(descricao = as.character(descricao),
+               indicador_nivel = indicador) } 
+    
+  }
+  
+  # Aplicando a função para cada nível
+  soma_nivel_1 <- calcular_soma_nivel(tab_aquisicao_aux, "class_final", "classes_nova",agregar_por_estrato)
+  soma_nivel_2 <- calcular_soma_nivel(tab_aquisicao_aux, "class_analisegeral_final", "alimentos_decreto",agregar_por_estrato)
+  soma_nivel_3 <- calcular_soma_nivel(tab_aquisicao_aux, "item_regional", "alimentos_regionais",agregar_por_estrato)
+  soma_nivel_4 <- calcular_soma_nivel(tab_aquisicao_aux, "class_analisegeral_final_bebidas", "alimentos_decreto_bebidas",agregar_por_estrato)
+  
+  # Unindo todas as tabelas
+  soma_niveis <- bind_rows(soma_nivel_1, soma_nivel_2, soma_nivel_3, soma_nivel_4)
+  
+  # Soma de indivíduos
+  if (agregar_por_estrato){
+    soma_uc <- tab_uc_aux %>% 
+      group_by(descricao_estrato)  %>% 
+      summarise(soma_uc = sum(PESO_FINAL, na.rm = TRUE))
+    
+    # Mesclando os resultados
+    tab_aquisicao <- merge(soma_niveis, soma_uc, by = "descricao_estrato", all.x = TRUE)
+  } else {
+    soma_uc <- tab_uc_aux %>% 
+      summarise(soma_uc = sum(PESO_FINAL, na.rm = TRUE))
+    
+    # Mesclando os resultados
+    tab_aquisicao <- merge(soma_niveis, soma_uc, all.x = TRUE)
+  }
+  
+  # Criando variável per capita
+  tab_aquisicao <- tab_aquisicao %>%
+    mutate(gasto_mensal_familiar = round(valor_total / soma_uc, 2))
+  
+  return(tab_aquisicao)
+}
+
