@@ -25,6 +25,8 @@ source("consumo-de-alimentos/set_estrato.R")
 base_aquisicao_alimentar_2008 <- read.csv(paste0(outdir,"tabela_base_alimentacao_pof0809_10marco2025.csv"),sep = ";")
 base_uc_2008 <- read.csv(paste0(outdir,"tabela_base_uc_pof0809_10marco2025.csv"),sep = ";")
 
+base_uc_2008 <- base_uc_2008 %>% rename(UF = COD_UF) 
+
 #2017-2018
 base_aquisicao_alimentar_2018 <- read.csv(paste0(outdir,"tabela_base_alimentacao_pof1718_10marco2025.csv"),sep = ";")
 base_uc_2018 <- read.csv(paste0(outdir,"tabela_base_uc_pof1718_10marco2025.csv"),sep = ";")
