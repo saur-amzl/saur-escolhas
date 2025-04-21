@@ -12,7 +12,7 @@ Nesta pasta estão disponíveis os arquivos de dicionário e mapeamento utilizad
 - CNAE
 	- dicio_cnae_descricao
 
-## Dicionários
+## Mapeamentos
 	- mapeamento_produtos_aquisicao_v16fevereiro25_limpo.xlsx
 	- mapeamento_produtos_aquisicao_v16fevereiro25.xlsx
 	- mapeamento_local_pof_rais_7marco2025.xlsx
