@@ -1,4 +1,4 @@
-## Script original disponibilizado juntamente com os microdados da POF 2007-2008
+## Script original disponibilizado juntamente com os microdados da POF 2008-2009
 
 # Limpa área de trabalho
 rm(list=ls())
@@ -12,13 +12,13 @@ p_load(dplyr, data.table, ggplot2, sf, googledrive, tidyr,RColorBrewer,readxl)
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
+pathdir <- paste(path, "data/raw/", sep = "/")
 
 # Etapa 1: Transformar os dados .txr em rds. Script original dispo --------
 # nível na pasta Leitura dos dados da POF
 # REGISTRO: DOMICÕLIO - POF1 / QUADRO 2 (TIPO_REG=01)
 DOMICILIO <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_DOMICILIO_S.txt") 
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_DOMICILIO_S.txt") 
            , widths = c(2,2,3,1,2,2,14,14,4,4,2,2,2,2,2,2,2,2,2,
                         2,2,2,2,2,2,2,1,1,1,16,16,16,1,1,1,1,1,1,
                         1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -40,12 +40,12 @@ DOMICILIO <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(DOMICILIO,paste0(pathdir,"2007-2008/Dados_20231009/","DOMICILIO.rds"))
+saveRDS(DOMICILIO,paste0(pathdir,"2008-2009/Dados_20231009/","DOMICILIO.rds"))
 rm(DOMICILIO)
 
 # REGISTRO: PESSOAS - POF1 / QUADROS 3 E 4 (TIPO_REG = 02) */
 MORADOR <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_MORADOR_S.txt")
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_MORADOR_S.txt")
            , widths = c(2,2,3,1,2,1,2,2,14,14,2,2,2,2,2,2,
                         4,3,6,7,2,2,2,2,2,2,2,2,2,2,2,2,2,
                         2,2,2,2,2,16,16,16,2,5,5,5,5,5,5,5,
@@ -71,12 +71,12 @@ MORADOR <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(MORADOR,paste0(pathdir,"2007-2008/Dados_20231009/","MORADOR.rds"))
+saveRDS(MORADOR,paste0(pathdir,"2008-2009/Dados_20231009/","MORADOR.rds"))
 rm(MORADOR)
 
 # REGISTRO: PESSOAS - IMPUTA«√O - POF1 / QUADRO 4 (TIPO_REG = 03)
 MORADOR_IMPUT <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_MORADOR_IMPUT_S.txt") 
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_MORADOR_IMPUT_S.txt") 
            , widths = c(2,2,3,1,2,1,2,2,14,14,1,1,1,1,1,1,
                         1,1,1,1,1,1,1,16,16,16,1,1,1,1,1)
            , na.strings=c(" ")
@@ -94,12 +94,12 @@ MORADOR_IMPUT <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(MORADOR_IMPUT,paste0(pathdir,"2007-2008/Dados_20231009/","MORADOR_IMPUT.rds"))
+saveRDS(MORADOR_IMPUT,paste0(pathdir,"2008-2009/Dados_20231009/","MORADOR_IMPUT.rds"))
 rm(MORADOR_IMPUT)
 
 # REGISTRO: CONDI«’ES DE VIDA - POF6 (TIPO_REG = 04)
 CONDICOES_VIDA <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_CONDICOES_DE_VIDA_S.txt")
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_CONDICOES_DE_VIDA_S.txt")
            , widths = c(2,2,3,1,2,1,2,2,14,14,1,1,1,16,16,16,11,11,
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                         1,1,1,6,1)
@@ -116,12 +116,12 @@ CONDICOES_VIDA <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(CONDICOES_VIDA,paste0(pathdir,"2007-2008/Dados_20231009/","CONDICOES_VIDA.rds"))
+saveRDS(CONDICOES_VIDA,paste0(pathdir,"2008-2009/Dados_20231009/","CONDICOES_VIDA.rds"))
 rm(CONDICOES_VIDA)
 
 # REGISTRO: INVENT¡RIO DE BENS DUR¡VEIS - POF2 / QUADRO 14 (TIPO_REG = 05)
 INVENTARIO <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_INVENTARIO_S.txt") 
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_INVENTARIO_S.txt") 
            , widths = c(2,2,3,1,2,1,2,14,14,2,5,2,4,1,
                         2,2,16,16,16,7,3,6,1)
            , na.strings=c(" ")
@@ -134,12 +134,12 @@ INVENTARIO <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(INVENTARIO,paste0(pathdir,"2007-2008/Dados_20231009/","INVENTARIO.rds"))
+saveRDS(INVENTARIO,paste0(pathdir,"2008-2009/Dados_20231009/","INVENTARIO.rds"))
 rm(INVENTARIO)
 
 # REGISTRO: DESPESA DE 90 DIAS - POF2 / QUADROS 6 A 9 (TIPO_REG = 06)
 DESPESA_90DIAS <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_DESPESA_90DIAS_S.txt")
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_DESPESA_90DIAS_S.txt")
            , widths = c( 2,2,3,1,2,1,2,14,14,2,5,2,11,2,5,11,16,
                          2,16,16,16,4,5,5,14,2,5,7,3,6,1)
            , na.strings=c(" ")
@@ -154,12 +154,12 @@ DESPESA_90DIAS <-
   )
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(DESPESA_90DIAS,paste0(pathdir,"2007-2008/Dados_20231009/","DESPESA_90DIAS.rds"))
+saveRDS(DESPESA_90DIAS,paste0(pathdir,"2008-2009/Dados_20231009/","DESPESA_90DIAS.rds"))
 rm(DESPESA_90DIAS)
 
 # REGISTRO: DESPESA DE 12 MESES - POF2 / QUADROS 10 A 13 (TIPO_REG = 07)
 DESPESA_12MESES <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_DESPESA_12MESES_S.txt")
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_DESPESA_12MESES_S.txt")
            , widths = c( 2,2,3,1,2,1,2,14,14,2,5,2,11,2,2,2,5,
                          11,16,2,16,16,16,5,7,3,6,1)
            , na.strings=c(" ")
@@ -173,12 +173,12 @@ DESPESA_12MESES <-
   )
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(DESPESA_12MESES,paste0(pathdir,"2007-2008/Dados_20231009/","DESPESA_12MESES.rds"))
+saveRDS(DESPESA_12MESES,paste0(pathdir,"2008-2009/Dados_20231009/","DESPESA_12MESES.rds"))
 rm(DESPESA_12MESES)
 
 # REGISTRO: OUTRAS DESPESAS - POF2 / QUADROS 15 A 18 (TIPO_REG = 08)
 OUTRAS_DESPESAS <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_OUTRAS_DESPESAS_S.txt")
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_OUTRAS_DESPESAS_S.txt")
            , widths = c( 2,2,3,1,2,1,2,14,14,2,5,2,11,1,2,5,
                          11,16,2,16,16,16,5,7,3,6,1)
            , na.strings=c(" ")
@@ -192,12 +192,12 @@ OUTRAS_DESPESAS <-
   )
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(OUTRAS_DESPESAS,paste0(pathdir,"2007-2008/Dados_20231009/","OUTRAS_DESPESAS.rds"))
+saveRDS(OUTRAS_DESPESAS,paste0(pathdir,"2008-2009/Dados_20231009/","OUTRAS_DESPESAS.rds"))
 rm(OUTRAS_DESPESAS)
 
 # REGISTRO: DESPESA COM SERVI«OS DOM…STICOS - POF2 / QUADRO 19 (TIPO_REG = 09)
 SERVICO_DOMS <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_SERVICO_DOMS_S.txt") 
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_SERVICO_DOMS_S.txt") 
            , widths = c(2,2,3,1,2,1,2,14,14,2,5,2,11,5,11,
                         1,2,2,2,5,11,11,16,16,2,2,16,16,16,
                         7,3,6,1)
@@ -214,13 +214,13 @@ SERVICO_DOMS <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(SERVICO_DOMS,paste0(pathdir,"2007-2008/Dados_20231009/","SERVICO_DOMS.rds"))
+saveRDS(SERVICO_DOMS,paste0(pathdir,"2008-2009/Dados_20231009/","SERVICO_DOMS.rds"))
 rm(SERVICO_DOMS)
 
 
 # REGISTRO: ALUGUEL ESTIMADO - POF1 / QUADRO 2 (TIPO_REG = 10)
 ALUGUEL_ESTIMADO <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_ALUGUEL_ESTIMADO_S.txt")
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_ALUGUEL_ESTIMADO_S.txt")
            , widths = c(2,2,3,1,2,1,2,14,14,2,5,2,11,
                         2,2,2,5,11,16,2,16,16,16,7,6,1)
            , na.strings=c(" ")
@@ -234,12 +234,12 @@ ALUGUEL_ESTIMADO <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(ALUGUEL_ESTIMADO,paste0(pathdir,"2007-2008/Dados_20231009/","ALUGUEL_ESTIMADO.rds"))
+saveRDS(ALUGUEL_ESTIMADO,paste0(pathdir,"2008-2009/Dados_20231009/","ALUGUEL_ESTIMADO.rds"))
 rm(ALUGUEL_ESTIMADO)
 
 # REGISTRO: CADERNETA DE DESPESA - POF3 (TIPO_REG = 11)
 CADERNETA_COLETIVA <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_CADERNETA_DESPESA_S.txt") 
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_CADERNETA_DESPESA_S.txt") 
            , widths = c(2,2,3,1,2,1,2,14,14,2,2,5,2,11,2,5,
                         11,16,2,16,16,16,2,8,5,10,5,5,7,3,6,1)
            , na.strings=c(" ")
@@ -254,12 +254,12 @@ CADERNETA_COLETIVA <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(CADERNETA_COLETIVA,paste0(pathdir,"2007-2008/Dados_20231009/","CADERNETA_COLETIVA.rds"))
+saveRDS(CADERNETA_COLETIVA,paste0(pathdir,"2008-2009/Dados_20231009/","CADERNETA_COLETIVA.rds"))
 rm(CADERNETA_COLETIVA)
 
 # REGISTRO: DESPESA INDIVIDUAL - POF4 / QUADROS 22 A 50 (TIPO_REG = 12)
 DESPESA_INDIVIDUAL <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_DESPESA_INDIVIDUAL_S.txt") 
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_DESPESA_INDIVIDUAL_S.txt") 
            , widths = c(2,2,3,1,2,1,2,2,14,14,2,5,2,11,2,5,11,16,
                         2,16,16,16,2,5,2,2,7,3,6,1)
            , na.strings=c(" ")
@@ -274,12 +274,12 @@ DESPESA_INDIVIDUAL <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(DESPESA_INDIVIDUAL,paste0(pathdir,"2007-2008/Dados_20231009/","DESPESA_INDIVIDUAL.rds"))
+saveRDS(DESPESA_INDIVIDUAL,paste0(pathdir,"2008-2009/Dados_20231009/","DESPESA_INDIVIDUAL.rds"))
 rm(DESPESA_INDIVIDUAL)
 
 # REGISTROS: DESPESA COM VEÕCULOS - POF4 / QUADRO 51 (TIPO_REG = 13)
 DESPESA_VEICULO <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_DESPESA_VEICULO_S.txt")
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_DESPESA_VEICULO_S.txt")
            , widths = c(2,2,3,1,2,1,2,2,14,14,2,5,2,11,
                         1,2,5,11,16,2,16,16,16,5,7,3,6,1)
            , na.strings=c(" ")
@@ -294,12 +294,12 @@ DESPESA_VEICULO <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(DESPESA_VEICULO,paste0(pathdir,"2007-2008/Dados_20231009/","DESPESA_VEICULO.rds"))
+saveRDS(DESPESA_VEICULO,paste0(pathdir,"2008-2009/Dados_20231009/","DESPESA_VEICULO.rds"))
 rm(DESPESA_VEICULO)
 
 # REGISTROS: RENDIMENTOS E DEDU«’ES - POF5 / QUADRO 53 (TIPO_REG = 14)
 RENDIMENTO_TRABALHO <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_RENDIMENTOS_S.txt")
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_RENDIMENTOS_S.txt")
            , widths = c(2,2,3,1,2,1,2,2,14,14,2,1,2,1,5,11,
                         2,2,1,5,11,5,11,5,11,2,5,11,11,11,
                         11,16,16,16,16,2,16,16,16,3,8,8,2,7,
@@ -321,12 +321,12 @@ RENDIMENTO_TRABALHO <-
   )
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(RENDIMENTO_TRABALHO,paste0(pathdir,"2007-2008/Dados_20231009/","RENDIMENTO_TRABALHO.rds"))
+saveRDS(RENDIMENTO_TRABALHO,paste0(pathdir,"2008-2009/Dados_20231009/","RENDIMENTO_TRABALHO.rds"))
 rm(RENDIMENTO_TRABALHO)
 
 # REGISTROS: OUTROS RENDIMENTOS - POF5 / QUADROS 54 A 57 (TIPO_REG = 15)
 OUTROS_RENDIMENTOS <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_OUTROS_RECI_S.txt")
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_OUTROS_RECI_S.txt")
            , widths = c(2,2,3,1,2,1,2,2,14,14,2,5,11,11,
                         5,2,2,2,5,11,11,16,16,2,16,16,16,
                         7,3,6,1)
@@ -342,12 +342,12 @@ OUTROS_RENDIMENTOS <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(OUTROS_RENDIMENTOS,paste0(pathdir,"2007-2008/Dados_20231009/","OUTROS_RENDIMENTOS.rds"))
+saveRDS(OUTROS_RENDIMENTOS,paste0(pathdir,"2008-2009/Dados_20231009/","OUTROS_RENDIMENTOS.rds"))
 rm(OUTROS_RENDIMENTOS)
 
 # REGISTRO: CONSUMO ALIMENTAR - POF7 / QUADROS 71 E 72 (TIPO_REG = 16)
 CONSUMO_ALIMENTAR <- 
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_CONSUMO_S.txt")
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_CONSUMO_S.txt")
            , widths = c(2,2,3,1,2,1,2,2,15,15,2,1,2,8,5,
                         7,2,1,8,1,16,16,16,5,8,8,1)
            , na.strings=c(" ")
@@ -363,12 +363,12 @@ CONSUMO_ALIMENTAR <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(CONSUMO_ALIMENTAR,paste0(pathdir,"2007-2008/Dados_20231009/","CONSUMO_ALIMENTAR.rds"))
+saveRDS(CONSUMO_ALIMENTAR,paste0(pathdir,"2008-2009/Dados_20231009/","CONSUMO_ALIMENTAR.rds"))
 rm(CONSUMO_ALIMENTAR)
 
 # REGISTRO - MORADOR / QUALIDADE DE VIDA (TIPO_REG = 17)
 MORADOR_QUALI_VIDA <-
-  read.fwf(paste0(pathdir,"2007-2008/Dados_20231009/","T_MORADOR_QUALI_VIDA_S.txt") 
+  read.fwf(paste0(pathdir,"2008-2009/Dados_20231009/","T_MORADOR_QUALI_VIDA_S.txt") 
            , widths = c(2,2,2,1,6,2,1,2,20,20,1,1,1,1,1,
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
                         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -390,6 +390,6 @@ MORADOR_QUALI_VIDA <-
   )   
 
 # Armazena no HD local arquivo serializado para leituras futuras
-saveRDS(MORADOR_QUALI_VIDA,paste0(pathdir,"2007-2008/Dados_20231009/","MORADOR_QUALI_VIDA.rds"))
+saveRDS(MORADOR_QUALI_VIDA,paste0(pathdir,"2008-2009/Dados_20231009/","MORADOR_QUALI_VIDA.rds"))
 rm(MORADOR_QUALI_VIDA)
 

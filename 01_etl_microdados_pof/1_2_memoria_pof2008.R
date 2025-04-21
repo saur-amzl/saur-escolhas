@@ -14,8 +14,8 @@ p_load(dplyr, data.table, ggplot2, sf, googledrive, tidyr,RColorBrewer,readxl)
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
-outdir <-  paste(path, "data/outputs/", sep = "/")
+pathdir <- paste(path, "data/raw/", sep = "/")
+intdir <-  paste(path, "data/intermediate/", sep = "/")
 
 # Tabela de Alimentação ---------------------------------------------------
 #  Leitura do REGISTRO - CADERNETA COLETIVA (Questionario POF 3)
@@ -139,11 +139,11 @@ morador_pessoas <-
 
 
 # Salva o dado 
-write.table(junta_ali, paste(outdir,"tabela_base_alimentacao_pof0809_10marco2025.csv", sep = ""),
+write.table(junta_ali, paste(intdir,"tabela_base_alimentacao_pof0809_10marco2025.csv", sep = ""),
             row.names = F, sep = ";")
 
-write.table(morador_uc, paste(outdir,"tabela_base_uc_pof0809_10marco2025.csv", sep = ""),
+write.table(morador_uc, paste(intdir,"tabela_base_uc_pof0809_10marco2025.csv", sep = ""),
             row.names = F, sep = ";")
 
-write.table(morador_pessoas, paste(outdir,"tabela_base_pessoas_pof0809_10marco2025.csv", sep = ""),
+write.table(morador_pessoas, paste(intdir,"tabela_base_pessoas_pof0809_10marco2025.csv", sep = ""),
             row.names = F, sep = ";")

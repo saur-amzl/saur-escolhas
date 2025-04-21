@@ -13,7 +13,7 @@ p_load(dplyr, data.table, ggplot2, sf, googledrive, tidyr,RColorBrewer,readxl)
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
+pathdir <- paste(path, "data/raw/", sep = "/")
 
 # Etapa 1: Transformar os dados .txr em rds. Script original dispo --------
 # nível na pasta Leitura dos dados da POF
