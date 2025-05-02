@@ -1,3 +1,10 @@
+#!/bin/bash
+
+# Define os caminhos de entrada e saída
+INPUT_DIR="/Users/marlucescarabello/Dropbox/Work/gtworkspace_outros/saur-escolhas/data/raw"
+OUTPUT_DIR="/Users/marlucescarabello/Dropbox/Work/gtworkspace_outros/saur-escolhas/data/intermediate"
+ROOT_DIR="/Users/marlucescarabello/Dropbox/Work/gtworkspace_outros/saur-escolhas/data"
+
  
 gdal_rasterize \
    -a_nodata 0 \
