@@ -4,7 +4,7 @@ Este repositório contém scripts para o **ETL (Extract, Transform, Load — Ext
 
 ---
 
-### 📥 Download dos dados
+### Download dos dados
 
 Para executar os scripts deste repositório, é necessário realizar o download manual dos microdados da POF diretamente dos links abaixo:
 
@@ -19,7 +19,7 @@ Essa estrutura é necessária para que os scripts de leitura e transformação f
 
 ---
 
-### 🗂️ Scripts disponíveis
+### Scripts disponíveis
 
 Os scripts estão organizados por ano e por etapa de processamento:
 
