@@ -15,6 +15,11 @@ outdir <-  paste(path, "data/outputs/", sep = "/")
 inputdir <-  paste(path, "data/inputs", sep = "/")
 dicdir <-  paste(path, "data/dic_map/", sep = "/")
 
+pathdir <- paste(path, "data/raw/", sep = "/")
+dicdir <-  paste(path, "data/dic_map/", sep = "/")
+intdir <-  paste(path, "data/intermediate/", sep = "/")
+outdir <-  paste(path, "data/outputs/", sep = "/")
+
 uf_map <- c(
   "11" = "RO", "12" = "AC", "13" = "AM", "14" = "RR",
   "15" = "PA", "16" = "AP", "17" = "TO", "21" = "MA",
@@ -72,7 +77,7 @@ input_mapa <- aux_mapa %>%
 input_mapa_wide <- input_mapa %>%
   pivot_wider(names_from = classe, values_from = est_total, values_fill = list(est_total = 0))
 
-write.table(input_mapa_wide, paste0(outdir,"/input_mapa_numest_classificados_19marco2025v2.csv", sep = ""),row.names = F, sep = ";")
+write.table(input_mapa_wide, paste0(outdir,"/input_mapa_numest_classificados_19marco2025.csv", sep = ""),row.names = F, sep = ";")
 
 percentis <- input_mapa %>%
   group_by(classe) %>%
