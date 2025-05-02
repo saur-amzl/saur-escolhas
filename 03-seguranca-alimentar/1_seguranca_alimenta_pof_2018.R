@@ -15,7 +15,6 @@ path <- getwd()
 
 #Indica o caminho dos dados
 pathdir <- paste(path, "data/raw/", sep = "/")
-inputdir <- paste(path, "data/inputs/", sep = "/")
 outdir <- paste(path, "data/outputs/", sep = "/")
 
 # Etapa 1: Leitura dos dados ----------------------------------------------------
