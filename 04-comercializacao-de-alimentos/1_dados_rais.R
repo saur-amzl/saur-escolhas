@@ -1,3 +1,6 @@
+# ------------------------------------------------------------------------------
+# Script para processar os dados da RAIS
+# ------------------------------------------------------------------------------
 
 # Limpa área de trabalho
 rm(list=ls())
@@ -11,14 +14,14 @@ p_load(dplyr, data.table, ggplot2, sf, googledrive, tidyr,RColorBrewer,readxl)
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
+pathdir <- paste(path, "data/raw/", sep = "/")
 outdir <-  paste(path, "data/outputs", sep = "/")
 dicdir <-  paste(path, "data/dic_map/", sep = "/")
 
 
 ## Etapa 1: Leitura dos dados da RAIS e ajustes iniciais no dado ----------------------
 
-rais <- read.table(paste0(pathdir, "RAIS/2023/RAIS_ESTAB_PUB.txt"), sep=";", header=TRUE, stringsAsFactors=FALSE, fileEncoding="latin1")
+rais <- read.table(paste0(pathdir, "RAIS/RAIS_ESTAB_PUB.txt"), sep=";", header=TRUE, stringsAsFactors=FALSE, fileEncoding="latin1")
 
 cnae_descricao <- readxl::read_excel(paste0(dicdir,"/dicio_cnae_descricao.xlsx"),sheet = 'Sheet1', range = "A1:D22")
 cnae_descricao <- cnae_descricao %>% filter(cnae_subclasse>1) %>% mutate(cnae_subclasse = as.integer(cnae_subclasse))
@@ -49,7 +52,7 @@ confere <- rais_cnae %>% group_by(`CNAE.2.0.Subclasse`) %>%
             qtidade_vinculos_clt = sum(`Qtd.Vínculos.CLT`,na.rm = TRUE),
             qtidade_vinculos_ativos = sum(`Qtd.Vínculos.Ativos`,na.rm = TRUE))
 
-confere <- rais22 %>% filter(`Município` == 130090) %>% 
+confere <- rais %>% filter(`Município` == 130090) %>% 
   dplyr::filter(`CNAE.2.0.Subclasse` %in% cnae_descricao$cnae_subclasse) %>% 
   dplyr::filter(Ind.Rais.Negativa == 0 | (Ind.Rais.Negativa ==1 & Qtd.Vínculos.Ativos >0))
 confere1 <- rais %>% filter(`Município` == 130090) %>% 
@@ -62,7 +65,9 @@ confere2 <- rais %>%
   dplyr::filter((`Ind.Atividade.Ano` == 1.0)) 
 
 
-## Etapa 2:  ------------------
+## Etapa 2: Filtra os dados ----------------------------------------------------
+# Seleciona os dados com os cnaes de interessse, de empresas ativas, dos estados
+# de interesse
 rais_cnae <- rais %>% 
   dplyr::filter(`CNAE.2.0.Subclasse` %in% cnae_descricao$cnae_subclasse) %>%
   dplyr::filter((`Ind.Atividade.Ano` == 1.0)) %>%
@@ -82,7 +87,7 @@ rais_cnae_mun <- rais_cnae %>%
   left_join(all_rm_ri, by = c("Municipio"="cd_mun6")) %>%
   left_join(cnae_descricao, by = c(`CNAE.2.0.Subclasse`="cnae_subclasse"))
 
-
+## Etapa 3: Sumarização dos dados ----------------------------------------------
 sumarizacao_rais_municipios <- rais_cnae_mun %>% 
   group_by(sigla_uf,nm_rm,cd_mun,nm_mun,`CNAE.2.0.Subclasse`,descricao_cnae_subclasse) %>%
   summarise(num_estb=n(),
@@ -98,6 +103,7 @@ sumarizacao_rais_estados <- rais_cnae_es %>%
 
 
 
+# Etapa 4: Salva os dados ---------------------------------------------------------
 # Criar um arquivo Excel
 wb <- createWorkbook()
 
