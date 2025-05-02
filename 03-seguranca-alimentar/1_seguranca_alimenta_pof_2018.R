@@ -15,7 +15,8 @@ path <- getwd()
 
 #Indica o caminho dos dados
 pathdir <- paste(path, "data/raw/", sep = "/")
-outdir <- paste(path, "data/outputs/", sep = "/")
+intdir <-  paste(path, "data/intermediate/", sep = "/")
+
 
 # Etapa 1: Leitura dos dados ----------------------------------------------------
 dom_pof_2018 <- readRDS(paste0(pathdir,"2017-2018/Dados_20230713/DOMICILIO.rds"))
@@ -120,5 +121,5 @@ pof_2018_completo <- pof_2018_completo %>%
 head(pof_2018_completo)
 
 
-write.table(pof_2018_completo, paste(outdir,"tabela_seguranca_alimentar_pof_2018_26marco2025.csv", sep = ""),row.names = F, sep = ";")
+write.table(pof_2018_completo, paste(intdir,"tabela_seguranca_alimentar_pof_2018_26marco2025.csv", sep = ""),row.names = F, sep = ";")
 
