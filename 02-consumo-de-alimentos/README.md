@@ -1,16 +1,16 @@
-# 📊 Consumo de Alimentos
+# Consumo de Alimentos
 
 Este repositório contém os scripts responsáveis por gerar as tabelas utilizadas nos resultados da sessão de **Consumo de Alimentos** deste estudo. Os dados processados aqui têm como base os microdados da Pesquisa de Orçamentos Familiares (POF), previamente tratados.
 
 ---
 
-### ✅ Pré-requisitos
+### Pré-requisitos
 
 Antes de executar os scripts desta pasta, certifique-se de que os scripts da pasta `01-etl-microdados-pof` já foram executados, pois os dados gerados naquela etapa são insumo direto para os procedimentos aqui descritos.
 
 ---
 
-### 🗂️ Scripts disponíveis
+### Scripts disponíveis
 
 Os scripts estão organizados por tema e escopo geográfico:
 
