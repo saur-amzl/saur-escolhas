@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# Script que gera 
+# ------------------------------------------------------------------------------
+
 # Pacotes necessários
 library(dplyr)
 library(tidyr)
@@ -63,4 +67,4 @@ gf <- ggplot(dados_long, aes(x = estado, y = cnae_label, fill = categoria)) +
     axis.text.y = element_text(size = 12)
   )
 
-ggsave("grafico_cnae_estado.png", gf, width = 12, height = 8, dpi = 300)
+ggsave("grafico_cnae_estado2.png", gf, width = 12, height = 8, dpi = 300)
