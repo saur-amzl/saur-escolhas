@@ -20,7 +20,6 @@ library(ggplot2)
 path <- getwd()
 
 #Indica o caminho dos dados
-dicdir <-  paste(path, "data/dic_map/", sep = "/")
 intdir <-  paste(path, "data/intermediate/", sep = "/")
 outdir <- paste(path, "data/outputs/", sep = "/")
 
