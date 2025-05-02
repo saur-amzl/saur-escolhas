@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# 
+# Script para calcular segurando alimentar da PNAD 2013
 # ------------------------------------------------------------------------------
 # Limpa área de trabalho
 rm(list=ls())
@@ -17,13 +17,13 @@ library(tidyr)
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
-inputdir <- paste(path, "data/inputs/", sep = "/")
+pathdir <- paste(path, "data/raw/", sep = "/")
+dicdir <-  paste(path, "data/dic_map/", sep = "/")
 outdir <- paste(path, "data/outputs/", sep = "/")
 
 # Etapa 1: Leitura dos dados ----------------------------------------------------
 dicio_dom <-
-  readxl::read_excel(paste0(inputdir,"dicio_pnad_dom_2013.xlsx"),sheet = 'diciopnad2013', range = "A1:E100")
+  readxl::read_excel(paste0(dicdir,"dicio_pnad_dom_2013.xlsx"),sheet = 'diciopnad2013', range = "A1:E100")
 
 # Criar coluna de fim de posição
 dicio_dom <- dicio_dom %>% mutate(end = posicao_inicial + tamanho - 1)
@@ -33,6 +33,7 @@ col_specs <- fwf_positions(start = dicio_dom$posicao_inicial,
                            end = dicio_dom$end, 
                            col_names = dicio_dom$codigo)
 
+unzip(paste0(pathdir,"PNAD/2013/Dados_20170807.zip"),exdir = paste0(pathdir,"PNAD/2013/"))
 pnad_2013 <- read_fwf(paste0(pathdir,"PNAD/2013/Dados/DOM2013.txt"), 
                       col_positions = col_specs, 
                       col_types = cols(.default = "c"))
