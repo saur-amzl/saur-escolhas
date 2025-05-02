@@ -1,4 +1,4 @@
-# 📊 Segurança Alimentar
+# Segurança Alimentar
 
 Este repositório contém os scripts responsáveis por gerar as tabelas utilizadas nos resultados da sessão de **Consumo de Alimentos**, com foco específico na **segurança alimentar**. Os dados processados aqui têm como base:
 
@@ -8,13 +8,13 @@ Este repositório contém os scripts responsáveis por gerar as tabelas utilizad
 
 ---
 
-### ✅ Pré-requisitos
+### Pré-requisitos
 
 Antes de executar os scripts desta pasta, é necessário que os scripts da pasta `01-etl-microdados-pof` tenham sido executados previamente, pois seus outputs são utilizados nesta etapa.
 
 ---
 
-### 📥 Download dos dados
+### Download dos dados
 
 Os microdados da PNAD e da PNAD Contínua devem ser baixados manualmente a partir dos links abaixo:
 
@@ -34,7 +34,7 @@ Essa estrutura é essencial para que os scripts de leitura e transformação fun
 
 ---
 
-### 🗂️ Scripts disponíveis
+###  Scripts disponíveis
 
 Os scripts estão organizados cronologicamente pelas edições da pesquisa:
 
