@@ -14,13 +14,13 @@ library(tidyr)
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
+pathdir <- paste(path, "data/raw/", sep = "/")
 inputdir <- paste(path, "data/inputs/", sep = "/")
 outdir <- paste(path, "data/outputs/", sep = "/")
 
 # Etapa 1: Leitura dos dados ----------------------------------------------------
-dom_pof_2018 <- readRDS(paste0(pathdir,"2017_2018/Dados_20230713/DOMICILIO.rds"))
-morador_pof_2018 <- readRDS(paste0(pathdir,"2017_2018/Dados_20230713/MORADOR.rds"))
+dom_pof_2018 <- readRDS(paste0(pathdir,"2017-2018/Dados_20230713/DOMICILIO.rds"))
+morador_pof_2018 <- readRDS(paste0(pathdir,"2017-2018/Dados_20230713/MORADOR.rds"))
 
 dom_pof_2018 <- dom_pof_2018 %>%
   mutate(seguranca_alimentar = case_when(
