@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# Script para calcular segurando alimentar da PNAD 2004
+# ------------------------------------------------------------------------------
+
 # Limpa área de trabalho
 rm(list=ls())
 
@@ -14,13 +18,14 @@ library(tidyr)
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
-inputdir <- paste(path, "data/inputs/", sep = "/")
-outdir <- paste(path, "data/outputs/", sep = "/")
+pathdir <- paste(path, "data/raw/", sep = "/")
+dicdir <-  paste(path, "data/dic_map/", sep = "/")
+intdir <-  paste(path, "data/intermediate/", sep = "/")
+
 
 # Etapa 1: Leitura dos dados ----------------------------------------------------
 dicio_dom <-
-  readxl::read_excel(paste0(inputdir,"dicio_pnad_dom_2004.xlsx"),sheet = 'diciopnad2004', range = "A1:E120")
+  readxl::read_excel(paste0(dicdir,"dicio_pnad_dom_2004.xlsx"),sheet = 'diciopnad2004', range = "A1:E120")
 colnames(dicio_dom)
 
 # Criar coluna de fim de posição
@@ -106,4 +111,4 @@ pnad_2004_completo <- pnad_2004_completo %>%
 head(pnad_2004_completo)
 
 
-write.table(pnad_2004_completo, paste(outdir,"tabela_seguranca_alimentar_pnad_2004_26marco2025.csv", sep = ""),row.names = F, sep = ";")
+write.table(pnad_2004_completo, paste(intdir,"tabela_seguranca_alimentar_pnad_2004_26marco2025.csv", sep = ""),row.names = F, sep = ";")
