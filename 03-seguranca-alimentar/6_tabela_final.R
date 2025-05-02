@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# 
+# Script para unir os resultados de Segurança alimentar de todos os anos (2004, 2009, 2013, 2018, 2023)
 # ------------------------------------------------------------------------------
 # Limpa área de trabalho
 rm(list=ls())
@@ -16,23 +16,20 @@ library(tidyr)
 library(openxlsx)
 library(ggplot2)
 
-
-
-
 # Armazena o caminho da pasta do Projeto
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
-inputdir <- paste(path, "data/inputs/", sep = "/")
+dicdir <-  paste(path, "data/dic_map/", sep = "/")
+intdir <-  paste(path, "data/intermediate/", sep = "/")
 outdir <- paste(path, "data/outputs/", sep = "/")
 
 # Etapa 1: Leitura dos dados ----------------------------------------------------
-pnad_2004 <- read.csv(paste0(outdir,"tabela_seguranca_alimentar_pnad_2004_26marco2025.csv"),sep = ";")
-pnad_2009 <- read.csv(paste0(outdir,"tabela_seguranca_alimentar_pnad_2009_26marco2025.csv"),sep = ";")
-pnad_2013 <- read.csv(paste0(outdir,"tabela_seguranca_alimentar_pnad_2013_26marco2025.csv"),sep = ";")
-pof_2018 <- read.csv(paste0(outdir,"tabela_seguranca_alimentar_pof_2018_26marco2025.csv"),sep = ";")
-pnadc_2023 <- read.csv(paste0(outdir,"tabela_seguranca_alimentar_pnadc_2023_26marco2025.csv"),sep = ";")
+pnad_2004 <- read.csv(paste0(intdir,"tabela_seguranca_alimentar_pnad_2004_26marco2025.csv"),sep = ";")
+pnad_2009 <- read.csv(paste0(intdir,"tabela_seguranca_alimentar_pnad_2009_26marco2025.csv"),sep = ";")
+pnad_2013 <- read.csv(paste0(intdir,"tabela_seguranca_alimentar_pnad_2013_26marco2025.csv"),sep = ";")
+pof_2018 <- read.csv(paste0(intdir,"tabela_seguranca_alimentar_pof_2018_26marco2025.csv"),sep = ";")
+pnadc_2023 <- read.csv(paste0(intdir,"tabela_seguranca_alimentar_pnadc_2023_26marco2025.csv"),sep = ";")
 
 # Adicionando a coluna 'fonte' em cada base de dados
 pnad_2004 <- pnad_2004 %>% mutate(fonte = "PNAD 2004") %>% filter(seguranca_alimentar != "Não Aplicável")
