@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# Script para calcular segurando alimentar da PNADC 2023
+# ------------------------------------------------------------------------------
+
 # Limpa área de trabalho
 rm(list=ls())
 
@@ -14,14 +18,15 @@ library("PNADcIBGE")
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
-inputdir <- paste(path, "data/inputs/", sep = "/")
-outdir <- paste(path, "data/outputs/", sep = "/")
+pathdir <- paste(path, "data/raw/", sep = "/")
+dicdir <-  paste(path, "data/dic_map/", sep = "/")
+intdir <-  paste(path, "data/intermediate/", sep = "/")
+
 
 # Etapa 1: Leitura dos dados ----------------------------------------------------
 #https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html?caminho=Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_continua/Anual/Microdados/Trimestre
 pnadc_2023 <- read_pnadc(microdata = paste0(pathdir,"PNADC/PNADC_2023_trimestre4.txt"),
-           input_txt = paste0(inputdir,"input_PNADC_trimestre4_20240425.txt"))
+           input_txt = paste0(dicdir,"input_PNADC_trimestre4_20240425.txt"))
 
 #dados_pnadc <- pnadc_labeller(pnadc_2023, "/Users/marlucescarabello/Dropbox/Work/gtworkspace_outros/saur-amzl/data/PNADC/dicionario_PNADC_microdados_trimestre4_20240816.xls")
 
@@ -104,6 +109,6 @@ pnadc_2023_completo <- pnadc_2023_completo %>%
 head(pnadc_2023_completo)
 
 
-write.table(pnadc_2023_completo, paste(outdir,"tabela_seguranca_alimentar_pnadc_2023_26marco2025.csv", sep = ""),row.names = F, sep = ";")
+write.table(pnadc_2023_completo, paste(intdir,"tabela_seguranca_alimentar_pnadc_2023_26marco2025.csv", sep = ""),row.names = F, sep = ";")
 
 
