@@ -14,9 +14,9 @@ library(openxlsx)
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
+pathdir <- paste(path, "data/raw/", sep = "/")
+intdir <-  paste(path, "data/intermediate/", sep = "/")
 outdir <-  paste(path, "data/outputs/", sep = "/")
-inputdir <-  paste(path, "data/inputs", sep = "/")
 dicdir <-  paste(path, "data/dic_map/", sep = "/")
 
 # Etapa 1: Leitura dos dados. --------------------------------------------------
@@ -46,7 +46,7 @@ uf_map <- c(
   "51" = "MT", "52" = "GO", "53" = "DF"
 )
 
-conn <- dbConnect(SQLite(), paste(pathdir, 'contagem_pixel_analise_30m.db', sep = ""))
+conn <- dbConnect(SQLite(), paste(intdir, 'contagem_pixel_analise_30m.db', sep = ""))
 data <- dbGetQuery(conn, "SELECT * FROM table_contagem_pixel")
 
 # Etapa 2: processamento -------------------------------------------------------
