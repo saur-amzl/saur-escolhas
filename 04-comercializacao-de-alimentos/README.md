@@ -27,9 +27,9 @@ Após o download, adicione o(s) arquivo(s) na pasta `data/raw/RAIS`. Essa estrut
 
 Os scripts devem ser executados sequencialmente:
 
-- `1_dados_rais.R` — Processamento dos dados da RAIS (Relação Anual de Informações Sociais), com foco em subsetar os estabelecimentos ativos pertencentes a setores específicos (CNAEs de interesse), localizados na Amazônia Legal e em regiões selecionadas (RMs e RIs). O objetivo é gerar tabelas com o número de estabelecimentos e vínculos empregatícios ativos por município e por estado.
-- `2_locais_aquisicao_pof.R` — processa os microdados da POF 2017-2018, com foco nos locais de aquisição de alimentos. Ele integra bases de consumo alimentar, mapeamentos de produtos e classificações dos locais, com o objetivo de produzir uma base analítica por unidade de consumo (UC), detalhada por tipo de produto e local de compra.
-- `3_classificacao.R` — Processa dados de estabelecimentos da POF, classifica-os em categorias, integra com dados da RAIS, gera tabelas agregadas por município, estado e região metropolitana, e exporta os resultados para Excel com formatação visual.
+- `1_dados_rais.R` — Processa os dados da RAIS, filtrando estabelecimentos ativos dos setores de interesse (CNAEs), localizados na Amazônia Legal e em regiões selecionadas (RMs e RIs). Gera tabelas com o número de estabelecimentos e vínculos empregatícios por município e por estado.
+- `2_locais_aquisicao_pof.R` — Processa os microdados da POF 2017-2018, com foco nos locais de aquisição de alimentos. Integra bases de consumo alimentar, mapeamentos de produtos e classificações dos locais, gerando uma base analítica por unidade de consumo (UC), detalhada por tipo de produto e local de compra.
+- `3_classificacao.R` — Integra os dados da POF e da RAIS, classifica os estabelecimentos em categorias (in natura, ultraprocessado e misto), agrega os resultados por município, estado e região metropolitana, e exporta os dados para Excel com formatação visual.
 ---
 
 ## 👩‍💻 Autoria
