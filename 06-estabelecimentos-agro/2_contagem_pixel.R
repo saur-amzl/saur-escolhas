@@ -13,20 +13,17 @@ library("dplyr")
 path <- getwd()
 
 #Indica o caminho dos dados
-pathdir <- paste(path, "data/", sep = "/")
-outdir <-  paste(path, "data/outputs/", sep = "/")
-inputdir <-  paste(path, "data/inputs", sep = "/")
-dicdir <-  paste(path, "data/dic_map/", sep = "/")
+intdir <-  paste(path, "data/intermediate/", sep = "/")
 
-mun = raster(paste0(pathdir,'pa_br_municipios_2023_30m.tif')); mun;
-areas_urbanizadas =  raster(paste0(pathdir,'AU_2022_AreasUrbanizadas2019_Brasil_30m.tif')); areas_urbanizadas;
-uso = raster(paste0(pathdir,'brasil_coverage_2023.tif')); uso;
-cnefe = raster(paste0(pathdir,'re_amzl_cnefe_estab_agropecuario_30m.tif')); cnefe;
+mun = raster(paste0(intdir,'pa_br_municipios_2023_30m.tif')); mun;
+areas_urbanizadas =  raster(paste0(intdir,'AU_2022_AreasUrbanizadas2019_Brasil_30m.tif')); areas_urbanizadas;
+uso = raster(paste0(intdir,'brasil_coverage_2023.tif')); uso;
+cnefe = raster(paste0(intdir,'re_amzl_cnefe_estab_agropecuario_30m.tif')); cnefe;
 
 # Etapa 2 : Contagem de Pixel
 output_file <- 'contagem_pixel_analise_30m.db' 
-if (file.exists(paste(pathdir, output_file, sep = ""))) file.remove(paste(pathdir, output_file, sep = ""))
-conn <- dbConnect(SQLite(), paste(pathdir, output_file, sep = ""))
+if (file.exists(paste(intdir, output_file, sep = ""))) file.remove(paste(intdir, output_file, sep = ""))
+conn <- dbConnect(SQLite(), paste(intdir, output_file, sep = ""))
 
 bss <- blockSize(mun)
 
