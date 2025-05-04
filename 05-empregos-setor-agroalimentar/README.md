@@ -3,7 +3,7 @@
 Este repositório contém os scripts responsáveis por gerar tabelas que analisam o número de pessoas ocupadas/empregadas no setor agroalimentar. Os dados processados têm como base:
 
 - Microdados da **Relação Anual de Informações Sociais (RAIS)** de 2023  
-- Microdados da **Pesquisa Nacional por Amostra de Domicílios Contínua (PNAD Contínua)** de 2023 (4º trimestre)
+- Microdados da **Pesquisa Nacional por Amostra de Domicílios Contínua (PNAD Contínua)** de 2023 
 
 ---
 
@@ -39,7 +39,7 @@ Essa estrutura de pastas é essencial para o funcionamento correto dos scripts.
 Os scripts devem ser executados na seguinte ordem:
 
 - `1_dados_rais.R` — Carrega os dados da RAIS, identifica estabelecimentos do setor agroalimentar em municípios selecionados da Amazônia Legal, calcula estatísticas por cadeia produtiva em níveis nacional, estadual e municipal/metropolitano.
-- `2_dados_pnadc.R` — Processa os microdados da PNAD Contínua 2023 (4º trimestre) para identificar e quantificar as ocupações no setor agroalimentar, com foco no Brasil, nos estados da Amazônia Legal e em suas capitais.
+- `2_dados_pnadc.R` — Processa os microdados da PNAD Contínua 2023 para identificar e quantificar as ocupações no setor agroalimentar, com foco no Brasil, nos estados da Amazônia Legal e em suas capitais.
 
 ---
 
