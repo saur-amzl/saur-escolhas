@@ -9,16 +9,16 @@ echo "Caminho de entrada: $INPUTDIR"
 echo "Caminho de saída: $INTDIR"
 
 # Rasterizações 
-gdal_rasterize \
-   -a_nodata 0 \
-   -ts 155241 158828 \
-   -a_srs EPSG:4326 \
-   -te -74.89767 -34.86586 -33.06106 7.937424 \
-   -burn 1 -add \
-   -ot Int32 -of GTiff \
-   -co "COMPRESS=DEFLATE" -co "ZLEVEL=9" -co "PREDICTOR=2" -co "BIGTIFF=IF_SAFER" -co "NUM_THREADS=8" \
-   "$INPUTDIR/re_amzl_cnefe_estab_agropecuario.gpkg" \
-   "$INTDIR/re_amzl_cnefe_estab_agropecuario_30m.tif"
+#gdal_rasterize \
+#   -a_nodata 0 \
+#   -ts 155241 158828 \
+#   -a_srs EPSG:4326 \
+#   -te -74.89767 -34.86586 -33.06106 7.937424 \
+#   -burn 1 -add \
+#   -ot Int32 -of GTiff \
+#   -co "COMPRESS=DEFLATE" -co "ZLEVEL=9" -co "PREDICTOR=2" -co "BIGTIFF=IF_SAFER" -co "NUM_THREADS=8" \
+#   "$INPUTDIR/re_amzl_cnefe_estab_agropecuario.gpkg" \
+#   "$INTDIR/re_amzl_cnefe_estab_agropecuario_30m.tif"
    
 gdal_rasterize \
    -burn 1 \
@@ -28,7 +28,7 @@ gdal_rasterize \
    -te -74.89767 -34.86586 -33.06106 7.937424 \
    -ot Int32 -of GTiff \
    -co "COMPRESS=DEFLATE" -co "ZLEVEL=9" -co "PREDICTOR=2" -co "BIGTIFF=IF_SAFER" -co "NUM_THREADS=8" \
-   "$INPUT_DIR/AreasUrbanizadas2019_Brasil/AU_2022_AreasUrbanizadas2019_Brasil.shp" \
+   "$INPUTDIR/AreasUrbanizadas2019_Brasil/AU_2022_AreasUrbanizadas2019_Brasil.shp" \
    "$INTDIR/AU_2022_AreasUrbanizadas2019_Brasil_30m.tif"    
     
 
@@ -40,7 +40,7 @@ gdal_rasterize \
    -te -74.89767 -34.86586 -33.06106 7.937424 \
    -ot Int32 -of GTiff \
    -co "COMPRESS=DEFLATE" -co "ZLEVEL=9" -co "PREDICTOR=2" -co "BIGTIFF=IF_SAFER" -co "NUM_THREADS=8" \
-   "$INPUT_DIR/BR_Municipios_2023/BR_Municipios_2023.shp" \
+   "$INPUTDIR/BR_Municipios_2023/BR_Municipios_2023.shp" \
    "$INTDIR/pa_br_municipios_2023_30m.tif"
     
 
