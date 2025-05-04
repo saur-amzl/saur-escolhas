@@ -22,13 +22,13 @@ Os setores do agroalimentar foram definidos com base na Classificação Nacional
 Os microdados da RAIS e da PNAD Contínua devem ser baixados manualmente nos links abaixo:
 
 - [RAIS 2023](https://drive.google.com/drive/folders/1sWHNUGiJG17KR9IRiNNCmjnCxY7ku6Hv?usp=drive_link)  
-- [PNAD Contínua 2023 - 4º trimestre](https://drive.google.com/drive/folders/1kK31mVT9ZIhEx1DpOzkfFFecBIogdPhI?usp=drive_link)
+- [PNADC 2023](https://drive.google.com/drive/folders/1kK31mVT9ZIhEx1DpOzkfFFecBIogdPhI?usp=drive_link)
 
 Após o download, os arquivos devem ser salvos nos seguintes diretórios:
 
 
 - `data/raw/RAIS`
-- `data/raw/PNAD/2013`. 
+- `data/raw/PNADC`. 
 
 Essa estrutura de pastas é essencial para o funcionamento correto dos scripts.
 
