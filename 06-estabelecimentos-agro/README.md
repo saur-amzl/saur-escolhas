@@ -5,7 +5,14 @@ Este repositório contém os scripts responsáveis por analisar dados do Censo A
 
 ---
 
-###  Scripts disponíveis
+### Ambiente e pacotes
+
+Os scripts estão escritos na linguagem **R**.
+Todos os pacotes necessários estão listados no início de cada script. Certifique-se de instalá-los previamente para garantir a execução correta.
+
+---
+
+###  Scripts
 
 Os scripts devem ser executados na seguinte ordem:
 
