@@ -34,15 +34,22 @@ Essa estrutura é essencial para que os scripts de leitura e transformação fun
 
 ---
 
-###  Scripts disponíveis
+### Ambiente e pacotes
+
+Os scripts estão escritos na linguagem **R**.
+Todos os pacotes necessários estão listados no início de cada script. Certifique-se de instalá-los previamente para garantir a execução correta.
+
+---
+
+###  Scripts 
 
 Os scripts estão organizados cronologicamente pelas edições da pesquisa:
 
-- `1_seguranca_alimentar_pof_2018.R` — Processamento da segurança alimentar com base na POF 2017/2018  
-- `2_seguranca_alimentar_pnad_2013.R` — Processamento da PNAD 2013  
-- `3_seguranca_alimentar_pnad_2009.R` — Processamento da PNAD 2009  
-- `4_seguranca_alimentar_pnad_2004.R` — Processamento da PNAD 2004  
-- `5_seguranca_alimentar_pnadc_2023.R` — Processamento da PNAD Contínua 2023  
+- `1_seguranca_alimentar_pof_2018.R` — Processamento dos dados de segurança alimentar com base na POF 2017/2018  
+- `2_seguranca_alimentar_pnad_2013.R` — Processamento dos dados de segurança alimentar com base na PNAD 2013  
+- `3_seguranca_alimentar_pnad_2009.R` — Processamento dos dados de segurança alimentar com base na PNAD 2009  
+- `4_seguranca_alimentar_pnad_2004.R` — Processamento dos dados de segurança alimentar com base na PNAD 2004  
+- `5_seguranca_alimentar_pnadc_2023.R` — Processamento dos dados de segurança alimentar com base na PNAD Contínua 2023  
 - `6_tabela_final.R` — Consolidação das bases e geração da tabela final para análise
 
 ---
