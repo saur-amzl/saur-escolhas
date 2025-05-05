@@ -22,7 +22,7 @@ Scripts para análise da **comercialização de alimentos**, utilizando dados da
 Análise dos **empregos no setor agroalimentar**, com base na **RAIS 2023** e na **PNAD Contínua 2023**. Inclui a identificação de setores como produção primária, comércio, serviços alimentares e indústria de transformação de alimentos.
 
 ### `06-estabelecimentos-agro`
-Processa dados do **Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE)** de 2022 para análise dos **estabelecimentos agropecuários** na Amazônia Legal, com base em informações geoespaciais e de uso do solo.
+Processa dados do **Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE)** do Censo Demográfico de 2022 para análise dos **estabelecimentos agropecuários** na Amazônia Legal, com base em informações geoespaciais e de uso do solo.
 
 ---
 
