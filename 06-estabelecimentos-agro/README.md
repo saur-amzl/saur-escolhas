@@ -1,7 +1,21 @@
 # Estabelecimentos Agropecuários (CNEFE) na Amazônia Legal
 
 
-Este repositório contém os scripts responsáveis por analisar dados do Censo Agropecuário (CNEFE) de 2022. Os dados processados são provenientes de informações geoespaciais e de uso do solo, com foco em municípios da Amazônia Legal e suas respectivas regiões metropolitanas e imediatas.
+Este repositório contém os scripts responsáveis por analisar dados de Estabelecimentos Agropecuários do 
+**Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE)** do Censo Demográfico de 2022.
+
+---
+
+### Download dos dados
+
+Os microdados da RAIS devem ser baixados manualmente a partir do link abaixo:
+
+- [CNEFE (Censo 2022)](https://drive.google.com/file/d/1udKgw-KGxMOF5LPFXiitviCK-e7MBTXp/view?usp=sharing)
+- [Município IBGE] (https://drive.google.com/drive/folders/1fTWpmhzX7Bp3h5W_O--4I0e50Uwl0X8U?usp=drive_link)
+- [Áreas Urbanizadas IBGE] (https://drive.google.com/drive/folders/1F69XxwjhoDYAzA8YziSTJ0YS2W6S7ae3?usp=sharing)
+- [Uso do Solo - Mapbiomas Col. 9 - 2023]  (https://drive.google.com/file/d/1tx5qJWbRw0ttozAYetGtdbIgsPwRT2Gl/view?usp=drive_link)
+
+Após o download, adicione o(s) arquivo(s) na pasta `data/raw/`. Essa estrutura é essencial para que os scripts de leitura e transformação funcionem corretamente.
 
 ---
 
