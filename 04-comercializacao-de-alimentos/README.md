@@ -23,11 +23,18 @@ Após o download, adicione o(s) arquivo(s) na pasta `data/raw/RAIS`. Essa estrut
 
 ---
 
-###  Scripts disponíveis
+### Ambiente e pacotes
+
+Os scripts estão escritos na linguagem **R**.
+Todos os pacotes necessários estão listados no início de cada script. Certifique-se de instalá-los previamente para garantir a execução correta.
+
+---
+
+###  Scripts
 
 Os scripts devem ser executados sequencialmente:
 
-- `1_dados_rais.R` — Processa os dados da RAIS, filtrando estabelecimentos ativos dos setores de interesse (CNAEs), localizados na Amazônia Legal e em regiões selecionadas (RMs e RIs). Gera tabelas com o número de estabelecimentos e vínculos empregatícios por município e por estado.
+- `1_dados_rais.R` — Processa os dados da RAIS, filtrando estabelecimentos ativos dos setores de interesse (CNAEs), localizados na Amazônia Legal e em regiões selecionadas. Gera tabelas com o número de estabelecimentos e vínculos empregatícios por município e por estado.
 - `2_locais_aquisicao_pof.R` — Processa os microdados da POF 2017-2018, com foco nos locais de aquisição de alimentos. Integra bases de consumo alimentar, mapeamentos de produtos e classificações dos locais, gerando uma base analítica por unidade de consumo (UC), detalhada por tipo de produto e local de compra.
 - `3_classificacao.R` — Integra os dados da POF e da RAIS, classifica os estabelecimentos em categorias (in natura, ultraprocessado e misto), agrega os resultados por município, estado e região metropolitana, e exporta os dados para Excel com formatação visual.
 ---
