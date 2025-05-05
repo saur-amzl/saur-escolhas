@@ -18,8 +18,13 @@ Após o download, coloque os arquivos extraídos na pasta:
 Essa estrutura é necessária para que os scripts de leitura e transformação funcionem corretamente.
 
 ---
+### Requisitos
 
-### Scripts disponíveis
+Os scripts estão escritos na linguagem **R**.
+Todos os pacotes necessários estão listados no início de cada script. Certifique-se de instalá-los previamente para garantir a execução correta.
+
+---
+### Scripts 
 
 Os scripts estão organizados por ano e por etapa de processamento:
 
@@ -32,6 +37,7 @@ Esses scripts foram desenvolvidos com base nos códigos fornecidos pelo IBGE jun
 
 - `2017-2018/Programas_de_Leitura_20230713/R/Leitura dos Microdados - R.R`: script original para leitura dos arquivos da POF  
 - `2017-2018/Memoria_de_Calculo_20230929/R/Tabela de Alimentacao.R`: script com os procedimentos de cálculo para tabulações específicas
+
 ---
 
 ## 👩‍💻 Autoria
