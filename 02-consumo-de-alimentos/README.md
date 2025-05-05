@@ -10,7 +10,14 @@ Antes de executar os scripts desta pasta, certifique-se de que os scripts da pas
 
 ---
 
-### Scripts disponíveis
+### Ambiente e pacotes
+
+Os scripts estão escritos na linguagem **R**.
+Todos os pacotes necessários estão listados no início de cada script. Certifique-se de instalá-los previamente para garantir a execução correta.
+
+---
+
+### Scripts
 
 Os scripts estão organizados por tema e escopo geográfico:
 
