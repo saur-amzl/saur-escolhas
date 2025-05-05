@@ -18,7 +18,7 @@ Após o download, coloque os arquivos extraídos na pasta:
 Essa estrutura é necessária para que os scripts de leitura e transformação funcionem corretamente.
 
 ---
-### Requisitos
+### Ambiente e pacotes
 
 Os scripts estão escritos na linguagem **R**.
 Todos os pacotes necessários estão listados no início de cada script. Certifique-se de instalá-los previamente para garantir a execução correta.
