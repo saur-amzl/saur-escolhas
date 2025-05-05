@@ -5,7 +5,7 @@ rm(list=ls())
 
 # Instala os pacotes necessarios
 library(pacman)
-p_load(dplyr, data.table, ggplot2, sf, googledrive, tidyr,RColorBrewer,readxl)
+p_load(dplyr, data.table, ggplot2, sf, tidyr,readxl)
 
 
 # Armazena o caminho da pasta do Projeto
