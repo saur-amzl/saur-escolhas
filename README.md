@@ -4,7 +4,7 @@ Este repositório contém um conjunto de scripts desenvolvidos no âmbito do pro
 
 ## Estrutura do Repositório
 
-O repositório está organizado em subpastas temáticas, conforme descrito a seguir:
+O repositório está organizado em subpastas, conforme descrito a seguir:
 
 ### `01-etl-microdados-pof`
 Contém os scripts responsáveis pela extração, transformação e carregamento (ETL) dos microdados da **POF**. O processamento gera tabelas base de **domicílios**, **pessoas** e **aquisição alimentar**.
